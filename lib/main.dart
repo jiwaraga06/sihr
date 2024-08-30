@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
 import 'package:sihr/source/router/router.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
@@ -22,16 +23,32 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => AuthCubit())],
+        providers: [BlocProvider(create: (context) => AuthCubit(repository: AuhtRepository()))],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: true,
-            primaryColor: Colors.green,
-            primaryColorLight: Colors.lightGreen,
-            primaryColorDark: Colors.green[800],
-            scaffoldBackgroundColor: Colors.green[50],
-            appBarTheme: const AppBarTheme(color: Colors.green),
+            primaryColor: hijau,
+            primaryColorLight: hijauLight,
+            primaryColorDark: hijauDark,
+            scaffoldBackgroundColor: whiteCustom,
+            appBarTheme: const AppBarTheme(color: whiteCustom, centerTitle: true),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: hijau,
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: hijau, // Warna border aktif global
+                    width: 2.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: Colors.grey, // Warna border saat tidak aktif secara global
+                    width: 1.0),
+              ),
+            ),
+            textSelectionTheme: const TextSelectionThemeData(cursorColor: hijau),
           ),
           builder: EasyLoading.init(),
           onGenerateRoute: router!.generateRoute,

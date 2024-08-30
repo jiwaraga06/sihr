@@ -8,10 +8,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+@override
+void initState() {
+  super.initState();
+  BlocProvider.of<AuthCubit>(context).session(context);
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network("https://api.hris.rsuumc.com/storage/assets/img/logo_perusahaan/logo_18202f7a1457cf1f28b3d63f7c450485.png", height: 60),
+          ],
+        ),
+      ),
     );
   }
 }
