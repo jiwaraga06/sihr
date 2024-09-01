@@ -12,19 +12,16 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
     FontAwesomeIcons.home,
     FontAwesomeIcons.receipt,
   ];
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
+
+  var widgets = [HomeScreen(), AbsensiScreen()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Image.network("https://api.hris.rsuumc.com/storage/assets/img/logo_perusahaan/logo_18202f7a1457cf1f28b3d63f7c450485.png", height: 60),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(60)
-      ),
+      body: widgets.elementAt(selectedIndex),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
         onPressed: () {},
         child: Icon(FontAwesomeIcons.fingerprint, color: Colors.white),
       ),
@@ -32,38 +29,26 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: iconList.length,
         tabBuilder: (int index, bool isActive) {
-          final color = isActive ? hijauDark : Colors.grey;
+          final color = isActive ? hijauLight : Colors.grey;
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                iconList[index],
-                size: 24,
-                color: color,
-              ),
+              Icon(iconList[index], size: 26, color: color),
               const SizedBox(height: 4),
-              if (index == 0)
-                Text(
-                  'Home',
-                  style: TextStyle(color: color, fontSize: 12),
-                ),
-              if (index == 1)
-                Text(
-                  'Data Absensi',
-                  style: TextStyle(color: color, fontSize: 12),
-                ),
+              if (index == 0) Text('Home', style: TextStyle(color: color, fontSize: 13, fontFamily: 'MontserratSemiBold')),
+              if (index == 1) Text('Data Absensi', style: TextStyle(color: color, fontSize: 13, fontFamily: 'MontserratSemiBold')),
             ],
           );
         },
         backgroundColor: Colors.white,
-        activeIndex: _selectedIndex,
+        activeIndex: selectedIndex,
         splashColor: hijauLight,
-        notchSmoothness: NotchSmoothness.softEdge,
+        notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
         onTap: (index) {
           setState(() {
-            _selectedIndex = index;
+            selectedIndex = index;
           });
         },
       ),

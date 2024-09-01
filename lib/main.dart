@@ -32,10 +32,9 @@ class MyApp extends StatelessWidget {
             primaryColorLight: hijauLight,
             primaryColorDark: hijauDark,
             scaffoldBackgroundColor: whiteCustom,
-            appBarTheme: const AppBarTheme(color: whiteCustom, centerTitle: true),
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: hijau,
-            ),
+            appBarTheme: const AppBarTheme(color: whiteCustom),
+            dialogTheme: DialogTheme(backgroundColor: Colors.white),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: hijauLight),
             inputDecorationTheme: const InputDecorationTheme(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(

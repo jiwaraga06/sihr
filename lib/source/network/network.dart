@@ -15,14 +15,13 @@ Future network({String? method, String? url, body, context}) async {
   var response;
   try {
     if (method == "GET") {
-      response = await dio.get("", options: Options(headers: headers), data: body);
+      response = await dio.get(url!, options: Options(headers: headers, responseType: ResponseType.json, validateStatus: (status) => true), data: body);
     } else if (method == "POST") {
-      // response = await http.post(Uri.parse(url!), headers: headers, body: body);
-      response = await dio.post("", options: Options(headers: headers), data: body);
+      response = await dio.post(url!, options: Options(headers: headers, responseType: ResponseType.json, validateStatus: (status) => true), data: body);
     } else if (method == "PUT") {
-      response = await dio.put("", options: Options(headers: headers), data: body);
+      response = await dio.put(url!, options: Options(headers: headers, responseType: ResponseType.json, validateStatus: (status) => true), data: body);
     } else if (method == "DELETE") {
-      response = await dio.delete("", options: Options(headers: headers), data: body);
+      response = await dio.delete(url!, options: Options(headers: headers, responseType: ResponseType.json, validateStatus: (status) => true), data: body);
     }
     return response;
   } on TimeoutException {
@@ -31,11 +30,12 @@ Future network({String? method, String? url, body, context}) async {
   } on SocketException {
     EasyLoading.dismiss();
     // MyDialog.dialogAlert(context, 'Masalah Koneksi \n Data Mati');
-  } on HttpException catch (e) {
+  } on HttpException catch (e) {print(e);
     EasyLoading.dismiss();
     // MyDialog.dialogAlert(context, e.message);
   } on Error catch (e) {
     EasyLoading.dismiss();
+    print(e);
     // MyDialog.dialogAlert(context, e.toString());
   }
 }
