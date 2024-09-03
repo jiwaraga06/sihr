@@ -55,6 +55,16 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const DashboardScreen(),
           transitionsBuilder: topToBottom,
         );
+      case absensiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const AbsensiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case dataAbsensiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const DataAbsensiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
 
       default:
         return null;

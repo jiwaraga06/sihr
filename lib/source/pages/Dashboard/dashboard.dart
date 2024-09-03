@@ -14,7 +14,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   ];
   int selectedIndex = 0;
 
-  var widgets = [HomeScreen(), AbsensiScreen()];
+  var widgets = [HomeScreen(), DataAbsensiScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,9 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       body: widgets.elementAt(selectedIndex),
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, absensiScreen);
+        },
         child: Icon(FontAwesomeIcons.fingerprint, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -36,8 +38,8 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             children: [
               Icon(iconList[index], size: 26, color: color),
               const SizedBox(height: 4),
-              if (index == 0) Text('Home', style: TextStyle(color: color, fontSize: 13, fontFamily: 'MontserratSemiBold')),
-              if (index == 1) Text('Data Absensi', style: TextStyle(color: color, fontSize: 13, fontFamily: 'MontserratSemiBold')),
+              if (index == 0) Text('Home', style: TextStyle(color: color, fontSize: 13)),
+              if (index == 1) Text('Data Absensi', style: TextStyle(color: color, fontSize: 13)),
             ],
           );
         },

@@ -28,20 +28,22 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthLoading) {
-            MyDialog.dialogLoading(context);
-          }
-          if (state is AuthLoaded) {
-            Navigator.of(context).pop();
-            var json = state.json;
-            var statusCode = state.statusCode;
-            if (statusCode == 200) {
-              MyDialog.dialogSuccess(context, json['message']);
-            } else {
-              MyDialog.dialogAlert(context, json['message']);
-            }
-          }
+        listener: (context, state) async {
+          // if (state is AuthLoading) {
+          //   MyDialog.dialogLoading(context);
+          // }
+          // if (state is AuthLoaded) {
+          //   Navigator.of(context).pop();
+          //   var json = state.json;
+          //   var statusCode = state.statusCode;
+          //   if (statusCode == 200) {
+          //     // MyDialog.dialogSuccess(context, json['message']);
+          //     await Future.delayed(const Duration(seconds: 1));
+          //     Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
+          //   } else {
+          //     MyDialog.dialogAlert(context, json['message']);
+          //   }
+          // }
         },
         child: SingleChildScrollView(
           child: Column(

@@ -9,7 +9,8 @@ final class AuthLoading extends AuthState {}
 
 final class AuthLoaded extends AuthState {
   final int? statusCode;
-  final dynamic json;
+  dynamic json;
+  ModelUser? modelUser;
 
-  AuthLoaded({required this.statusCode, required this.json});
+  AuthLoaded({required this.statusCode, this.json, this.modelUser});
 }

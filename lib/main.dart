@@ -5,6 +5,7 @@ import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
 import 'package:sihr/source/router/router.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
+import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
 
 void main() {
   runApp(MyApp(router: RouterNavigation()));
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => AuthCubit(repository: AuhtRepository()))],
+        providers: [
+          BlocProvider(create: (context) => AuthCubit(repository: AuhtRepository())),
+          BlocProvider(create: (context) => MarkerLocationCubit()),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

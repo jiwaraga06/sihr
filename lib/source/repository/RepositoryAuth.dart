@@ -12,9 +12,10 @@ class AuhtRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
-  Future session(body, context) async {
+
+  Future session(context) async {
     if (await internetChecker()) {
-      var json = await network(url: ApiUser.session(), method: "GET", body: body, context: context);
+      var json = await network(url: ApiUser.session(), method: "GET", body: null, context: context);
       return json;
     } else {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
