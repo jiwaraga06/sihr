@@ -50,6 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
       var statusCode = value.statusCode;
       print(statusCode);
       if (statusCode == 200) {
+        pref.setString("id_pegawai", json['user']['id_pegawai'].toString());
         emit(AuthLoaded(statusCode: statusCode, json: data));
         // if (from != 'home') {
         // await Future.delayed(const Duration(seconds: 1));

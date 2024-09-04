@@ -46,9 +46,9 @@ class MarkerLocationCubit extends Cubit<MarkerLocationState> {
     emit(MarkerLocationLoading());
 
     await Geolocator.getCurrentPosition().then((location) async {
-      print(location.isMocked);
+      print("isMoeck : ${location.isMocked}");
       List<Placemark> placemarks = await placemarkFromCoordinates(location.latitude, location.longitude);
-      print(placemarks[0]);
+      // print(placemarks[0]);
       emit(MarkerLocationLoaded(latitude: location.latitude, longitude: location.longitude, myPlacement: placemarks));
     });
     // serviceEnabled = await location.serviceEnabled();

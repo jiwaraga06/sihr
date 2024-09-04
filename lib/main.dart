@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
+import 'package:sihr/source/repository/repositoryPegawai.dart';
 import 'package:sihr/source/router/router.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
+import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 
 void main() {
   runApp(MyApp(router: RouterNavigation()));
@@ -20,15 +22,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(
-          create: (context) => AuhtRepository(),
-        ),
+        RepositoryProvider(create: (context) => AuhtRepository()),
+        RepositoryProvider(create: (context) => PegawaiRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => AuthCubit(repository: AuhtRepository())),
           BlocProvider(create: (context) => MarkerLocationCubit()),
           BlocProvider(create: (context) => CheckPermissionCubit()),
+          // PEGAWAI
+          BlocProvider(create: (context) => GetPegawaiCubit(repository: PegawaiRepository())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -39,7 +42,6 @@ class MyApp extends StatelessWidget {
             primaryColorDark: hijauDark,
             scaffoldBackgroundColor: whiteCustom,
             secondaryHeaderColor: whiteCustom,
-            
             colorScheme: ColorScheme.fromSeed(
               seedColor: whiteCustom,
               brightness: Brightness.light, // or Brightness.dark
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
               onPrimary: Colors.red, // Text color on top of the primary color
               // secondary: whiteCustom, // Used for accents, buttons, etc.
               onSecondary: Colors.black, // Text color on top of the secondary color
-              surface: Colors.red[200]!, // Background of cards, dialogs, etc.
+              surface: Colors.white, // Background of cards, dialogs, etc.
               onSurface: Colors.black, // Text color on top of surfaces
               error: Colors.red, // Color for errors
               onError: Colors.red, // Text color on top of the error color

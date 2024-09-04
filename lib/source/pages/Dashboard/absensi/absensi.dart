@@ -20,6 +20,14 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
     });
   }
 
+  void pickImage() async {
+    selectPhoto(source: ImageSource.camera).then((value){
+      
+    });
+  }
+
+  void proses() {}
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +39,13 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Absensi"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                BlocProvider.of<MarkerLocationCubit>(context).getCurrentLocation();
+              },
+              icon: Icon(Icons.pin_drop))
+        ],
       ),
       body: BlocBuilder<MarkerLocationCubit, MarkerLocationState>(
         builder: (context, state) {
@@ -46,7 +61,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
           return Stack(
             children: [
               FlutterMap(
-                options: MapOptions(initialCenter: LatLng(-7.002922, 107.5725543), initialZoom: 10),
+                options: MapOptions(initialCenter: LatLng(-7.002922, 107.5725543), initialZoom: 15),
                 children: [
                   TileLayer(
                     urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -71,17 +86,17 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
               ),
               Container(
                 margin: const EdgeInsets.all(12),
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                decoration: BoxDecoration(color: Color(0XFFFCF8F3), borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                decoration: BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       children: [
                         const SizedBox(width: 4),
-                        Icon(FontAwesomeIcons.circleDot),
-                        const SizedBox(width: 4),
-                        Text(place.street!, style: TextStyle(fontFamily: 'MontserratMedium')),
+                        Icon(FontAwesomeIcons.circle, size: 23),
+                        const SizedBox(width: 8),
+                        AutoSizeText(place.street!, style: TextStyle(fontFamily: 'JakartaSansBold'), maxLines: 2),
                         const SizedBox(width: 4),
                       ],
                     ),
@@ -89,9 +104,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                     Row(
                       children: [
                         const SizedBox(width: 4),
-                        Icon(FontAwesomeIcons.circleDot),
-                        const SizedBox(width: 4),
-                        Text(place.name!, style: TextStyle(fontFamily: 'MontserratMedium')),
+                        Icon(Icons.circle, size: 23),
+                        const SizedBox(width: 8),
+                        AutoSizeText(place.name!, style: TextStyle(fontFamily: 'JakartaSansSemiBold'), maxLines: 1),
                         const SizedBox(width: 4),
                       ],
                     ),
@@ -110,23 +125,26 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text("Foto Belakang"),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(color: biru, borderRadius: BorderRadius.circular(100)),
-                                    child: Icon(FontAwesomeIcons.camera, color: Colors.white),
-                                  ),
-                                  Icon(Icons.arrow_drop_down_outlined),
-                                ],
-                              )
-                            ],
+                          InkWell(
+                            onTap: pickImage,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text("Ambil Foto"),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(color: biru, borderRadius: BorderRadius.circular(100)),
+                                      child: Icon(FontAwesomeIcons.camera, color: Colors.white),
+                                    ),
+                                    Icon(Icons.arrow_drop_down_outlined),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                           Column(
                             children: [
@@ -205,9 +223,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                         width: MediaQuery.of(context).size.width,
                         height: 50,
                         child: CustomButton2(
-                          onTap: () {},
+                          onTap: proses,
                           text: "PROSES",
-                          textStyle: TextStyle(color: Colors.white, fontFamily: 'MontserratSemiBold'),
+                          textStyle: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'JakartaSansSemiBold'),
                           backgroundColor: biru,
                           roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                         ),

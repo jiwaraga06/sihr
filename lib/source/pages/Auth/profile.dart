@@ -15,57 +15,109 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Profile"),
+        title: Text("Profile", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
-      body: BlocBuilder<AuthCubit, AuthState>(
+      body: BlocBuilder<GetPegawaiCubit, GetPegawaiState>(
         builder: (context, state) {
-          if (state is AuthLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is AuthLoaded == false) {
-            return Container();
-          }
-          var data = (state as AuthLoaded).json;
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
+          if (state is GetPegawaiLoading) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
-                  Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset("assets/images/avatar.png"),
-                    ),
-                  ),
+                  Skeleton.skeleton2(width: 160, height: 160),
                   const SizedBox(height: 28),
-                  AutoSizeText("Informasi Pribadi", maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 18)),
-                  const SizedBox(height: 20),
-                  AutoSizeText("Alamat Email", maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 18)),
-                  const SizedBox(height: 15),
-                  CustomField(readOnly: true, initialValue: data['email']),
+                  Skeleton.skeleton1(width: MediaQuery.of(context).size.width, height: 20),
                   const SizedBox(height: 28),
-                  AutoSizeText("Username", maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 18)),
-                  const SizedBox(height: 15),
-                  CustomField(readOnly: true, initialValue: data['username']),
-                  const SizedBox(height: 28),
-                  AutoSizeText("Nomor Ponsel", maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 18)),
-                  const SizedBox(height: 15),
-                  CustomField(readOnly: true, initialValue: data['phoneNumber']),
-                  const SizedBox(height: 30),
-                  CustomButton(
-                    onTap: logout,
-                    backgroundColor: merah,
-                    text: "Keluar Akun",
-                    textStyle: TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
-                  )
+                  Skeleton.skeleton1(width: MediaQuery.of(context).size.width, height: 50),
                 ],
               ),
+            );
+          }
+          if (state is GetPegawaiLoaded == false) {
+            return Container();
+          }
+          var data = (state as GetPegawaiLoaded).model;
+          return RefreshIndicator(
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 1));
+              BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
+            },
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      if (data!.data!.foto!.isNotEmpty)
+                        Center(
+                          child: AspectRatio(
+                            aspectRatio: 487 / 221,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: hijauLight2, width: 3),
+                                image: DecorationImage(fit: BoxFit.fitHeight, alignment: FractionalOffset.topCenter, image: NetworkImage(data.data!.foto!)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (data.data!.foto!.isEmpty)
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset("assets/images/avatar.png"),
+                          ),
+                        ),
+                      const SizedBox(height: 28),
+                      AutoSizeText("Informasi Pribadi", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 18)),
+                      const SizedBox(height: 20),
+                      AutoSizeText("Alamat Email", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      CustomField(readOnly: true, initialValue: data.data!.users!.email),
+                      const SizedBox(height: 24),
+                      AutoSizeText("Username", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      CustomField(readOnly: true, initialValue: data.data!.nama),
+                      const SizedBox(height: 24),
+                      AutoSizeText("Nomor Ponsel", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      CustomField(readOnly: true, initialValue: data.data!.nomr),
+                      const SizedBox(height: 24),
+                      AutoSizeText("Jenis Kelamin", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      if (data.data!.jenisKelamin == "L")
+                        CustomField(readOnly: true, initialValue: "Laki-laki", suffixIcon: Icon(Icons.male, color: Colors.blue[200])),
+                      if (data.data!.jenisKelamin != "L")
+                        CustomField(readOnly: true, initialValue: "Perempuan", suffixIcon: Icon(Icons.female, color: Colors.pink[200])),
+                      const SizedBox(height: 24),
+                      AutoSizeText("Tanggal Lahir", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      CustomField(readOnly: true, initialValue: data.data!.tglLahir),
+                      const SizedBox(height: 30),
+                      CustomButton(
+                        onTap: logout,
+                        backgroundColor: merah,
+                        text: "Keluar Akun",
+                        textStyle: TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
+                );
+              },
             ),
           );
         },
