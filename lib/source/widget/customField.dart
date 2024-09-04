@@ -3,7 +3,7 @@ import 'package:sihr/source/env/env.dart';
 
 class CustomField extends StatelessWidget {
   final TextEditingController? controller;
-  final String? hintText, labelText, messageError;
+  final String? hintText, labelText, messageError, initialValue;
   final bool? readOnly, hidePassword;
   final Widget? preffixIcon, suffixIcon;
   final VoidCallback? onTap;
@@ -12,6 +12,7 @@ class CustomField extends StatelessWidget {
       {super.key,
       this.hintText,
       this.labelText,
+      this.initialValue,
       this.messageError,
       this.readOnly = false,
       this.hidePassword = false,
@@ -24,6 +25,7 @@ class CustomField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       onTap: onTap,
       controller: controller,
       readOnly: readOnly!,

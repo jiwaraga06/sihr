@@ -3,7 +3,7 @@ import 'package:geocoding/geocoding.dart';
 // import 'package:location/location.dart';
 import 'package:meta/meta.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:safe_device/safe_device.dart';
+// import 'package:safe_device/safe_device.dart';
 
 part 'marker_location_state.dart';
 
@@ -18,14 +18,14 @@ class MarkerLocationCubit extends Cubit<MarkerLocationState> {
   LocationPermission? permission;
 
   void getCurrentLocation() async {
-    bool isJailBroken = await SafeDevice.isJailBroken;
-    bool isRealDevice = await SafeDevice.isRealDevice;
-    bool isMockLocation = await SafeDevice.isMockLocation;
-    bool isSafeDevice = await SafeDevice.isSafeDevice;
-    print("jailbrokder: $isJailBroken");
-    print("realDevice: $isRealDevice");
-    print("mockLocation: $isMockLocation");
-    print("safeDevice: $isSafeDevice");
+    // bool isJailBroken = await SafeDevice.isJailBroken;
+    // bool isRealDevice = await SafeDevice.isRealDevice;
+    // bool isMockLocation = await SafeDevice.isMockLocation;
+    // bool isSafeDevice = await SafeDevice.isSafeDevice;
+    // print("jailbrokder: $isJailBroken");
+    // print("realDevice: $isRealDevice");
+    // print("mockLocation: $isMockLocation");
+    // print("safeDevice: $isSafeDevice");
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled!) {

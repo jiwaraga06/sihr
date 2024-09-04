@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sihr/source/env/env.dart';
+import 'package:sihr/source/router/string.dart';
 
 class WidgetMenuUtama extends StatelessWidget {
   const WidgetMenuUtama({super.key});
@@ -23,34 +25,12 @@ class WidgetMenuUtama extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(FontAwesomeIcons.receipt, size: 30, color: Colors.indigo),
-                  const SizedBox(height: 6),
-                 AutoSizeText('Izin', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(FontAwesomeIcons.businessTime, size: 30, color: Colors.pink),
-                  const SizedBox(height: 6),
-                   AutoSizeText('Lembur', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.login, size: 30, color: Colors.blue),
-                  const SizedBox(height: 6),
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/checkin.png")),
+                  SizedBox(height: 6),
                   AutoSizeText('Absen Masuk', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
@@ -62,8 +42,12 @@ class WidgetMenuUtama extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.logout, size: 30, color: Colors.amber),
-                  const SizedBox(height: 6),
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/checkout.png")),
+                  SizedBox(height: 6),
                   AutoSizeText('Absen Pulang', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
@@ -75,8 +59,29 @@ class WidgetMenuUtama extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(FontAwesomeIcons.newspaper, size: 30, color: Colors.teal),
-                  const SizedBox(height: 6),
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/izin.png")),
+                  SizedBox(height: 6),
+                  AutoSizeText('Izin', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/visit.png")),
+                  SizedBox(height: 6),
                   AutoSizeText('Visit', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
@@ -88,22 +93,32 @@ class WidgetMenuUtama extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(FontAwesomeIcons.sackDollar, size: 30, color: Colors.orange),
-                  const SizedBox(height: 6),
-                   AutoSizeText('Cuti', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/cuti.png")),
+                  SizedBox(height: 6),
+                  AutoSizeText('Cuti', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, profileScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/images/avatar.png"),
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/male.png")),
                   const SizedBox(height: 6),
-                   AutoSizeText('Profile', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  const AutoSizeText('Profile', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),

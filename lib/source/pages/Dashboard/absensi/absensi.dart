@@ -8,6 +8,18 @@ class AbsensiScreen extends StatefulWidget {
 }
 
 class _AbsensiScreenState extends State<AbsensiScreen> {
+  String tipeScan = "Scan Masuk";
+
+  void changeTipe(value) {
+    setState(() {
+      if (value == 1) {
+        tipeScan = "Scan Masuk";
+      } else {
+        tipeScan = "Scan Pulang";
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -73,7 +85,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                         const SizedBox(width: 4),
                       ],
                     ),
-                        const SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         const SizedBox(width: 4),
@@ -81,7 +93,6 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                         const SizedBox(width: 4),
                         Text(place.name!, style: TextStyle(fontFamily: 'MontserratMedium')),
                         const SizedBox(width: 4),
-                        
                       ],
                     ),
                   ],
@@ -99,23 +110,6 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Column(
-                            children: [
-                              Text("Foto Depan"),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(color: biru, borderRadius: BorderRadius.circular(100)),
-                                    child: Icon(FontAwesomeIcons.user, color: Colors.white),
-                                  ),
-                                  Icon(Icons.arrow_drop_down_outlined),
-                                ],
-                              )
-                            ],
-                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -164,7 +158,29 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Tipe Scan", style: TextStyle(fontFamily: 'MontserratMedium')),
-                                Text("Scan Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                Row(
+                                  children: [
+                                    Text(tipeScan, style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                    PopupMenuButton(
+                                        child: Icon(Icons.arrow_drop_down),
+                                        itemBuilder: (context) => [
+                                              PopupMenuItem(
+                                                onTap: () {
+                                                  changeTipe(1);
+                                                },
+                                                value: 1,
+                                                child: Text("Scan Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                              ),
+                                              PopupMenuItem(
+                                                onTap: () {
+                                                  changeTipe(2);
+                                                },
+                                                value: 2,
+                                                child: Text("Scan Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                              ),
+                                            ]),
+                                  ],
+                                ),
                               ],
                             ),
                             Column(

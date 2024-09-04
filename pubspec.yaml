@@ -53,9 +53,13 @@ dependencies:
   latlong2: ^0.9.1
   # location: ^7.0.0
   geolocator: ^13.0.1
-  safe_device: ^1.1.8
+  # safe_device: ^1.1.8
   geocoding: ^3.0.0
   local_auth: ^2.3.0
+  file_picker: ^8.1.2
+  image_picker: ^1.1.2
+  permission_handler: ^11.3.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +87,16 @@ flutter:
   assets:
     - assets/images/avatar.png
     - assets/images/pin.png
+    - assets/images/vectorMenu.png
+    - assets/images/checkin.png
+    - assets/images/checkout.png
+    - assets/images/cuti.png
+    - assets/images/female.png
+    - assets/images/male.png
+    - assets/images/izin.png
+    - assets/images/visit.png
+  #   vector
+    - assets/images/vectorpermision.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -112,6 +126,18 @@ flutter:
     - family: MontserratBlack
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat/Montserrat-Black.ttf
+    - family: JakartaSansRegular
+      fonts:
+        - asset: assets/fonts/JakartaSans/PlusJakartaSans-Regular.ttf
+    - family: JakartaSansSemiBold
+      fonts:
+        - asset: assets/fonts/JakartaSans/PlusJakartaSans-SemiBold.ttf
+    - family: JakartaSansMedium
+      fonts:
+        - asset: assets/fonts/JakartaSans/PlusJakartaSans-Medium.ttf
+    - family: JakartaSansBold
+      fonts:
+        - asset: assets/fonts/JakartaSans/PlusJakartaSans-Bold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

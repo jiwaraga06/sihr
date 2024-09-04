@@ -23,7 +23,11 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
         onPressed: () {
-          Navigator.pushNamed(context, absensiScreen);
+          if (storagePermission!.isGranted || locationPermission!.isGranted || cameraPermission!.isGranted) {
+            Navigator.pushNamed(context, absensiScreen);
+          } else {
+            BlocProvider.of<CheckPermissionCubit>(context).checkPermissionGranted(context);
+          }
         },
         child: Icon(FontAwesomeIcons.fingerprint, color: Colors.white),
       ),
@@ -38,8 +42,8 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             children: [
               Icon(iconList[index], size: 26, color: color),
               const SizedBox(height: 4),
-              if (index == 0) Text('Home', style: TextStyle(color: color, fontSize: 13)),
-              if (index == 1) Text('Data Absensi', style: TextStyle(color: color, fontSize: 13)),
+              if (index == 0) Text('Home', style: TextStyle(color: color, fontSize: 13, fontFamily: 'JakartaSansSemibold')),
+              if (index == 1) Text('Data Absensi', style: TextStyle(color: color, fontSize: 13, fontFamily: 'JakartaSansSemibold')),
             ],
           );
         },

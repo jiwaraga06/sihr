@@ -16,22 +16,49 @@ class AuthCubit extends Cubit<AuthState> {
   final AuhtRepository? repository;
   AuthCubit({this.repository}) : super(AuthInitial());
 
+  void logout(context) async {
+    MyDialog.dialogLoading(context);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear();
+    await Future.delayed(const Duration(seconds: 2));
+    Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
+  }
+
+  void checkSession(context) async {
+    emit(AuthLoading());
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString("token");
+    if (token != null) {
+      await Future.delayed(const Duration(seconds: 1));
+      Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
+    } else {
+      await Future.delayed(const Duration(seconds: 1));
+      Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
+    }
+  }
+
   void session(context) async {
     emit(AuthLoading());
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString("token");
+    var username = pref.getString("username");
+    var email = pref.getString("email");
+    var phoneNumber = pref.getString("phoneNumber");
+    var data = {"username": username, "email": email, "phoneNumber": phoneNumber};
     repository!.session(context).then((value) async {
       var json = value.data;
       var statusCode = value.statusCode;
       print(statusCode);
       if (statusCode == 200) {
-    emit(AuthLoaded(statusCode: statusCode, modelUser: modelUserFromJson(jsonEncode(json))) );
-        await Future.delayed(const Duration(seconds: 1));
-        Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
+        emit(AuthLoaded(statusCode: statusCode, json: data));
+        // if (from != 'home') {
+        // await Future.delayed(const Duration(seconds: 1));
+        // Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
+        // }
       } else if (token == null) {
         await Future.delayed(const Duration(seconds: 1));
         Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
-      } else if (statusCode != 200){
+      } else if (statusCode != 200) {
         await Future.delayed(const Duration(seconds: 1));
         Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
       }

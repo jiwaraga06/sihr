@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AuthCubit>(context).session(context);
+    BlocProvider.of<AuthCubit>(context).checkSession(context);
   }
 
   @override
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.network("https://api.hris.rsuumc.com/storage/assets/img/logo_perusahaan/logo_e629cec4f652fd5211e5f7eeb4324a70.png", height: 180),
             const SizedBox(height: 15),
-            const CircularProgressIndicator(color: Colors.blue)
+            // const CircularProgressIndicator(color: Colors.blue)
           ],
         ),
       ),

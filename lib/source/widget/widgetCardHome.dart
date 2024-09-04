@@ -11,14 +11,17 @@ class WidgetCardHome extends StatelessWidget {
       height: 250,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: whiteCustom, borderRadius: BorderRadius.circular(6.0), boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.8),
-          blurRadius: 1.5,
-          spreadRadius: 1.3,
-          offset: Offset(1, 3),
-        )
-      ]),
+      decoration: BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(6.0), 
+      border: Border.all(color: Colors.grey.withOpacity(0.5))
+      // boxShadow: [
+      //   BoxShadow(
+      //     color: Colors.grey.withOpacity(0.5),
+      //     blurRadius: 1.5,
+      //     spreadRadius: 1.3,
+      //     offset: Offset(1, 3),
+      //   ),
+      // ]
+      ),
       child: Column(
         children: [
           SizedBox(
