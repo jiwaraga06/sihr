@@ -62,6 +62,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       const SizedBox(height: 10),
                       if (data!.data!.foto!.isNotEmpty)
+                        // AspectRatio(
+                        //   aspectRatio: 16 / 9, // Menjaga rasio asli gambar
+                        //   child: ClipOval(
+                        //     child: Image.network(
+                        //       width: 120,
+                        //       data.data!.foto!,
+                        //       fit: BoxFit.cover, // Mengisi area secara proporsional
+                        //     ),
+                        //   ),
+                        // ),
                         Center(
                           child: AspectRatio(
                             aspectRatio: 487 / 221,
@@ -69,8 +79,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: hijauLight2, width: 3),
-                                image: DecorationImage(fit: BoxFit.fitHeight, alignment: FractionalOffset.topCenter, image: NetworkImage(data.data!.foto!)),
+                                image: DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  alignment: FractionalOffset.topCenter,
+                                  image: NetworkImage(data.data!.foto!),
+                                ),
                               ),
+                              // child: ClipRRect(
+                              //   child: Image.network(data.data!.foto!, fit: BoxFit.cover, )),
                             ),
                           ),
                         ),

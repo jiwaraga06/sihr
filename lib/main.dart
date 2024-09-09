@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
+import 'package:sihr/source/repository/RepositoryAbseni.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
+import 'package:sihr/source/repository/RepositoryShift.dart';
 import 'package:sihr/source/repository/repositoryPegawai.dart';
 import 'package:sihr/source/router/router.dart';
+import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
+import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 
 void main() {
@@ -24,6 +28,8 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => AuhtRepository()),
         RepositoryProvider(create: (context) => PegawaiRepository()),
+        RepositoryProvider(create: (context) => AbsensiRepository()),
+        RepositoryProvider(create: (context) => ShiftRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -32,6 +38,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => CheckPermissionCubit()),
           // PEGAWAI
           BlocProvider(create: (context) => GetPegawaiCubit(repository: PegawaiRepository())),
+          // ABSENSI
+          BlocProvider(create: (context) => PostAbsensiCubit(repository: AbsensiRepository())),
+          //  SHIFT
+          BlocProvider(create: (context) =>  GetShiftCubit(repository: ShiftRepository())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

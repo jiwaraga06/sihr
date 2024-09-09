@@ -21,7 +21,6 @@ class Skeleton {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(200),
         child: Shimmer.fromColors(
-          
           baseColor: Colors.grey.withOpacity(0.3),
           highlightColor: Colors.grey.withOpacity(0.1),
           child: Container(color: Colors.grey[200]),

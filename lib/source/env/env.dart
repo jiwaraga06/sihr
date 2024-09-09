@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 const String APPLICATION_JSON = "application/json";
@@ -7,6 +8,7 @@ const String ACCEPT = "Accept";
 const String AUTHORIZATION = "authorization";
 
 const url = "https://api.hris.rsuumc.com";
+var tanggal = DateFormat('yyyy-MM-dd').format(DateTime.now());
 PermissionStatus? storagePermission;
 PermissionStatus? locationPermission;
 PermissionStatus? cameraPermission;

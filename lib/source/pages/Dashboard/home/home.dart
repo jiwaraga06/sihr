@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<AuthCubit>(context).session(context);
+    BlocProvider.of<GetShiftCubit>(context).getShift(context);
     WidgetsBinding.instance.addPostFrameCallback((context) {
       handleCheck();
     });
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Image.asset("assets/images/vectorMenu.png")),
         title: Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 25)),
       ),
+      
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthLoading) {
@@ -49,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           var data = (state as AuthLoaded).json;
           return SingleChildScrollView(
+            
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

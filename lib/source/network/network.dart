@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sihr/source/env/env.dart';
 
 Future network({String? method, String? url, body, context}) async {
   final dio = Dio();
@@ -30,7 +28,8 @@ Future network({String? method, String? url, body, context}) async {
   } on SocketException {
     EasyLoading.dismiss();
     // MyDialog.dialogAlert(context, 'Masalah Koneksi \n Data Mati');
-  } on HttpException catch (e) {print(e);
+  } on HttpException catch (e) {
+    print(e);
     EasyLoading.dismiss();
     // MyDialog.dialogAlert(context, e.message);
   } on Error catch (e) {

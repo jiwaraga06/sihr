@@ -8,6 +8,7 @@ class AbsensiScreen extends StatefulWidget {
 }
 
 class _AbsensiScreenState extends State<AbsensiScreen> {
+  TextEditingController controllerNote = TextEditingController(text: "-");
   String tipeScan = "Scan Masuk";
 
   void changeTipe(value) {
@@ -20,13 +21,17 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
     });
   }
 
+  XFile? gambar;
   void pickImage() async {
-    selectPhoto(source: ImageSource.camera).then((value){
-      
+    selectPhoto(source: ImageSource.camera).then((value) {
+      gambar = value;
+      print("gambar: ${gambar!.path}");
     });
   }
 
-  void proses() {}
+  void proses(lat, long) {
+    BlocProvider.of<PostAbsensiCubit>(context).postAbsensi(gambar, lat, long,controllerNote.text, context);
+  }
 
   @override
   void initState() {
@@ -86,8 +91,8 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
               ),
               Container(
                 margin: const EdgeInsets.all(12),
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                decoration: BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.only(top: 15, bottom: 15, left: 12, right: 12),
+                decoration: BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.black.withOpacity(0.5))),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -147,74 +152,47 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                             ),
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Lampiran"),
-                              const SizedBox(height: 4),
+                              Text("Tipe Scan", style: TextStyle(fontFamily: 'MontserratMedium')),
                               Row(
                                 children: [
-                                  Container(
-                                    height: 50,
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(color: biru, borderRadius: BorderRadius.circular(100)),
-                                    child: Icon(FontAwesomeIcons.fileArrowDown, color: Colors.white),
-                                  ),
-                                  Icon(Icons.arrow_drop_down_outlined),
+                                  Text(tipeScan, style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                  PopupMenuButton(
+                                      child: Icon(Icons.arrow_drop_down),
+                                      itemBuilder: (context) => [
+                                            PopupMenuItem(
+                                              onTap: () {
+                                                changeTipe(1);
+                                              },
+                                              value: 1,
+                                              child: Text("Scan Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                            ),
+                                            PopupMenuItem(
+                                              onTap: () {
+                                                changeTipe(2);
+                                              },
+                                              value: 2,
+                                              child: Text("Scan Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                            ),
+                                          ]),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 12),
                       Container(
                         color: Color(0XFFF5F5F5),
-                        padding: const EdgeInsets.only(top: 20, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        padding: const EdgeInsets.only(top: 20, bottom: 10, left: 12, right: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Tipe Scan", style: TextStyle(fontFamily: 'MontserratMedium')),
-                                Row(
-                                  children: [
-                                    Text(tipeScan, style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                    PopupMenuButton(
-                                        child: Icon(Icons.arrow_drop_down),
-                                        itemBuilder: (context) => [
-                                              PopupMenuItem(
-                                                onTap: () {
-                                                  changeTipe(1);
-                                                },
-                                                value: 1,
-                                                child: Text("Scan Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                              ),
-                                              PopupMenuItem(
-                                                onTap: () {
-                                                  changeTipe(2);
-                                                },
-                                                value: 2,
-                                                child: Text("Scan Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                              ),
-                                            ]),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Jam", style: TextStyle(fontFamily: 'MontserratMedium')),
-                                Text("13:34", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Catatan", style: TextStyle(fontFamily: 'MontserratMedium')),
-                                Text("-", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              ],
-                            ),
+                            Text("Catatan", style: TextStyle(fontFamily: 'MontserratMedium')),
+                            CustomField(
+                              controller: controllerNote,
+                            )
                           ],
                         ),
                       ),
@@ -223,7 +201,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                         width: MediaQuery.of(context).size.width,
                         height: 50,
                         child: CustomButton2(
-                          onTap: proses,
+                          onTap: () {
+                            proses(latitude, longitude);
+                          },
                           text: "PROSES",
                           textStyle: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'JakartaSansSemiBold'),
                           backgroundColor: biru,
