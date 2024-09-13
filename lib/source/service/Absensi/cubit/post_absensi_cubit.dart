@@ -19,8 +19,8 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
     var body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
       "tanggal": "$tanggal",
-      "waktu_masuk": "08:00:00",
-      "waktu_keluar": "12:00:00",
+      // "waktu_masuk": "08:00:00",
+      // "waktu_keluar": "12:00:00",
       "status": "Hadir",
       "keterangan": "$keterangan",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
@@ -34,6 +34,12 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       var json = value.data;
       var statusCode = value.statusCode;
       print("POST: $json");
+      if (statusCode >= 200) {
+        emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+      } else {
+        emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+
+      }
     });
   }
 }
