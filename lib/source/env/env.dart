@@ -18,6 +18,7 @@ const hijauDark = Color(0XFF1A5319);
 const hijauLight = Color(0XFF508D4E);
 const hijauLight2 = Color(0XFF80AF81);
 const hijauDark2 = Color(0XFF00712D);
+const hijauTeal1 = Color(0XFF41B3A2);
 const whiteCustom = Color.fromRGBO(245, 245, 245, 1);
 const whiteCustom2 = Color.fromARGB(255, 255, 255, 255);
 const merah = Color(0XFFA91D3A);

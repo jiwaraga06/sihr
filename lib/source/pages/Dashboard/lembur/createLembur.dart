@@ -54,7 +54,8 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Form Lembur"),
+        centerTitle: true,
+        title: Text("Surat Izin Lembur", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateLemburCubit, CreateLemburState>(
         listener: (context, state) {
@@ -88,7 +89,11 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                 children: [
                   AutoSizeText("Tanggal Pembuatan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
-                  CustomField(readOnly: true, controller: controllerTanggal, textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                  CustomField(
+                      readOnly: true,
+                      controller: controllerTanggal,
+                      suffixIcon: Icon(FontAwesomeIcons.calendar),
+                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
                   AutoSizeText("Pilih Jam Mulai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
@@ -96,6 +101,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                       readOnly: true,
                       onTap: pilihJamMulai,
                       controller: controllerJamMulai,
+                      suffixIcon: Icon(FontAwesomeIcons.clock),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
@@ -105,6 +111,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                       readOnly: true,
                       onTap: pilihJamSelesai,
                       controller: controllerJamSelesai,
+                      suffixIcon: Icon(FontAwesomeIcons.clock),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
@@ -122,7 +129,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                     child: CustomButton2(
                       onTap: submit,
                       text: "Submit",
-                      backgroundColor: biru,
+                      backgroundColor: hijauTeal1,
                       textStyle: TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
                       roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),

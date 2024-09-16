@@ -50,7 +50,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Form Cuti"),
+        title: Text("Surat Izin Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateCutiCubit, CreateCutiState>(
         listener: (context, state) {
@@ -84,7 +84,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                 children: [
                   AutoSizeText("Tanggal Pengajuan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
-                  CustomField(readOnly: true, controller: controllerTanggal, textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                  CustomField(readOnly: true, controller: controllerTanggal,  suffixIcon: Icon(FontAwesomeIcons.calendar),textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
                   AutoSizeText("Pilih kategori Cuti", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
@@ -137,7 +137,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                   CustomField(
                       readOnly: true,
                       onTap: pilihtglMulai,
-                      controller: controllerTglMulai,
+                      controller: controllerTglMulai,suffixIcon: Icon(FontAwesomeIcons.calendar),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
@@ -146,7 +146,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                   CustomField(
                       readOnly: true,
                       onTap: pilihtglSelesai,
-                      controller: controllerTglSelesai,
+                      controller: controllerTglSelesai,suffixIcon: Icon(FontAwesomeIcons.calendar),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
@@ -164,7 +164,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                     child: CustomButton2(
                       onTap: submit,
                       text: "Submit",
-                      backgroundColor: biru,
+                      backgroundColor: hijauTeal1,
                       textStyle: TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
                       roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),

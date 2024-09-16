@@ -82,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           CustomField(
                             controller: controllerPassword,
                             hidePassword: hidePassword,
+                            maxline: 1,
                             preffixIcon: Icon(FontAwesomeIcons.lock),
                             suffixIcon: InkWell(onTap: handlePassword, child: hidePassword ? Icon(FontAwesomeIcons.eyeSlash) : Icon(FontAwesomeIcons.eye)),
                             hintText: "Please insert your password",
