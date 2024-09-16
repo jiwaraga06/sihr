@@ -70,6 +70,28 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const DataAbsensiScreen(),
           transitionsBuilder: rightToLeft,
         );
+        // lembur
+      case lemburScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const LemburScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case createLemburScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CreateLemburScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+        // cuti
+      case cutiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CutiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case createCutiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CreateCutiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
 
       default:
         return null;

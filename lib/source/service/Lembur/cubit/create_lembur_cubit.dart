@@ -20,6 +20,7 @@ class CreateLemburCubit extends Cubit<CreateLemburState> {
       "jam_selesai": "$jamSelesai",
       "keterangan": "$keterangan",
     });
+    // print(body.fields);
     emit(CreateLemburLoading());
     repository!.createLembur(body, context).then((value) {
       var json = value.data;

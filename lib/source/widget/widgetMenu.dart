@@ -88,7 +88,9 @@ class WidgetMenuUtama extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, lemburScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +107,9 @@ class WidgetMenuUtama extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, cutiScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

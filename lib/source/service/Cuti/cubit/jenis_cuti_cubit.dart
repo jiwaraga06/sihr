@@ -15,7 +15,7 @@ class JenisCutiCubit extends Cubit<JenisCutiState> {
     emit(JenisCutiLoading());
     repository!.jeniscuti(context).then((value) {
       var json = value.data;
-      var statusCode = value.stausCode;
+      var statusCode = value.statusCode;
       if (statusCode >= 200) {
         emit(JenisCutiLoaded(statusCode: statusCode, model: modelJenisCutiFromJson(jsonEncode(json))));
       } else {

@@ -24,6 +24,7 @@ class CreateCutiCubit extends Cubit<CreateCutiState> {
       "user_acc": "",
       "tgl_acc": ""
     });
+    // print(body.fields);
     emit(CreateCutiLoading());
     repository!.createCuti(body, context).then((value) {
       var json = value.data;

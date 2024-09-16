@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
               seedColor: whiteCustom,
               brightness: Brightness.light, // or Brightness.dark
               // primary: whiteCustom, // Main color of the app
-              onPrimary: Colors.red, // Text color on top of the primary color
+              onPrimary: Colors.white, // Text color on top of the primary color
               // secondary: whiteCustom, // Used for accents, buttons, etc.
               onSecondary: Colors.black, // Text color on top of the secondary color
               surface: Colors.white, // Background of cards, dialogs, etc.

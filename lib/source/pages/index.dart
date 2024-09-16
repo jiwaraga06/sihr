@@ -16,10 +16,15 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/env/pickImage.dart';
+import 'package:sihr/source/env/pickTime.dart';
+import 'package:sihr/source/env/pickdate.dart';
 import 'package:sihr/source/router/string.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
+import 'package:sihr/source/service/Cuti/cubit/create_cuti_cubit.dart';
+import 'package:sihr/source/service/Cuti/cubit/jenis_cuti_cubit.dart';
+import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
@@ -41,3 +46,9 @@ part './Dashboard/dashboard.dart';
 part './Dashboard/home/home.dart';
 part './Dashboard/absensi/dataAbsensi.dart';
 part './Dashboard/absensi/absensi.dart';
+// lembur
+part './Dashboard/lembur/lembur.dart';
+part './Dashboard/lembur/createLembur.dart';
+// cuti
+part './Dashboard/cuti/cuti.dart';
+part './Dashboard/cuti/createCuti.dart';
