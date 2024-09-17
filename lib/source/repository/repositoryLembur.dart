@@ -12,4 +12,13 @@ class LemburRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
+
+  Future getLembur(context) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiLembur.getLembur(), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
 }

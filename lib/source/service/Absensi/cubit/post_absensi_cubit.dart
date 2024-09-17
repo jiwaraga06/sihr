@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,12 +14,11 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
   PostAbsensiCubit({this.repository}) : super(PostAbsensiInitial());
 
   void postAbsensi(XFile? foto, lat, long, keterangan, context) async {
-    emit(PostAbsensiLoading());
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
-      "tanggal": "$tanggal",
+      // "tanggal": "$tanggal",
       // "waktu_masuk": "08:00:00",
       // "waktu_keluar": "12:00:00",
       "status": "Hadir",
@@ -30,6 +30,9 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       "id_shift": "8",
     });
     print(body.fields);
+    emit(PostAbsensiLoading());
+    double distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
+    print(distanceInMeters);
     repository!.postAbsensi(body, context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;

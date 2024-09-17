@@ -14,9 +14,11 @@ import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
 import 'package:sihr/source/service/Cuti/cubit/create_cuti_cubit.dart';
+import 'package:sihr/source/service/Cuti/cubit/get_cuti_cubit.dart';
 import 'package:sihr/source/service/Cuti/cubit/jenis_cuti_cubit.dart';
 import 'package:sihr/source/service/Izin/cubit/jenis_izin_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
+import 'package:sihr/source/service/Lembur/cubit/get_lembur_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
@@ -55,8 +57,10 @@ class MyApp extends StatelessWidget {
           // CUTI
           BlocProvider(create: (context) => JenisCutiCubit(repository: CutiRepository())),
           BlocProvider(create: (context) => CreateCutiCubit(repository: CutiRepository())),
+          BlocProvider(create: (context) => GetCutiCubit(repository: CutiRepository())),
           // LEMBUR
           BlocProvider(create: (context) => CreateLemburCubit(repository: LemburRepository())),
+          BlocProvider(create: (context) => GetLemburCubit(repository: LemburRepository())),
           // IZIN
           BlocProvider(create: (context) => JenisIzinCubit(repository: IzinRepository())),
 

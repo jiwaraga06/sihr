@@ -71,7 +71,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess(context, data['message']);
+            MyDialog.dialogSuccess(context, "Successfully !");
           }
         },
         child: SingleChildScrollView(
@@ -91,7 +91,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                   BlocBuilder<JenisCutiCubit, JenisCutiState>(
                     builder: (context, state) {
                       if (state is JenisCutiLoading) {
-                        return CustomField(readOnly: true, hintText: "Jenis ", textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
+                        return CustomField(readOnly: true, hintText: "Kategori ", textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       if (state is JenisCutiLoaded == false) {
                         return CustomField(
