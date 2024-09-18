@@ -13,4 +13,13 @@ class AbsensiRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
+
+  Future getAbsensi(context) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiAbsensi.postAbsensi(), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
 }

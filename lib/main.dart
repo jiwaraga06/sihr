@@ -10,6 +10,7 @@ import 'package:sihr/source/repository/repositoryIzin.dart';
 import 'package:sihr/source/repository/repositoryLembur.dart';
 import 'package:sihr/source/repository/repositoryPegawai.dart';
 import 'package:sihr/source/router/router.dart';
+import 'package:sihr/source/service/Absensi/cubit/get_absensi_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetPegawaiCubit(repository: PegawaiRepository())),
           // ABSENSI
           BlocProvider(create: (context) => PostAbsensiCubit(repository: AbsensiRepository())),
+          BlocProvider(create: (context) => GetAbsensiCubit(repository: AbsensiRepository())),
           //  SHIFT
           BlocProvider(create: (context) => GetShiftCubit(repository: ShiftRepository())),
           // CUTI
