@@ -70,23 +70,23 @@ class WidgetMenuUtama extends StatelessWidget {
               ),
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration:
-                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                      child: Image.asset("assets/images/visit.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Visit', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                ],
-              ),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {},
+          //   child: Container(
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //             padding: const EdgeInsets.all(12),
+          //             decoration:
+          //                 BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+          //             child: Image.asset("assets/images/visit.png")),
+          //         SizedBox(height: 6),
+          //         AutoSizeText('Visit', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+          //       ],
+          //     ),
+          //   ),
+          // ),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, lemburScreen);

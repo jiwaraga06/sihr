@@ -9,14 +9,14 @@ class AbsensiScreen extends StatefulWidget {
 
 class _AbsensiScreenState extends State<AbsensiScreen> {
   TextEditingController controllerNote = TextEditingController(text: "-");
-  String tipeScan = "Scan Masuk";
+  String tipeScan = "Masuk";
 
   void changeTipe(value) {
     setState(() {
       if (value == 1) {
-        tipeScan = "Scan Masuk";
+        tipeScan = "Masuk";
       } else {
-        tipeScan = "Scan Pulang";
+        tipeScan = "Pulang";
       }
     });
   }
@@ -33,7 +33,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
     if (gambar == null) {
       MyDialog.dialogAlert(context, "Maaf, anda belum upload foto");
     } else {
-      BlocProvider.of<PostAbsensiCubit>(context).postAbsensi(gambar, lat, long, controllerNote.text, context);
+      BlocProvider.of<PostAbsensiCubit>(context).postAbsensi(gambar, lat, long, controllerNote.text,tipeScan, context);
     }
   }
 

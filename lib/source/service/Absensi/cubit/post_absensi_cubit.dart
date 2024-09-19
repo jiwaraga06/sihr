@@ -13,7 +13,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
   final AbsensiRepository? repository;
   PostAbsensiCubit({this.repository}) : super(PostAbsensiInitial());
 
-  void postAbsensi(XFile? foto, lat, long, keterangan, context) async {
+  void postAbsensi(XFile? foto, lat, long, keterangan, tipeScan, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var body = FormData.fromMap({
@@ -30,19 +30,38 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       "id_shift": "8",
     });
     print(body.fields);
-    emit(PostAbsensiLoading());
-    double distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
+    num distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
     print(distanceInMeters);
-    repository!.postAbsensi(body, context).then((value) {
-      var json = value.data;
-      var statusCode = value.statusCode;
-      print("POST: $json");
-      if (statusCode >= 200) {
-        emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
-      } else {
-        emit(PostAbsensiFailed(statusCode: statusCode, json: json));
-
-      }
-    });
+    if (distanceInMeters <= 50) {
+      print("bisa absen");
+    } else {
+      print("tidak bisa absen");
+    }
+    emit(PostAbsensiLoading());
+    if (tipeScan == "Masuk") {
+      repository!.postAbsensi(body, context).then((value) {
+        var json = value.data;
+        var statusCode = value.statusCode;
+        print("POST: $json");
+        if (statusCode >= 200) {
+          pref.setString("idAbsensi", json['data']['id'].toString());
+          emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+        } else {
+          emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+        }
+      });
+    } else {
+      var idAbsensi = pref.getString("idAbsensi");
+      repository!.updateAbsensi(idAbsensi, body, context).then((value) {
+        var json = value.data;
+        var statusCode = value.statusCode;
+        print("POST: $json");
+        if (statusCode >= 200) {
+          emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+        } else {
+          emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+        }
+      });
+    }
   }
 }
