@@ -54,7 +54,9 @@ class WidgetMenuUtama extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, izinScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

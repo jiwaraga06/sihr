@@ -12,3 +12,6 @@ const createLemburScreen = "/dashboard/lembur/create";
 // cuti
 const cutiScreen = "/dashboard/cuti";
 const createCutiScreen = "/dashboard/cuti/create";
+// ijin
+const izinScreen = "/dashboard/izin";
+const createIzinScreen = "/dashboard/izin/create";

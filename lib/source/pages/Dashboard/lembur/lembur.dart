@@ -42,6 +42,8 @@ class _LemburScreenState extends State<LemburScreen> {
             return Container();
           }
           var data = (state as GetLemburLoaded).model;
+          var idPegawai = (state as GetLemburLoaded).idPegawai;
+          List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
@@ -50,9 +52,9 @@ class _LemburScreenState extends State<LemburScreen> {
                 BlocProvider.of<GetLemburCubit>(context).getLembur(context);
               },
               child: ListView.builder(
-                itemCount: data!.data!.length,
+                itemCount: datafilter.length,
                 itemBuilder: (context, index) {
-                  var a = data!.data![index];
+                  var a = datafilter[index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -99,7 +101,6 @@ class _LemburScreenState extends State<LemburScreen> {
               ),
             ),
           );
-     
         },
       ),
     );

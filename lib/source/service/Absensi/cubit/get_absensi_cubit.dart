@@ -14,14 +14,14 @@ class GetAbsensiCubit extends Cubit<GetAbsensiState> {
 
   void getAbsensi(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var idPegawai = pref.getString("id_pegawai");
+    String? idPegawai = pref.getString("id_pegawai");
     print(idPegawai);
     emit(GetAbsensiLoading());
     repository!.getAbsensi(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       if (statusCode >= 200) {
-        emit(GetAbsensiLoaded(statusCode: statusCode, idPegawai: idPegawai, model: modelDataAbsensiFromJson(jsonEncode(json))));
+        emit(GetAbsensiLoaded(statusCode: statusCode, idPegawai: int.parse(idPegawai!), model: modelDataAbsensiFromJson(jsonEncode(json))));
       } else {
         emit(GetAbsensiFailed(statusCode: statusCode, json: json));
       }

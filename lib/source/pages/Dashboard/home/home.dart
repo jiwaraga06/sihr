@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<AuthCubit>(context).session(context);
+    BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
     BlocProvider.of<GetShiftCubit>(context).getShift(context);
     WidgetsBinding.instance.addPostFrameCallback((context) {
       handleCheck();

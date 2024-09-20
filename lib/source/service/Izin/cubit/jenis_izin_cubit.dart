@@ -13,7 +13,7 @@ class JenisIzinCubit extends Cubit<JenisIzinState> {
 
   void getjenisIzin(context) async {
     emit(JenisIzinLoading());
-    repository!.jeniscuti(context).then((value) {
+    repository!.jenisizin(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       if (statusCode >= 200) {

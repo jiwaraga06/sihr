@@ -4,9 +4,27 @@ import 'package:sihr/source/network/network.dart';
 import 'package:sihr/source/widget/customDialog.dart';
 
 class IzinRepository {
-  Future jeniscuti(context) async {
+  Future jenisizin(context) async {
     if (await internetChecker()) {
       var json = await network(url: Apiizin.jenisIzin(), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
+
+  Future createIzin(body, context) async {
+    if (await internetChecker()) {
+      var json = await network(url: Apiizin.createIzin(), method: "POST", body: body, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
+
+  Future getIzin(context) async {
+    if (await internetChecker()) {
+      var json = await network(url: Apiizin.getIzin(), method: "GET", body: null, context: context);
       return json;
     } else {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");

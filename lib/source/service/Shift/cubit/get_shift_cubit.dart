@@ -14,16 +14,20 @@ class GetShiftCubit extends Cubit<GetShiftState> {
 
   void getShift(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    emit(GetShiftLoading());
-    repository!.getShift(context, 8).then((value) {
-      var json = value.data;
-      var statusCode = value.statusCode;
-      print(json);
-      if (statusCode >= 200) {
-        emit(GetShiftLoaded(statusCode: statusCode, model: modelShiftFromJson(jsonEncode(json))));
-      } else {
-        emit(GetShiftFailed(statusCode: statusCode, messageError: json['message']));
-      }
-    });
+    var idShift = pref.getString('idShift');
+    
+    if (idShift != null) {
+      emit(GetShiftLoading());
+      repository!.getShift(context, idShift).then((value) {
+        var json = value.data;
+        var statusCode = value.statusCode;
+        // print(json);
+        if (statusCode >= 200) {
+          emit(GetShiftLoaded(statusCode: statusCode, model: modelShiftFromJson(jsonEncode(json))));
+        } else {
+          emit(GetShiftFailed(statusCode: statusCode, messageError: json['message']));
+        }
+      });
+    }
   }
 }

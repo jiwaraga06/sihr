@@ -14,18 +14,16 @@ class GetCutiCubit extends Cubit<GetCutiState> {
 
   void getCuti(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var idPegawai = pref.getString("id_pegawai");
+    String? idPegawai = pref.getString("id_pegawai");
     emit(GetCutiLoading());
     repository!.getCuti(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       if (statusCode >= 200) {
-        emit(GetCutiLoaded(statusCode: statusCode, model: modelCutiFromJson(jsonEncode(json))));
+        emit(GetCutiLoaded(statusCode: statusCode, model: modelCutiFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {
         emit(GetCutiFailed(statusCode: statusCode, json: json));
       }
     });
-  
   }
-
 }

@@ -6,6 +6,9 @@ class Apiizin {
   }
 
   static createIzin() {
-    return "$url/api/v1/m_t_izin";
+    return "$url/api/v1/t_izin";
+  }
+  static getIzin() {
+    return "$url/api/v1/t_izin";
   }
 }

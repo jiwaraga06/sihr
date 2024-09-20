@@ -14,13 +14,13 @@ class GetLemburCubit extends Cubit<GetLemburState> {
 
   void getLembur(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var idPegawai = pref.getString("id_pegawai");
+    String? idPegawai = pref.getString("id_pegawai");
     emit(GetLemburLoading());
     repository!.getLembur(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       if (statusCode >= 200) {
-        emit(GetLemburLoaded(statusCode: statusCode, model: modelLemburFromJson(jsonEncode(json))));
+        emit(GetLemburLoaded(statusCode: statusCode, model: modelLemburFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {
         emit(GetLemburFailed(statusCode: statusCode, json: json));
       }

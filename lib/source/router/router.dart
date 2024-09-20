@@ -70,7 +70,7 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const DataAbsensiScreen(),
           transitionsBuilder: rightToLeft,
         );
-        // lembur
+      // lembur
       case lemburScreen:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const LemburScreen(),
@@ -81,7 +81,7 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const CreateLemburScreen(),
           transitionsBuilder: rightToLeft,
         );
-        // cuti
+      // cuti
       case cutiScreen:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const CutiScreen(),
@@ -90,6 +90,17 @@ class RouterNavigation {
       case createCutiScreen:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const CreateCutiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      // izin
+      case izinScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const IzinScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case createIzinScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CreateIzinScreen(),
           transitionsBuilder: rightToLeft,
         );
 

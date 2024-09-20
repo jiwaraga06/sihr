@@ -15,8 +15,8 @@ final class GetAbsensiFailed extends GetAbsensiState {
 }
 
 final class GetAbsensiLoaded extends GetAbsensiState {
-  final int? statusCode;
-  final String? idPegawai;
+  final int? statusCode, idPegawai;
+
   final ModelDataAbsensi? model;
 
   GetAbsensiLoaded({required this.statusCode, required this.model, this.idPegawai});

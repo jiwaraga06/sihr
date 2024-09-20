@@ -15,8 +15,8 @@ final class GetCutiFailed extends GetCutiState {
 }
 
 final class GetCutiLoaded extends GetCutiState {
-  final int? statusCode;
+  final int? statusCode, idPegawai;
   final ModelCuti? model;
 
-  GetCutiLoaded({required this.statusCode, required this.model});
+  GetCutiLoaded({required this.statusCode, required this.model, this.idPegawai});
 }

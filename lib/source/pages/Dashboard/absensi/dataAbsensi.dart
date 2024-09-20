@@ -35,18 +35,19 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
           }
           var data = (state as GetAbsensiLoaded).model;
           var idPegawai = (state as GetAbsensiLoaded).idPegawai;
+          List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 1));
-                BlocProvider.of<GetLemburCubit>(context).getLembur(context);
+                BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context);
               },
               child: ListView.builder(
-                itemCount: data!.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var a = data!.data![index];
-                  
+                  itemCount: datafilter.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var a = datafilter[index];
+
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -63,6 +64,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                // Text(a.idPegawai.toString()),
                                 Text("Jam Aktifitas", style: TextStyle(fontFamily: 'MontserratSemiBold')),
                                 Text(a.status!,
                                     style: TextStyle(
@@ -86,9 +88,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                         ),
                       ),
                     );
-                  
-                },
-              ),
+                  }),
             ),
           );
         },

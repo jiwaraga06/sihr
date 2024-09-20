@@ -17,6 +17,8 @@ import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit
 import 'package:sihr/source/service/Cuti/cubit/create_cuti_cubit.dart';
 import 'package:sihr/source/service/Cuti/cubit/get_cuti_cubit.dart';
 import 'package:sihr/source/service/Cuti/cubit/jenis_cuti_cubit.dart';
+import 'package:sihr/source/service/Izin/cubit/create_izin_cubit.dart';
+import 'package:sihr/source/service/Izin/cubit/get_izin_cubit.dart';
 import 'package:sihr/source/service/Izin/cubit/jenis_izin_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/get_lembur_cubit.dart';
@@ -65,6 +67,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetLemburCubit(repository: LemburRepository())),
           // IZIN
           BlocProvider(create: (context) => JenisIzinCubit(repository: IzinRepository())),
+          BlocProvider(create: (context) => CreateIzinCubit(repository: IzinRepository())),
+          BlocProvider(create: (context) => GetIzinCubit(repository: IzinRepository())),
 
         ],
         child: MaterialApp(

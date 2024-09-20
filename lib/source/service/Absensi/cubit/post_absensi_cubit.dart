@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/widget/customDialog.dart';
 
 part 'post_absensi_state.dart';
 
@@ -16,6 +17,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
   void postAbsensi(XFile? foto, lat, long, keterangan, tipeScan, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
+    var idShift = pref.getString("idShift");
     var body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
       // "tanggal": "$tanggal",
@@ -27,41 +29,43 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       "latt": "$lat",
       "terlambat": "1",
       "att": "$long",
-      "id_shift": "8",
+      "id_shift": "$idShift",
     });
     print(body.fields);
+    // -6.803123267471703, 108.61565805428894
     num distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
     print(distanceInMeters);
-    if (distanceInMeters <= 50) {
+    if (distanceInMeters >= 50) {
       print("bisa absen");
+      emit(PostAbsensiLoading());
+      if (tipeScan.toString().contains("Masuk")) {
+        repository!.postAbsensi(body, context).then((value) {
+          var json = value.data;
+          var statusCode = value.statusCode;
+          print("POST: $json");
+          if (statusCode >= 200) {
+            pref.setString("idAbsensi", json['data']['id'].toString());
+            emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+          } else {
+            emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+          }
+        });
+      } else {
+        var idAbsensi = pref.getString("idAbsensi");
+        print(idAbsensi);
+        repository!.updateAbsensi(idAbsensi, body, context).then((value) {
+          var json = value.data;
+          var statusCode = value.statusCode;
+          print("POST: $json");
+          if (statusCode >= 200) {
+            emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+          } else {
+            emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+          }
+        });
+      }
     } else {
-      print("tidak bisa absen");
-    }
-    emit(PostAbsensiLoading());
-    if (tipeScan == "Masuk") {
-      repository!.postAbsensi(body, context).then((value) {
-        var json = value.data;
-        var statusCode = value.statusCode;
-        print("POST: $json");
-        if (statusCode >= 200) {
-          pref.setString("idAbsensi", json['data']['id'].toString());
-          emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
-        } else {
-          emit(PostAbsensiFailed(statusCode: statusCode, json: json));
-        }
-      });
-    } else {
-      var idAbsensi = pref.getString("idAbsensi");
-      repository!.updateAbsensi(idAbsensi, body, context).then((value) {
-        var json = value.data;
-        var statusCode = value.statusCode;
-        print("POST: $json");
-        if (statusCode >= 200) {
-          emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
-        } else {
-          emit(PostAbsensiFailed(statusCode: statusCode, json: json));
-        }
-      });
+      MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
     }
   }
 }

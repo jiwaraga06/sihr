@@ -20,7 +20,8 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
       var json = value.data;
       var statusCode = value.statusCode;
       // print(json);
-      if (statusCode == 200) {
+      if (statusCode >= 200) {
+        pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
         emit(GetPegawaiLoaded(statusCode: statusCode, model: modelPegawaiFromJson(jsonEncode(json))));
       } else {
         emit(GetPegawaiFailed(statusCode: statusCode, messageError: "Ops, Terjadi Kesalahan"));
