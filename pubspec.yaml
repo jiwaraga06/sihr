@@ -95,6 +95,7 @@ flutter:
     - assets/images/male.png
     - assets/images/izin.png
     - assets/images/visit.png
+    - assets/images/hospital.png
   #   vector
     - assets/images/vectorpermision.jpg
   #   - images/a_dot_ham.jpeg

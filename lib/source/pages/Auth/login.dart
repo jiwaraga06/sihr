@@ -21,7 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() {
-    BlocProvider.of<AuthCubit>(context).login(controllerEmail.text, controllerPassword.text, context);
+    if (formkey.currentState!.validate()) {
+      BlocProvider.of<AuthCubit>(context).login(controllerEmail.text, controllerPassword.text, context);
+    }
   }
 
   @override
@@ -77,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                             preffixIcon: Icon(Icons.email),
                             hintText: "Please insert your email",
+                            messageError: "Please fill this field",
                           ),
                           const SizedBox(height: 30),
                           CustomField(
@@ -86,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             preffixIcon: Icon(FontAwesomeIcons.lock),
                             suffixIcon: InkWell(onTap: handlePassword, child: hidePassword ? Icon(FontAwesomeIcons.eyeSlash) : Icon(FontAwesomeIcons.eye)),
                             hintText: "Please insert your password",
+                            messageError: "Please fill this field",
                           ),
                           const SizedBox(height: 70),
                           SizedBox(

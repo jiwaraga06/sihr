@@ -13,6 +13,9 @@ PermissionStatus? storagePermission;
 PermissionStatus? locationPermission;
 PermissionStatus? cameraPermission;
 
+double latitudePlace = -6.803123267471703;
+double longitudePlace = 108.61565805428894;
+
 const hijau = Color(0XFF00712D);
 const hijauDark = Color(0XFF1A5319);
 const hijauLight = Color(0XFF508D4E);

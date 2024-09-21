@@ -34,8 +34,9 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
     print(body.fields);
     // -6.803123267471703, 108.61565805428894
     num distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
+    // num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
     print(distanceInMeters);
-    if (distanceInMeters >= 50) {
+    if (distanceInMeters <= 50) {
       print("bisa absen");
       emit(PostAbsensiLoading());
       if (tipeScan.toString().contains("Masuk")) {

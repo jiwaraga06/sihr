@@ -92,6 +92,23 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                       userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                     ),
+                    // LOKASI HOSPITAL
+                    CircleLayer(
+                      circles: [
+                        CircleMarker(
+                          point: LatLng(latitudePlace, longitudePlace),
+                          radius: 250,
+                          useRadiusInMeter: true,
+                          color: Colors.red[200]!.withOpacity(0.5),
+                          borderColor: Colors.red.withOpacity(0.5),
+                          borderStrokeWidth: 2,
+                        ),
+                      ],
+                    ),
+                    MarkerLayer(markers: [
+                      Marker(point: LatLng(latitudePlace, longitudePlace), width: 50, height: 50, child: Image.asset("assets/images/hospital.png", height: 50)),
+                    ]),
+                    // LOKASI USER
                     CircleLayer(
                       circles: [
                         CircleMarker(
@@ -106,7 +123,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                     ),
                     MarkerLayer(markers: [
                       Marker(point: LatLng(latitude, longitude), width: 50, height: 50, child: Image.asset("assets/images/pin.png", height: 50)),
-                    ])
+                    ]),
                   ],
                 ),
                 Container(
