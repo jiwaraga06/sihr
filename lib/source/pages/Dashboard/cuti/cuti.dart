@@ -68,7 +68,6 @@ class _CutiScreenState extends State<CutiScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(idPegawai.toString() + a.idPegawai.toString()),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

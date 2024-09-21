@@ -69,26 +69,26 @@ class _LemburScreenState extends State<LemburScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(FontAwesomeIcons.calendar, size: 25),
-                              const SizedBox(width: 12),
+                              Text("Tanggal Pengajuan", style: TextStyle(fontFamily: 'MontserratSemiBold')),
                               Text(formatDate(a.tanggal!), style: TextStyle(fontFamily: 'MontserratSemiBold')),
                             ],
                           ),
                           const SizedBox(height: 12),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              AutoSizeText(a.jamMulai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 20)),
-                              AutoSizeText(a.jamSelesai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 20)),
+                              AutoSizeText(a.jamMulai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                              AutoSizeText(" - ", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
+                              AutoSizeText(a.jamSelesai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                             ],
                           ),
                           const SizedBox(height: 12),
                           Row(
                             children: [
-                              Icon(FontAwesomeIcons.plusMinus, size: 18),
+                              Text("Total :", style: TextStyle(fontFamily: 'MontserratMedium')),
                               const SizedBox(width: 12),
-                              Text(a.jumlahJam!, style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              Text(a.jumlahJam! + " jam", style: TextStyle(fontFamily: 'MontserratSemiBold')),
                             ],
                           ),
                           const SizedBox(height: 12),
