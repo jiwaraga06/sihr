@@ -12,4 +12,12 @@ class ApiAbsensi {
   static getAbsensi() {
     return "$url/api/v1/t_absensi";
   }
+
+  static getSisaAbsensi() {
+    return "$url/api/v1/t_absensi?sisa_absen=y";
+  }
+
+  static getJenisAbsensi() {
+    return "$url/api/v1/m_jenis_absen";
+  }
 }

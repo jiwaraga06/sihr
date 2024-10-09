@@ -26,7 +26,7 @@ class CreateLemburCubit extends Cubit<CreateLemburState> {
       var json = value.data;
       var statusCode = value.statusCode;
       print("create lembur: $json");
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(CreateLemburLoaded(statusCode: statusCode, json: json));
       } else {
         emit(CreateLemburFailed(statusCode: statusCode, json: json));

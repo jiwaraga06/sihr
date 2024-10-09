@@ -13,6 +13,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final formkey = GlobalKey<FormState>();
 
   bool hidePassword = true;
+  bool rememberme = false;
+
+  void handleRememberme(bool? value) {
+    setState(() {
+      rememberme = !rememberme;
+      print(rememberme);
+    });
+  }
 
   void handlePassword() {
     setState(() {
@@ -22,19 +30,26 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     if (formkey.currentState!.validate()) {
-      BlocProvider.of<AuthCubit>(context).login(controllerEmail.text, controllerPassword.text, context);
+      BlocProvider.of<AuthCubit>(context).login(controllerEmail.text, controllerPassword.text, rememberme, context);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AuthCubit>(context).checkemailLogin();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFD9EDBF),
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) async {
-          // if (state is AuthLoading) {
-          //   MyDialog.dialogLoading(context);
-          // }
+          if (state is AuthSaveEmail) {
+            setState(() {
+              controllerEmail = TextEditingController(text: state.email!);
+            });
+          }
           // if (state is AuthLoaded) {
           //   Navigator.of(context).pop();
           //   var json = state.json;
@@ -48,67 +63,77 @@ class _LoginScreenState extends State<LoginScreen> {
           //   }
           // }
         },
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(8)),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Image.network("https://api.hris.rsuumc.com/storage/assets/img/logo_perusahaan/logo_e629cec4f652fd5211e5f7eeb4324a70.png", height: 80),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 35),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(16),
+            // decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(8)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 60),
+                const Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 35)),
+                const SizedBox(height: 12),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Halo,", style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 35)),
+                    SizedBox(height: 2),
+                    Text("Selamat Datang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 40)),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                AutoSizeText("Silahkan masukan email dan password Anda", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 15), maxLines: 1),
+                const SizedBox(height: 40),
+                Form(
+                  key: formkey,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 35),
+                    child: Column(
                       children: [
-                        Text("Welcome to", style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 20)),
-                        SizedBox(width: 4),
-                        Text("Si-HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 20)),
+                        CustomField(
+                          controller: controllerEmail,
+                          keyboardType: TextInputType.emailAddress,
+                          preffixIcon: const Icon(Icons.email),
+                          hintText: "Masukan email anda",
+                          messageError: "Please fill this field",
+                        ),
+                        const SizedBox(height: 30),
+                        CustomField(
+                          controller: controllerPassword,
+                          hidePassword: hidePassword,
+                          maxline: 1,
+                          preffixIcon: const Icon(FontAwesomeIcons.lock),
+                          suffixIcon:
+                              InkWell(onTap: handlePassword, child: hidePassword ? const Icon(FontAwesomeIcons.eyeSlash) : const Icon(FontAwesomeIcons.eye)),
+                          hintText: "Masukan password anda",
+                          messageError: "Please fill this field",
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                                tristate: true, // Example with tristate
+                                value: rememberme,
+                                onChanged: handleRememberme),
+                            const Text('Ingat Saya', style: TextStyle(fontSize: 17.0)),
+                          ],
+                        ),
+                        const SizedBox(height: 70),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 55,
+                          child: CustomButton2(
+                            onTap: login,
+                            text: "Masuk",
+                            backgroundColor: hijau,
+                            textStyle: const TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
+                            roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  Form(
-                    key: formkey,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 35),
-                      child: Column(
-                        children: [
-                          CustomField(
-                            controller: controllerEmail,
-                            keyboardType: TextInputType.emailAddress,
-                            preffixIcon: Icon(Icons.email),
-                            hintText: "Please insert your email",
-                            messageError: "Please fill this field",
-                          ),
-                          const SizedBox(height: 30),
-                          CustomField(
-                            controller: controllerPassword,
-                            hidePassword: hidePassword,
-                            maxline: 1,
-                            preffixIcon: Icon(FontAwesomeIcons.lock),
-                            suffixIcon: InkWell(onTap: handlePassword, child: hidePassword ? Icon(FontAwesomeIcons.eyeSlash) : Icon(FontAwesomeIcons.eye)),
-                            hintText: "Please insert your password",
-                            messageError: "Please fill this field",
-                          ),
-                          const SizedBox(height: 70),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            child: CustomButton2(
-                              onTap: login,
-                              text: "Log in",
-                              backgroundColor: hijau,
-                              textStyle: TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansMedium'),
-                              roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),

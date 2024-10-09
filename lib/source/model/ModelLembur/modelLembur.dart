@@ -142,7 +142,7 @@ class Pegawai {
     final String? prodi;
     final String? npwp;
     final String? statusMenikah;
-    final String? statusKeluarga;
+    final int? statusKeluarga;
     final dynamic tglResign;
     final dynamic ketResign;
     final int? statusResign;

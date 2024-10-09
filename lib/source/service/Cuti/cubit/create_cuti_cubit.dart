@@ -30,7 +30,7 @@ class CreateCutiCubit extends Cubit<CreateCutiState> {
       var json = value.data;
       var statusCode = value.statusCode;
       print("create cuti: $json");
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(CreateCutiLoaded(statusCode: statusCode, json: json));
       } else {
         emit(CreateCutiFailed(statusCode: statusCode, json: json));

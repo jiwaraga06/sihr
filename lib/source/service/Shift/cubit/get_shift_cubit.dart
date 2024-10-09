@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/model/ModelShift/modelShift.dart';
 import 'package:sihr/source/repository/RepositoryShift.dart';
+import 'package:sihr/source/widget/customDialog.dart';
 
 part 'get_shift_state.dart';
 
@@ -22,12 +23,14 @@ class GetShiftCubit extends Cubit<GetShiftState> {
         var json = value.data;
         var statusCode = value.statusCode;
         // print(json);
-        if (statusCode >= 200) {
+        if (statusCode == 200 || statusCode == 201) {
           emit(GetShiftLoaded(statusCode: statusCode, model: modelShiftFromJson(jsonEncode(json))));
         } else {
           emit(GetShiftFailed(statusCode: statusCode, messageError: json['message']));
         }
       });
+    } else {
+      // MyDialog.dialogAlert(context, "Maaf, shift tidak ditemukan");
     }
   }
 }

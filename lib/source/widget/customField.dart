@@ -59,7 +59,7 @@ class CustomField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: merah, strokeAlign: 20),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

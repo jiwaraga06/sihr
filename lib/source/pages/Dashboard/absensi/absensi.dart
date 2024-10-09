@@ -9,17 +9,24 @@ class AbsensiScreen extends StatefulWidget {
 
 class _AbsensiScreenState extends State<AbsensiScreen> {
   TextEditingController controllerNote = TextEditingController(text: "-");
-  String tipeScan = "Masuk";
+  // String tipeScan = "Visit";
+  int tipeScan = 1;
 
-  void changeTipe(value) {
-    setState(() {
-      if (value == 1) {
-        tipeScan = "Masuk";
-      } else {
-        tipeScan = "Pulang";
-      }
-    });
-  }
+  // void changeTipe(value) {
+  //   setState(() {
+  //     if (value == 1) {
+  //       tipeScan = "Masuk";
+  //     } else if (value == 2) {
+  //       tipeScan = "Pulang";
+  //     } else if (value == 3) {
+  //       tipeScan = "Lembur Masuk";
+  //     } else if (value == 4) {
+  //       tipeScan = "Lembur Pulang";
+  //     } else if (value == 5) {
+  //       tipeScan = "Visit";
+  //     }
+  //   });
+  // }
 
   XFile? gambar;
   void pickImage() async {
@@ -33,7 +40,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
     if (gambar == null) {
       MyDialog.dialogAlert(context, "Maaf, anda belum upload foto");
     } else {
-      BlocProvider.of<PostAbsensiCubit>(context).postAbsensi(gambar, lat, long, controllerNote.text,tipeScan, context);
+      BlocProvider.of<PostAbsensiCubit>(context).postAbsensi(gambar, lat, long, controllerNote.text, tipeScan, context);
     }
   }
 
@@ -77,8 +84,19 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
             if (state is MarkerLocationLoading) {
               return const Center(child: CupertinoActivityIndicator());
             }
+            if (state is MarkerLocationFailed) {
+              return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text(state.message)],
+                ),
+              );
+            }
             if (state is MarkerLocationLoaded == false) {
-              return const Center(child: CupertinoActivityIndicator());
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
             }
             var latitude = (state as MarkerLocationLoaded).latitude!;
             var longitude = (state as MarkerLocationLoaded).longitude!;
@@ -192,28 +210,82 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Tipe Scan", style: TextStyle(fontFamily: 'MontserratMedium')),
+                                Text("Tipe Absen", style: TextStyle(fontFamily: 'MontserratMedium')),
                                 Row(
                                   children: [
-                                    Text(tipeScan, style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                    PopupMenuButton(
-                                        child: Icon(Icons.arrow_drop_down),
-                                        itemBuilder: (context) => [
-                                              PopupMenuItem(
-                                                onTap: () {
-                                                  changeTipe(1);
-                                                },
-                                                value: 1,
-                                                child: Text("Scan Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                              ),
-                                              PopupMenuItem(
-                                                onTap: () {
-                                                  changeTipe(2);
-                                                },
-                                                value: 2,
-                                                child: Text("Scan Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                              ),
-                                            ]),
+                                    BlocBuilder<JenisAbsenCubit, JenisAbsenState>(
+                                      builder: (context, state) {
+                                        if (state is JenisAbsenLoading) {
+                                          return Container();
+                                        }
+                                        if (state is JenisAbsenFailed) {
+                                          return Container();
+                                        }
+                                        if (state is JenisAbsenLoaded == false) {
+                                          return Container();
+                                        }
+                                        var data = (state as JenisAbsenLoaded).model!;
+                                        return DropdownButton(
+                                            value: tipeScan,
+                                            items: data.data!.map((e) {
+                                              return DropdownMenuItem(child: Text(e.namaAbsen!), value: e.id!);
+                                            }).toList(),
+                                            onChanged: (value) {
+                                              setState(() {
+                                                tipeScan = value!;
+                                              });
+                                            });
+                                        // return PopupMenuButton(
+                                        //   child: Icon(Icons.arrow_drop_down),
+                                        //   itemBuilder: (context) => data.data!.map((e) {
+                                        //     return PopupMenuItem(
+                                        //       onTap: () {
+                                        //         changeTipe(1);
+                                        //         tipeScan = e.namaAbsen!;
+                                        //       },
+                                        //       value: e.id,
+                                        //       child: Text("${e.namaAbsen!}", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //     );
+                                        //   }).toList(),
+                                        // itemBuilder: (context) => [
+                                        //   PopupMenuItem(
+                                        //     onTap: () {
+                                        //       changeTipe(1);
+                                        //     },
+                                        //     value: 1,
+                                        //     child: Text("Absen Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //   ),
+                                        //   PopupMenuItem(
+                                        //     onTap: () {
+                                        //       changeTipe(2);
+                                        //     },
+                                        //     value: 2,
+                                        //     child: Text("Absen Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //   ),
+                                        //   PopupMenuItem(
+                                        //     onTap: () {
+                                        //       changeTipe(3);
+                                        //     },
+                                        //     value: 3,
+                                        //     child: Text("Lembur Masuk", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //   ),
+                                        //   PopupMenuItem(
+                                        //     onTap: () {
+                                        //       changeTipe(4);
+                                        //     },
+                                        //     value: 4,
+                                        //     child: Text("Lembur Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //   ),
+                                        //   PopupMenuItem(
+                                        //     onTap: () {
+                                        //       changeTipe(4);
+                                        //     },
+                                        //     value: 4,
+                                        //     child: Text("Visit", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                        //   ),
+                                        // ],
+                                      },
+                                    ),
                                   ],
                                 ),
                               ],

@@ -20,7 +20,9 @@ class WidgetMenuUtama extends StatelessWidget {
         childAspectRatio: 1.0,
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+               Navigator.pushNamed(context, absensiScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +39,9 @@ class WidgetMenuUtama extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+               Navigator.pushNamed(context, absensiScreen);
+            },
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

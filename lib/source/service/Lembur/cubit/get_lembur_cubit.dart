@@ -19,7 +19,7 @@ class GetLemburCubit extends Cubit<GetLemburState> {
     repository!.getLembur(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(GetLemburLoaded(statusCode: statusCode, model: modelLemburFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {
         emit(GetLemburFailed(statusCode: statusCode, json: json));

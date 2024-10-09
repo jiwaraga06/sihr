@@ -14,6 +14,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void cekcv(id) async {
+    if (!await launchUrl(Uri.parse("https://hris.rsuumc.com/pegawai/$id"))) {
+      throw Exception('Could not launch "https://hris.rsuumc.com/pegawai/$id"');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -122,6 +128,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       AutoSizeText("Tanggal Lahir", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
                       const SizedBox(height: 12),
                       CustomField(readOnly: true, initialValue: data.data!.tglLahir),
+                      const SizedBox(height: 24),
+                      AutoSizeText("CV Saya", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
+                      const SizedBox(height: 12),
+                      CustomField(
+                          readOnly: true,
+                          initialValue: "Cek CV disini",
+                          onTap: () {
+                            cekcv(data.data!.id);
+                          }),
                       const SizedBox(height: 30),
                       CustomButton(
                         onTap: logout,

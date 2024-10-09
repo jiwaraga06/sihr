@@ -46,10 +46,14 @@ class MarkerLocationCubit extends Cubit<MarkerLocationState> {
     emit(MarkerLocationLoading());
 
     await Geolocator.getCurrentPosition().then((location) async {
-      print("isMoeck : ${location.isMocked}");
+      print("isMock : ${location.isMocked}");
       List<Placemark> placemarks = await placemarkFromCoordinates(location.latitude, location.longitude);
       // print(placemarks[0]);
-      emit(MarkerLocationLoaded(latitude: location.latitude, longitude: location.longitude, myPlacement: placemarks));
+      if (location.isMocked == true) {
+        emit(MarkerLocationFailed(isMock: true, message: "Maaf, fake gps terdeteksi"));
+      } else {
+        emit(MarkerLocationLoaded(latitude: location.latitude, longitude: location.longitude, myPlacement: placemarks));
+      }
     });
     // serviceEnabled = await location.serviceEnabled();
     // if (!serviceEnabled!) {

@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/model/ModelPegawai/modelPegawai.dart';
 import 'package:sihr/source/repository/repositoryPegawai.dart';
+import 'package:sihr/source/widget/customDialog.dart';
 
 part 'get_pegawai_state.dart';
 
@@ -15,13 +16,18 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
   void getPegawai(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
+    print("ID: $idPegawai");
     emit(GetPegawaiLoading());
     repository!.getPegawai(context, idPegawai).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       // print(json);
-      if (statusCode >= 200) {
-        pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
+      if (statusCode == 200 || statusCode == 201) {
+        if (json['jadwal'].isNotEmpty) {
+          pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
+        } else {
+          MyDialog.dialogAlert(context, "Maaf, jadwal shift kosong");
+        }
         emit(GetPegawaiLoaded(statusCode: statusCode, model: modelPegawaiFromJson(jsonEncode(json))));
       } else {
         emit(GetPegawaiFailed(statusCode: statusCode, messageError: "Ops, Terjadi Kesalahan"));
@@ -29,3 +35,11 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
     });
   }
 }
+
+// Materi presentasi :
+// - Konsep History of
+// virtual reality
+// - Pengertian virtual
+// reality
+// - Contoh – contoh
+// virtual reality

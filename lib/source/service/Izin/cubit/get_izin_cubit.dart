@@ -20,7 +20,7 @@ class GetIzinCubit extends Cubit<GetIzinState> {
     repository!.getIzin(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(GetIzinLoaded(statusCode: statusCode, model: modelIzinFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {
         emit(GetIzinFailed(statusCode: statusCode, json: json));

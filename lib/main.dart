@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAbseni.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
+import 'package:sihr/source/repository/RepositoryPengumuman.dart';
 import 'package:sihr/source/repository/RepositoryShift.dart';
 import 'package:sihr/source/repository/repositoryCuti.dart';
 import 'package:sihr/source/repository/repositoryIzin.dart';
@@ -11,6 +12,8 @@ import 'package:sihr/source/repository/repositoryLembur.dart';
 import 'package:sihr/source/repository/repositoryPegawai.dart';
 import 'package:sihr/source/router/router.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_absensi_cubit.dart';
+import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
+import 'package:sihr/source/service/Absensi/cubit/jenis_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
@@ -23,6 +26,7 @@ import 'package:sihr/source/service/Izin/cubit/jenis_izin_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/get_lembur_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
+import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 
@@ -45,6 +49,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => CutiRepository()),
         RepositoryProvider(create: (context) => LemburRepository()),
         RepositoryProvider(create: (context) => IzinRepository()),
+        RepositoryProvider(create: (context) => Repositorypengumuman()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -56,6 +61,8 @@ class MyApp extends StatelessWidget {
           // ABSENSI
           BlocProvider(create: (context) => PostAbsensiCubit(repository: AbsensiRepository())),
           BlocProvider(create: (context) => GetAbsensiCubit(repository: AbsensiRepository())),
+          BlocProvider(create: (context) => GetSisaAbsenCubit(repository: AbsensiRepository())),
+          BlocProvider(create: (context) => JenisAbsenCubit(repository: AbsensiRepository())),
           //  SHIFT
           BlocProvider(create: (context) => GetShiftCubit(repository: ShiftRepository())),
           // CUTI
@@ -69,6 +76,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => JenisIzinCubit(repository: IzinRepository())),
           BlocProvider(create: (context) => CreateIzinCubit(repository: IzinRepository())),
           BlocProvider(create: (context) => GetIzinCubit(repository: IzinRepository())),
+          // pengumuman
+          BlocProvider(create: (context) => GetPengumumanCubit(repository: Repositorypengumuman()) ),
 
         ],
         child: MaterialApp(

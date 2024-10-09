@@ -29,7 +29,7 @@ class CreateIzinCubit extends Cubit<CreateIzinState> {
     repository!.createIzin(body, context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(CreateIzinLoaded(statusCode: statusCode, json: json));
       } else {
         emit(CreateIzinFailed(statusCode: statusCode, json: json));

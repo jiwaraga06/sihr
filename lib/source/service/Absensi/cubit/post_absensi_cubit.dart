@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
@@ -33,40 +35,72 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
     });
     print(body.fields);
     // -6.803123267471703, 108.61565805428894
-    num distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
-    // num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
-    print(distanceInMeters);
-    if (distanceInMeters <= 50) {
-      print("bisa absen");
-      emit(PostAbsensiLoading());
-      if (tipeScan.toString().contains("Masuk")) {
-        repository!.postAbsensi(body, context).then((value) {
-          var json = value.data;
-          var statusCode = value.statusCode;
-          print("POST: $json");
-          if (statusCode >= 200) {
-            pref.setString("idAbsensi", json['data']['id'].toString());
-            emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
-          } else {
-            emit(PostAbsensiFailed(statusCode: statusCode, json: json));
-          }
-        });
+    // num distanceInMeters = Geolocator.distanceBetween(lat, long, -7.002724, 107.572764);
+    EasyLoading.show();
+    await Geolocator.getCurrentPosition().then((location) async {
+      print("isMock : ${location.isMocked}");
+      // print(placemarks[0]);
+      if (location.isMocked == true) {
+        EasyLoading.dismiss();
+        MyDialog.dialogAlert(context, "Maaf, fake gps terdeteksi");
       } else {
-        var idAbsensi = pref.getString("idAbsensi");
-        print(idAbsensi);
-        repository!.updateAbsensi(idAbsensi, body, context).then((value) {
-          var json = value.data;
-          var statusCode = value.statusCode;
-          print("POST: $json");
-          if (statusCode >= 200) {
-            emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+        EasyLoading.dismiss();
+        num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
+        print(distanceInMeters);
+
+        if (tipeScan == 1 || tipeScan == 3) {
+          if (distanceInMeters >= 50) {
+            print("bisa absen");
+            emit(PostAbsensiLoading());
+            repository!.postAbsensi(body, context).then((value) {
+              var json = value.data;
+              var statusCode = value.statusCode;
+              print("POST: $json");
+              if (statusCode >= 200) {
+                pref.setString("idAbsensi", json['data']['id'].toString());
+                emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+              } else {
+                emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+              }
+            });
           } else {
-            emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
           }
-        });
+        } else if (tipeScan == 2 || tipeScan == 4) {
+          if (distanceInMeters >= 50) {
+            print("bisa absen");
+            emit(PostAbsensiLoading());
+            var idAbsensi = pref.getString("idAbsensi");
+            print(idAbsensi);
+            repository!.updateAbsensi(idAbsensi, body, context).then((value) {
+              var json = value.data;
+              var statusCode = value.statusCode;
+              print("POST: $json");
+              if (statusCode >= 200) {
+                emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+              } else {
+                emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+              }
+            });
+          } else {
+            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+          }
+        } else {
+          print("bisa absen");
+          emit(PostAbsensiLoading());
+          repository!.postAbsensi(body, context).then((value) {
+            var json = value.data;
+            var statusCode = value.statusCode;
+            print("POST: $json");
+            if (statusCode >= 200) {
+              pref.setString("idAbsensi", json['data']['id'].toString());
+              emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+            } else {
+              emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+            }
+          });
+        }
       }
-    } else {
-      MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
-    }
+    });
   }
 }

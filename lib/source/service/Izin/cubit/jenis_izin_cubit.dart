@@ -16,7 +16,7 @@ class JenisIzinCubit extends Cubit<JenisIzinState> {
     repository!.jenisizin(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(JenisIzinLoaded(statusCode: statusCode, model: modelJenisizinFromJson(jsonEncode(json))));
       } else {
         emit(JenisIzinFailed(statusCode: statusCode, json: json));

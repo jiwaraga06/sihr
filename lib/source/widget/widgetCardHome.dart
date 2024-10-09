@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sihr/source/env/env.dart';
+import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
+import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 import 'package:sihr/source/widget/skeleton.dart';
 
 class WidgetCardHome extends StatelessWidget {
@@ -11,15 +13,18 @@ class WidgetCardHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetShiftCubit, GetShiftState>(
+    return BlocBuilder<GetPegawaiCubit, GetPegawaiState>(
       builder: (context, state) {
-        if (state is GetShiftLoading ) {
+        if (state is GetPegawaiLoading) {
           return Padding(padding: const EdgeInsets.only(left: 12, right: 12), child: Skeleton.skeleton1(height: 200));
         }
-        if (state is GetShiftFailed) {
+        if (state is GetPegawaiFailed) {
           return Container();
         }
-        var data = (state as GetShiftLoaded).model;
+        if (state is GetPegawaiLoaded == false) {
+          return Container();
+        }
+        var data = (state as GetPegawaiLoaded).model;
         return Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,9 +58,10 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          Text(data!.data!.jamMulai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isNotEmpty) Text(data!.jadwal![0].shift!.jamMulai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isEmpty) Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
-                          Text("Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
+                          Text("Jadwal Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
                       ),
                     ),
@@ -81,85 +87,110 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          Text(data!.data!.jamSelesai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isNotEmpty)
+                            Text(data!.jadwal![0].shift!.jamSelesai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isEmpty) Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
-                          Text("Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
+                          Text("Jadwal Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
                       ),
                     ),
                   ),
                 ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                child: Row(children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: whiteCustom2,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.withOpacity(0.5)),
+              BlocBuilder<GetSisaAbsenCubit, GetSisaAbsenState>(
+                builder: (context, state) {
+                  if (state is GetSisaAbsenLoading) {
+                    return Padding(
+                        padding: const EdgeInsets.only(left: 12, right: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Skeleton.skeleton1(height: 60, width: 60),
+                            Skeleton.skeleton1(height: 60, width: 60),
+                            Skeleton.skeleton1(height: 60, width: 60),
+                          ],
+                        ));
+                  }
+                  if (state is GetSisaAbsenFailed) {
+                    return Container();
+                  }
+                  if (state is GetSisaAbsenLoaded == false) {
+                    return Container();
+                  }
+                  var data = (state as GetSisaAbsenLoaded).model!;
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    child: Row(children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: whiteCustom2,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Izin", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const SizedBox(height: 4),
+                              AutoSizeText("${data.data!.izin} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              const SizedBox(height: 4),
+                              const Divider(color: Colors.blue, thickness: 2.5)
+                            ],
+                          ),
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Izin", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
-                          const SizedBox(height: 4),
-                          AutoSizeText("0 Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
-                          const SizedBox(height: 4),
-                          const Divider(color: Colors.blue, thickness: 2.5)
-                        ],
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: whiteCustom2,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Sisa Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const SizedBox(height: 4),
+                              AutoSizeText("${data.data!.sisaCuti} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              const SizedBox(height: 4),
+                              const Divider(color: Colors.indigo, thickness: 2.5)
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: whiteCustom2,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: whiteCustom2,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Kehadiran", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const SizedBox(height: 4),
+                              AutoSizeText("${data.data!.kehadiran} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              const SizedBox(height: 4),
+                              const Divider(color: Colors.green, thickness: 2.5)
+                            ],
+                          ),
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Sisa Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
-                          const SizedBox(height: 4),
-                          AutoSizeText("0 Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
-                          const SizedBox(height: 4),
-                          const Divider(color: Colors.indigo, thickness: 2.5)
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: whiteCustom2,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey.withOpacity(0.5)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Kehadiran", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
-                          const SizedBox(height: 4),
-                          AutoSizeText("0 Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
-                          const SizedBox(height: 4),
-                          const Divider(color: Colors.green, thickness: 2.5)
-                        ],
-                      ),
-                    ),
-                  ),
-                ]),
+                    ]),
+                  );
+                },
               ),
             ],
           ),

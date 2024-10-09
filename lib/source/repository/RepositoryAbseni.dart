@@ -31,4 +31,21 @@ class AbsensiRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
+
+  Future getSisaAbsensi(context) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiAbsensi.getSisaAbsensi(), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
+  Future getJenisAbsensi(context) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiAbsensi.getJenisAbsensi(), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
 }

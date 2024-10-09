@@ -19,9 +19,20 @@ class AuthCubit extends Cubit<AuthState> {
   void logout(context) async {
     MyDialog.dialogLoading(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.clear();
+    pref.remove("token");
     await Future.delayed(const Duration(seconds: 2));
     Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
+  }
+
+  void checkemailLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var email = pref.getString("email");
+    print(email);
+    if (email != null) {
+      emit(AuthSaveEmail(email: email));
+    } else {
+      emit(AuthSaveEmail(email: ""));
+    }
   }
 
   void checkSession(context) async {
@@ -49,7 +60,7 @@ class AuthCubit extends Cubit<AuthState> {
       var json = value.data;
       var statusCode = value.statusCode;
       print(statusCode);
-      if (statusCode == 200) {
+      if (statusCode == 200 || statusCode == 201) {
         pref.setString("id_pegawai", json['user']['id_pegawai'].toString());
         emit(AuthLoaded(statusCode: statusCode, json: data));
         // if (from != 'home') {
@@ -66,7 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void login(email, password, context) async {
+  void login(email, password, rememberme, context) async {
     emit(AuthLoading());
     var body = FormData.fromMap({"email": "$email", "password": "$password"});
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -75,10 +86,13 @@ class AuthCubit extends Cubit<AuthState> {
       var json = value.data;
       var statusCode = value.statusCode;
       Navigator.of(context).pop();
-      if (statusCode == 200) {
+    if (statusCode == 200 || statusCode == 201) {
+        if (rememberme == true) {
+          pref.setString("email", email);
+        }
         pref.setString("id", json['data']['id'].toString());
         pref.setString("username", json['data']['username']);
-        pref.setString("email", json['data']['email']);
+
         pref.setString("phoneNumber", json['data']['phoneNumber']);
         pref.setString("token", json['data']['token']);
         await Future.delayed(const Duration(seconds: 1));
