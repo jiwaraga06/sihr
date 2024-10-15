@@ -15,3 +15,7 @@ const createCutiScreen = "/dashboard/cuti/create";
 // ijin
 const izinScreen = "/dashboard/izin";
 const createIzinScreen = "/dashboard/izin/create";
+
+// news
+
+const newsScreen ="/news/news";

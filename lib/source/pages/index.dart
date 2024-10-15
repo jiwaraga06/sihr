@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shimmer/shimmer.dart';
@@ -67,3 +68,5 @@ part './Dashboard/cuti/createCuti.dart';
 // izin
 part './Dashboard/izin/izin.dart';
 part './Dashboard/izin/createIzin.dart';
+
+part './Dashboard/news/news.dart';

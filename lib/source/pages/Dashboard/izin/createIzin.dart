@@ -12,12 +12,23 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
   TextEditingController controllerAlasan = TextEditingController();
   TextEditingController controllerKeterangan = TextEditingController();
   final formkey = GlobalKey<FormState>();
-  var valueIzin ;
+  var valueIzin;
 
   void submit() {
     if (formkey.currentState!.validate()) {
       BlocProvider.of<CreateIzinCubit>(context).createIzin(controllerAlasan.text, controllerKeterangan.text, valueIzin, context);
     }
+  }
+
+  void pickdate() {
+    pickDate(context).then((value) {
+      if (value != null) {
+        var date = DateFormat('yyyy-MM-dd').format(value);
+        setState(() {
+          controllerTanggal.text = date;
+        });
+      }
+    });
   }
 
   @override
@@ -68,6 +79,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
                   CustomField(
                       readOnly: true,
                       controller: controllerTanggal,
+                      onTap: pickdate,
                       suffixIcon: Icon(FontAwesomeIcons.calendar),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),

@@ -61,16 +61,18 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 12),
+                            AutoSizeText(formatDate(a.tanggal!), maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 16),),
+                            const SizedBox(height: 12),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // Text(a.idPegawai.toString()),
                                 Text("Jam Aktifitas", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                Text(a.status!,
-                                    style: TextStyle(
-                                        fontFamily: 'JakartaSansMedium',
-                                        fontSize: 16,
-                                        color: a.status!.contains('setuju') ? Colors.blue[300] : Colors.red[300]))
+                                Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+                                    child: Text(a.status!, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                               ],
                             ),
                             Row(

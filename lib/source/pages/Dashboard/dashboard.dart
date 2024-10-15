@@ -12,7 +12,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
     FontAwesomeIcons.home,
     FontAwesomeIcons.receipt,
   ];
-  int selectedIndex = 0;
+  
 
   var widgets = [HomeScreen(), DataAbsensiScreen()];
 

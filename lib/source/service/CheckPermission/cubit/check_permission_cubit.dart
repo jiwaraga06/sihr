@@ -11,25 +11,27 @@ class CheckPermissionCubit extends Cubit<CheckPermissionState> {
   CheckPermissionCubit() : super(CheckPermissionInitial());
 
   Future<void> checkPermissionGranted(context) async {
-     storagePermission = await Permission.manageExternalStorage.status;
-     locationPermission = await Permission.location.status;
-     cameraPermission = await Permission.camera.status;
+    storagePermission = await Permission.manageExternalStorage.status;
+    locationPermission = await Permission.location.status;
+    cameraPermission = await Permission.camera.status;
     print(storagePermission);
     print(locationPermission);
     print(cameraPermission);
     if (!storagePermission!.isGranted || !locationPermission!.isGranted || !cameraPermission!.isGranted) {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return CheckPermissionView(onPermissionRequest: () async {
-            await Permission.manageExternalStorage.request();
-            await Permission.location.request();
-            await Permission.camera.request();
-          }, onCancel: () {
-            Navigator.pop(context);
-          });
-        },
-      );
+    showModalBottomSheet(
+      context: context,
+      isDismissible: true,
+      builder: (context) {
+        return CheckPermissionView(onPermissionRequest: () async {
+          await Permission.manageExternalStorage.request();
+          await Permission.location.request();
+          await Permission.camera.request();
+          Navigator.pop(context);
+        }, onCancel: () {
+          Navigator.pop(context);
+        });
+      },
+    );
     }
   }
 }

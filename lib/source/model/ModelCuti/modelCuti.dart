@@ -39,7 +39,7 @@ class DataUser {
   final DateTime? tglMulai;
   final DateTime? tglSelesai;
   final String? keterangan;
-  final String? status;
+  final int? status;
   final String? userAcc;
   final DateTime? tglAcc;
   final DateTime? createdAt;
@@ -80,7 +80,7 @@ class DataUser {
         tglMulai: json["tgl_mulai"] == null ? null : DateTime.parse(json["tgl_mulai"]),
         tglSelesai: json["tgl_selesai"] == null ? null : DateTime.parse(json["tgl_selesai"]),
         keterangan: json["keterangan"] ?? "",
-        status: json["status"] ?? "",
+        status: json["status"] ?? 0,
         userAcc: json["user_acc"],
         tglAcc: json["tgl_acc"] == null ? null : DateTime.parse(json["tgl_acc"]),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),

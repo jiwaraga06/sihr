@@ -49,7 +49,7 @@ class _IzinScreenState extends State<IzinScreen> {
             child: RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 1));
-                    BlocProvider.of<GetIzinCubit>(context).getizin(context);
+                BlocProvider.of<GetIzinCubit>(context).getizin(context);
               },
               child: ListView.builder(
                 itemCount: datafilter.length,
@@ -74,10 +74,26 @@ class _IzinScreenState extends State<IzinScreen> {
                               Text("Tanggal izin", style: TextStyle(fontFamily: 'MontserratSemiBold')),
                               Text(
                                 formatDate(a.tanggal!),
-                                style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16, color: Colors.blue[300]),
+                                style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16, color: Colors.blue[600]),
                               )
                             ],
                           ),
+                          const SizedBox(height: 8),
+                          if (a.status == 0)
+                            Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
+                                child: Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                          if (a.status == 1)
+                            Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
+                                child: Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                          if (a.status == 2)
+                            Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
+                                child: Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                           const SizedBox(height: 8),
                           AutoSizeText("Alasan", maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
                           const SizedBox(height: 8),

@@ -8,6 +8,28 @@ class CutiScreen extends StatefulWidget {
 }
 
 class _CutiScreenState extends State<CutiScreen> {
+  void detailCuti() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Tutup"))
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -72,11 +94,21 @@ class _CutiScreenState extends State<CutiScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Tanggal Cuti", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Text(
-                                a.status!,
-                                style: TextStyle(
-                                    fontFamily: 'JakartaSansMedium', fontSize: 16, color: a.status!.contains('setuju') ? Colors.blue[300] : Colors.red[300]),
-                              )
+                              if (a.status == 0)
+                                Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
+                                    child: Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                              if (a.status == 1)
+                                Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
+                                    child: Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                              if (a.status == 2)
+                                Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
+                                    child: Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                             ],
                           ),
                           Row(
@@ -87,9 +119,9 @@ class _CutiScreenState extends State<CutiScreen> {
                             ],
                           ),
                           const SizedBox(height: 8),
-                          AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
+                          AutoSizeText("Jenis Cuti : " + a.jenisCuti!.namaCuti!, maxLines: 1, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 8),
-                          AutoSizeText(a.jenisCuti!.namaCuti!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
+                          AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 12),
                         ],
                       ),

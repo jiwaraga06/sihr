@@ -16,17 +16,20 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
   void getPegawai(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
-    print("ID: $idPegawai");
+    var shift = pref.getString("idShift");
+    print("shift: $shift");
     emit(GetPegawaiLoading());
     repository!.getPegawai(context, idPegawai).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       // print(json);
       if (statusCode == 200 || statusCode == 201) {
-        if (json['jadwal'].isNotEmpty) {
-          pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
-        } else {
-          MyDialog.dialogAlert(context, "Maaf, jadwal shift kosong");
+        if (json['jadwal'] != null) {
+          if (json['jadwal'].isNotEmpty) {
+            pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
+          } else {
+            MyDialog.dialogAlert(context, "Maaf, jadwal shift kosong");
+          }
         }
         emit(GetPegawaiLoaded(statusCode: statusCode, model: modelPegawaiFromJson(jsonEncode(json))));
       } else {

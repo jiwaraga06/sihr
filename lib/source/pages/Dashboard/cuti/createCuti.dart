@@ -15,6 +15,17 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
   var valueCuti;
   final formkey = GlobalKey<FormState>();
 
+  void pickdate() {
+    pickDate(context).then((value) {
+      if (value != null) {
+        var date = DateFormat('yyyy-MM-dd').format(value);
+        setState(() {
+          controllerTanggal.text = date;
+        });
+      }
+    });
+  }
+
   void pilihtglMulai() {
     pickDate(context).then((value) {
       setState(() {
@@ -84,7 +95,9 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                 children: [
                   AutoSizeText("Tanggal Pengajuan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
-                  CustomField(readOnly: true, controller: controllerTanggal,  suffixIcon: Icon(FontAwesomeIcons.calendar),textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                  CustomField(readOnly: true, controller: controllerTanggal, 
+                  onTap: pickdate,
+                   suffixIcon: Icon(FontAwesomeIcons.calendar),textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
                   AutoSizeText("Pilih kategori Cuti", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),

@@ -76,7 +76,12 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
           if (state is PostAbsensiLoaded) {
             Navigator.of(context).pop();
             var data = state.json;
-            MyDialog.dialogSuccess(context, data['message']);
+            MyDialog.dialogSuccess(context, data['message'], onPressedOk: () {
+              Navigator.pushNamedAndRemoveUntil(context, homeScreen, (Route<dynamic> route) => false);
+              setState(() {
+                selectedIndex = 1;
+              });
+            });
           }
         },
         child: BlocBuilder<MarkerLocationCubit, MarkerLocationState>(

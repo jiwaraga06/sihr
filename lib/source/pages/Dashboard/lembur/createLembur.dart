@@ -44,6 +44,17 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
     }
   }
 
+  void pickdate() {
+    pickDate(context).then((value) {
+      if (value != null) {
+        var date = DateFormat('yyyy-MM-dd').format(value);
+        setState(() {
+          controllerTanggal.text = date;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -92,6 +103,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                   CustomField(
                       readOnly: true,
                       controller: controllerTanggal,
+                      onTap: pickdate,
                       suffixIcon: Icon(FontAwesomeIcons.calendar),
                       textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),

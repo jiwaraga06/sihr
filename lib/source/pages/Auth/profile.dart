@@ -129,14 +129,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 12),
                       CustomField(readOnly: true, initialValue: data.data!.tglLahir),
                       const SizedBox(height: 24),
-                      AutoSizeText("CV Saya", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
-                      const SizedBox(height: 12),
-                      CustomField(
-                          readOnly: true,
-                          initialValue: "Cek CV disini",
-                          onTap: () {
-                            cekcv(data.data!.id);
-                          }),
+                      CustomButton(
+                        onTap: () {
+                          cekcv(data.data!.id);
+                        },
+                        backgroundColor: hijauLight,
+                        text: "CV SAYA",
+                        textStyle: TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
+                      ),
                       const SizedBox(height: 30),
                       CustomButton(
                         onTap: logout,

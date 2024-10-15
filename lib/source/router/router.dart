@@ -103,6 +103,12 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const CreateIzinScreen(),
           transitionsBuilder: rightToLeft,
         );
+      // news
+      case newsScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const NewsScreen(),
+          transitionsBuilder: rightToLeft,
+        );
 
       default:
         return null;

@@ -20,6 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
     MyDialog.dialogLoading(context);
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove("token");
+    pref.remove("idShift");
     await Future.delayed(const Duration(seconds: 2));
     Navigator.pushNamedAndRemoveUntil(context, loginScreen, (Route<dynamic> route) => false);
   }

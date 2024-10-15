@@ -19,44 +19,25 @@ class WidgetMenuUtama extends StatelessWidget {
         crossAxisCount: 3,
         childAspectRatio: 1.0,
         children: [
-          InkWell(
-            onTap: () {
-               Navigator.pushNamed(context, absensiScreen);
-            },
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration:
-                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                      child: Image.asset("assets/images/checkin.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Absen Masuk', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-               Navigator.pushNamed(context, absensiScreen);
-            },
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration:
-                          BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                      child: Image.asset("assets/images/checkout.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Absen Pulang', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                ],
-              ),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //      Navigator.pushNamed(context, absensiScreen);
+          //   },
+          //   child: Container(
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //             padding: const EdgeInsets.all(12),
+          //             decoration:
+          //                 BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+          //             child: Image.asset("assets/images/checkin.png")),
+          //         SizedBox(height: 6),
+          //         AutoSizeText('Absen', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+          //       ],
+          //     ),
+          //   ),
+          // ),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, izinScreen);
@@ -146,6 +127,25 @@ class WidgetMenuUtama extends StatelessWidget {
                       child: Image.asset("assets/images/male.png")),
                   const SizedBox(height: 6),
                   const AutoSizeText('Profile', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, newsScreen);
+            },
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: Colors.grey.withOpacity(0.4), borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/News.png")),
+                  const SizedBox(height: 6),
+                  const AutoSizeText('News', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),

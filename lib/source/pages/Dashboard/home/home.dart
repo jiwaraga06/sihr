@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     BlocProvider.of<AuthCubit>(context).session(context);
     BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
-    BlocProvider.of<GetPengumumanCubit>(context).getPengumuman(context);
     BlocProvider.of<GetSisaAbsenCubit>(context).getSisaAbsensi(context);
     BlocProvider.of<JenisAbsenCubit>(context).getJenisAbsensi(context);
     // BlocProvider.of<GetShiftCubit>(context).getShift(context);
@@ -32,14 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: key,
-      drawer: CustomDrawer(),
+      // drawer: CustomDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              key.currentState!.openDrawer();
-            },
-            icon: Image.asset("assets/images/vectorMenu.png")),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       key.currentState!.openDrawer();
+        //     },
+        //     icon: Image.asset("assets/images/vectorMenu.png")),
         title: Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 25)),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
@@ -108,36 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
-                          padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
-                          height: 60,
-                          decoration: BoxDecoration(
-                              color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                          child: BlocBuilder<GetPengumumanCubit, GetPengumumanState>(
-                            builder: (context, state) {
-                              if (state is GetPengumumanLoading) {
-                                return Container();
-                              }
-                              if (state is GetPengumumanFailed) {
-                                return Container();
-                              }
-                              if (state is GetPengumumanLoaded == false) {
-                                return Container();
-                              }
-                              var data = (state as GetPengumumanLoaded).model!;
-                              return Row(
-                                children: [
-                                  AnimatedTextKit(
-                                    repeatForever: true,
-                                    animatedTexts: data.data!.map((e) {
-                                      return RotateAnimatedText(e.namaJenis!);
-                                    }).toList(),
-                                  ),
-                                ],
-                              );
-                            },
-                          )),
+                    
                       const SizedBox(height: 12),
                       const WidgetCardHome(),
                       const SizedBox(height: 12),
