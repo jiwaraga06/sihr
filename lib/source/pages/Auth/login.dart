@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 6),
-                AutoSizeText("Silahkan masukan email dan password Anda", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 15), maxLines: 1),
+                const AutoSizeText("Silahkan masukan email dan password Anda", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 15), maxLines: 1),
                 const SizedBox(height: 40),
                 Form(
                   key: formkey,

@@ -10,21 +10,21 @@ class CheckPermissionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       color: whiteCustom2,
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Permissions Required",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Image.asset("assets/images/vectorpermision.jpg"),
-          SizedBox(height: 10),
-          Text("This app needs access to your files, location, and camera."),
-          SizedBox(height: 20),
+          const SizedBox(height: 10),
+          const Text("This app needs access to your files, location, and camera."),
+          const SizedBox(height: 20),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 50,
@@ -32,10 +32,10 @@ class CheckPermissionView extends StatelessWidget {
               onTap: onPermissionRequest,
               backgroundColor: hijau,
               text: "Izinkan",
-              textStyle: TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
+              textStyle: const TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 50,
@@ -43,7 +43,7 @@ class CheckPermissionView extends StatelessWidget {
               onTap: onCancel,
               backgroundColor: whiteCustom2,
               text: "Tutup",
-              textStyle: TextStyle(color: hijau, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
+              textStyle: const TextStyle(color: hijau, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
             ),
           ),
          

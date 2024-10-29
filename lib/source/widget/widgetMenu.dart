@@ -51,8 +51,8 @@ class WidgetMenuUtama extends StatelessWidget {
                       decoration:
                           BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
                       child: Image.asset("assets/images/izin.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Izin', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  const SizedBox(height: 6),
+                  const AutoSizeText('Izin', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),
@@ -87,8 +87,8 @@ class WidgetMenuUtama extends StatelessWidget {
                       decoration:
                           BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
                       child: Image.asset("assets/images/visit.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Lembur', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  const SizedBox(height: 6),
+                  const AutoSizeText('Lembur', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),
@@ -106,8 +106,8 @@ class WidgetMenuUtama extends StatelessWidget {
                       decoration:
                           BoxDecoration(color: whiteCustom2, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
                       child: Image.asset("assets/images/cuti.png")),
-                  SizedBox(height: 6),
-                  AutoSizeText('Cuti', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  const SizedBox(height: 6),
+                  const AutoSizeText('Cuti', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),
@@ -142,10 +142,48 @@ class WidgetMenuUtama extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.all(12),
                       decoration:
-                          BoxDecoration(color: Colors.grey.withOpacity(0.4), borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
                       child: Image.asset("assets/images/News.png")),
                   const SizedBox(height: 6),
-                  const AutoSizeText('News', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                  const AutoSizeText('Berita', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, pelatihanScreen);
+            },
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/Training.png")),
+                  const SizedBox(height: 6),
+                  const AutoSizeText('Pelatihan', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, logbookScreen);
+            },
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration:
+                          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                      child: Image.asset("assets/images/Note.png")),
+                  const SizedBox(height: 6),
+                  const AutoSizeText('Log Book', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
               ),
             ),

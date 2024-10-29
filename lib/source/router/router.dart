@@ -109,6 +109,29 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const NewsScreen(),
           transitionsBuilder: rightToLeft,
         );
+      // pelatihan
+      case pelatihanScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const PelatihanScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      // Log Book
+      case logbookScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const LogBookScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case createlogbookScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CreateLogBookScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case updatelogbookScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const UpdateLogBookScreen(),
+          transitionsBuilder: rightToLeft,
+        );
 
       default:
         return null;

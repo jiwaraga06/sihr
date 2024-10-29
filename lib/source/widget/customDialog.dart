@@ -46,6 +46,19 @@ class MyDialog {
     )..show();
   }
 
+  static dialogSuccess2(context, message) {
+    return AwesomeDialog(
+      dismissOnTouchOutside: false,
+      dismissOnBackKeyPress: false,
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.rightSlide,
+      title: 'Success',
+      desc: '$message',
+      btnOkOnPress: () {},
+    )..show();
+  }
+
   static dialogInfo(context, message, VoidCallback onPressedCancel, VoidCallback onPressedOk) {
     return AwesomeDialog(
       context: context,

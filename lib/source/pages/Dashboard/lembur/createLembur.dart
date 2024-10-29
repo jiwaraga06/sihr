@@ -66,7 +66,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Surat Izin Lembur", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Surat Izin Lembur", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateLemburCubit, CreateLemburState>(
         listener: (context, state) {
@@ -87,7 +87,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess(context, 'Successfully');
+            MyDialog.dialogSuccess2(context, 'Successfully');
           }
         },
         child: SingleChildScrollView(
@@ -98,41 +98,41 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AutoSizeText("Tanggal Pembuatan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Tanggal Pembuatan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: true,
                       controller: controllerTanggal,
                       onTap: pickdate,
-                      suffixIcon: Icon(FontAwesomeIcons.calendar),
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
-                  AutoSizeText("Pilih Jam Mulai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Pilih Jam Mulai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: true,
                       onTap: pilihJamMulai,
                       controller: controllerJamMulai,
-                      suffixIcon: Icon(FontAwesomeIcons.clock),
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      suffixIcon: const Icon(FontAwesomeIcons.clock),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
-                  AutoSizeText("Pilih Jam Selesai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Pilih Jam Selesai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: true,
                       onTap: pilihJamSelesai,
                       controller: controllerJamSelesai,
-                      suffixIcon: Icon(FontAwesomeIcons.clock),
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      suffixIcon: const Icon(FontAwesomeIcons.clock),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
-                  AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       controller: controllerKeterangan,
                       maxline: 3,
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 40),
                   SizedBox(
@@ -142,7 +142,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                       onTap: submit,
                       text: "Submit",
                       backgroundColor: hijauTeal1,
-                      textStyle: TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
+                      textStyle: const TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
                       roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
                   )

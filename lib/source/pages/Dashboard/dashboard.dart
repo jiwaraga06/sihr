@@ -14,7 +14,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
   ];
   
 
-  var widgets = [HomeScreen(), DataAbsensiScreen()];
+  var widgets = [const HomeScreen(), const DataAbsensiScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> with TickerProviderSt
             BlocProvider.of<CheckPermissionCubit>(context).checkPermissionGranted(context);
           }
         },
-        child: Icon(FontAwesomeIcons.fingerprint, color: Colors.white),
+        child: const Icon(FontAwesomeIcons.fingerprint, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(

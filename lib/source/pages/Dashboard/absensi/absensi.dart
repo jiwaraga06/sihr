@@ -31,8 +31,10 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
   XFile? gambar;
   void pickImage() async {
     selectPhoto(source: ImageSource.camera).then((value) {
-      gambar = value;
-      print("gambar: ${gambar!.path}");
+      setState(() {
+        gambar = value;
+        print("gambar: ${gambar!.path}");
+      });
     });
   }
 
@@ -54,13 +56,13 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Absensi"),
+        title: const Text("Absensi"),
         actions: [
           IconButton(
               onPressed: () {
                 BlocProvider.of<MarkerLocationCubit>(context).getCurrentLocation();
               },
-              icon: Icon(Icons.pin_drop))
+              icon: const Icon(Icons.pin_drop))
         ],
       ),
       body: BlocListener<PostAbsensiCubit, PostAbsensiState>(
@@ -71,7 +73,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
           if (state is PostAbsensiFailed) {
             Navigator.of(context).pop();
             var data = state.json;
-            MyDialog.dialogAlert(context, data['message']);
+            MyDialog.dialogAlert(context, data['message'].toString());
           }
           if (state is PostAbsensiLoaded) {
             Navigator.of(context).pop();
@@ -104,8 +106,8 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
               );
             }
             var latitude = (state as MarkerLocationLoaded).latitude!;
-            var longitude = (state as MarkerLocationLoaded).longitude!;
-            var place = (state as MarkerLocationLoaded).myPlacement![0];
+            var longitude = (state).longitude!;
+            var place = (state).myPlacement![0];
             return Stack(
               children: [
                 FlutterMap(
@@ -160,9 +162,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                       Row(
                         children: [
                           const SizedBox(width: 4),
-                          Icon(FontAwesomeIcons.circle, size: 23),
+                          const Icon(FontAwesomeIcons.circle, size: 23),
                           const SizedBox(width: 8),
-                          AutoSizeText(place.street!, style: TextStyle(fontFamily: 'JakartaSansBold'), maxLines: 2),
+                          AutoSizeText(place.street!, style: const TextStyle(fontFamily: 'JakartaSansBold'), maxLines: 2),
                           const SizedBox(width: 4),
                         ],
                       ),
@@ -170,9 +172,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                       Row(
                         children: [
                           const SizedBox(width: 4),
-                          Icon(Icons.circle, size: 23),
+                          const Icon(Icons.circle, size: 23),
                           const SizedBox(width: 8),
-                          AutoSizeText(place.name!, style: TextStyle(fontFamily: 'JakartaSansSemiBold'), maxLines: 1),
+                          AutoSizeText(place.name!, style: const TextStyle(fontFamily: 'JakartaSansSemiBold'), maxLines: 1),
                           const SizedBox(width: 4),
                         ],
                       ),
@@ -184,7 +186,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                   child: Container(
                     // height: 250,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(color: Colors.white),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: Column(
                       children: [
                         const SizedBox(height: 8),
@@ -196,7 +198,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text("Ambil Foto"),
+                                  const Text("Ambil Foto"),
                                   const SizedBox(height: 4),
                                   Row(
                                     children: [
@@ -204,9 +206,9 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                                         height: 50,
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(color: biru, borderRadius: BorderRadius.circular(100)),
-                                        child: Icon(FontAwesomeIcons.camera, color: Colors.white),
+                                        child: const Icon(FontAwesomeIcons.camera, color: Colors.white),
                                       ),
-                                      Icon(Icons.arrow_drop_down_outlined),
+                                      const Icon(Icons.arrow_drop_down_outlined),
                                     ],
                                   )
                                 ],
@@ -215,7 +217,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Tipe Absen", style: TextStyle(fontFamily: 'MontserratMedium')),
+                                const Text("Tipe Absen", style: TextStyle(fontFamily: 'MontserratMedium')),
                                 Row(
                                   children: [
                                     BlocBuilder<JenisAbsenCubit, JenisAbsenState>(
@@ -233,7 +235,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                                         return DropdownButton(
                                             value: tipeScan,
                                             items: data.data!.map((e) {
-                                              return DropdownMenuItem(child: Text(e.namaAbsen!), value: e.id!);
+                                              return DropdownMenuItem(value: e.id!, child: Text(e.namaAbsen!));
                                             }).toList(),
                                             onChanged: (value) {
                                               setState(() {
@@ -299,12 +301,12 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                         ),
                         const SizedBox(height: 12),
                         Container(
-                          color: Color(0XFFF5F5F5),
+                          color: const Color(0XFFF5F5F5),
                           padding: const EdgeInsets.only(top: 20, bottom: 10, left: 12, right: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Catatan", style: TextStyle(fontFamily: 'MontserratMedium')),
+                              const Text("Catatan", style: TextStyle(fontFamily: 'MontserratMedium')),
                               CustomField(
                                 controller: controllerNote,
                               )
@@ -320,7 +322,7 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
                               proses(latitude, longitude);
                             },
                             text: "PROSES",
-                            textStyle: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'JakartaSansSemiBold'),
+                            textStyle: const TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'JakartaSansSemiBold'),
                             backgroundColor: biru,
                             roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                           ),

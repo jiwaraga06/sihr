@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/widget/widgetCheckPermision.dart';

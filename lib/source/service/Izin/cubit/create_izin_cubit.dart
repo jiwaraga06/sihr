@@ -17,7 +17,7 @@ class CreateIzinCubit extends Cubit<CreateIzinState> {
     var datenow = DateTime.now();
     var body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
-      "tanggal": "$tanggal",
+      "tanggal": tanggal,
       "alasan": "$alasan",
       "status": "2",
       "id_jenis_izin": "$idjenis",

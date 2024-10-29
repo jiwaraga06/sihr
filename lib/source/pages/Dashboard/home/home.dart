@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //       key.currentState!.openDrawer();
         //     },
         //     icon: Image.asset("assets/images/vectorMenu.png")),
-        title: Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 25)),
+        title: const Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 25)),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Hi", style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
+                                      const Text("Hi", style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
                                       AutoSizeText(load['username']!, style: const TextStyle(fontSize: 16, fontFamily: 'MontserratSemiBold'), maxLines: 1),
                                     ],
                                   ),

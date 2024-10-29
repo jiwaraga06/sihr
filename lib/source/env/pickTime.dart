@@ -21,7 +21,7 @@ Future selectTime(BuildContext context) async {
             ),
             entryModeIconColor: Colors.blue.shade700,
           ),
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: Colors.blue,
           ),
         ),

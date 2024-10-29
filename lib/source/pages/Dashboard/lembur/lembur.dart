@@ -18,13 +18,13 @@ class _LemburScreenState extends State<LemburScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Data Lembur", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Data Lembur", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, createLemburScreen);
           },
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           )),
@@ -42,7 +42,7 @@ class _LemburScreenState extends State<LemburScreen> {
             return Container();
           }
           var data = (state as GetLemburLoaded).model;
-          var idPegawai = (state as GetLemburLoaded).idPegawai;
+          var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           return Container(
             padding: const EdgeInsets.all(12),
@@ -61,7 +61,7 @@ class _LemburScreenState extends State<LemburScreen> {
                     child: Container(
                       margin: const EdgeInsets.only(left: 12),
                       padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: whiteCustom2,
                         borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
                       ),
@@ -71,28 +71,61 @@ class _LemburScreenState extends State<LemburScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Tanggal Pengajuan", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Text(formatDate(a.tanggal!), style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              const Text("Tanggal Pengajuan", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'MontserratSemiBold')),
                             ],
                           ),
                           const SizedBox(height: 12),
-                          Row(
+                          Table(
+                            border: TableBorder.all(style: BorderStyle.none),
+                            columnWidths: const <int, TableColumnWidth>{
+                              0: FixedColumnWidth(100),
+                              1: FixedColumnWidth(15),
+                            },
                             children: [
-                              AutoSizeText(a.jamMulai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
-                              AutoSizeText(" - ", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
-                              AutoSizeText(a.jamSelesai!, maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                              TableRow(
+                                children: [
+                                  const Text('Jam Mulai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.jamMulai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
+                              TableRow(
+                                children: [
+                                  const Text('Jam Selesai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
+                              TableRow(
+                                children: [
+                                  const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
+                              TableRow(
+                                children: [
+                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
-                          Row(
-                            children: [
-                              Text("Total :", style: TextStyle(fontFamily: 'MontserratMedium')),
-                              const SizedBox(width: 12),
-                              Text(a.jumlahJam! + " jam", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
                         ],
                       ),
                     ),

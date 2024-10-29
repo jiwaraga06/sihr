@@ -17,5 +17,13 @@ const izinScreen = "/dashboard/izin";
 const createIzinScreen = "/dashboard/izin/create";
 
 // news
+const newsScreen = "/news/news";
 
-const newsScreen ="/news/news";
+// pelatihan
+const pelatihanScreen = "/pelatihan/pelatihan";
+
+// LOG Book
+
+const logbookScreen = "/logbook/logbook";
+const createlogbookScreen = "/logbook/createLogBook";
+const updatelogbookScreen = "/logbook/updateLogBook";

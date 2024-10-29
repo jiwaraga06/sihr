@@ -10,7 +10,7 @@ Future network({String? method, String? url, body, context}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   var token = pref.getString('token');
   var headers = {'Authorization': 'Bearer $token', "Accept": "application/json", "Content-type": "application/json"};
-  var response;
+  Response? response;
   try {
     if (method == "GET") {
       response = await dio.get(url!, options: Options(headers: headers, responseType: ResponseType.json, validateStatus: (status) => true), data: body);

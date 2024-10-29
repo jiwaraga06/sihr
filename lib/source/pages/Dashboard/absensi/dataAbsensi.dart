@@ -18,7 +18,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Data Absensi", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Data Absensi", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocBuilder<GetAbsensiCubit, GetAbsensiState>(
         builder: (context, state) {
@@ -34,7 +34,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
             return Container();
           }
           var data = (state as GetAbsensiLoaded).model;
-          var idPegawai = (state as GetAbsensiLoaded).idPegawai;
+          var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           return Container(
             padding: const EdgeInsets.all(12),
@@ -54,38 +54,78 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                       child: Container(
                         margin: const EdgeInsets.only(left: 12),
                         padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: whiteCustom2,
                           borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 12),
-                            AutoSizeText(formatDate(a.tanggal!), maxLines: 1, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 16),),
-                            const SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Row(children: [
+                              Image.asset("assets/images/male.png"),
+                              const SizedBox(width: 6),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(a.namaPegawai!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 13)),
+                                  Text(a.departement, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                                ],
+                              )
+                            ]),
+                            const SizedBox(height: 6),
+                            Table(
+                              border: TableBorder.all(style: BorderStyle.none),
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(100),
+                                1: FixedColumnWidth(15),
+                              },
                               children: [
-                                // Text(a.idPegawai.toString()),
-                                Text("Jam Aktifitas", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
-                                    child: Text(a.status!, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                AutoSizeText(a.waktuMasuk!, style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                Text(" - "),
-                                if (a.waktuKeluar!.isNotEmpty) AutoSizeText(a.waktuKeluar!, style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                                if (a.waktuKeluar!.isEmpty) AutoSizeText("Belum Pulang", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                                TableRow(
+                                  children: [
+                                    const Text('Jam Masuk', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.waktuMasuk!}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jam Pulang', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.waktuKeluar!.isNotEmpty) AutoSizeText(a.waktuKeluar!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.waktuKeluar!.isEmpty) const AutoSizeText("Belum Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Masuk', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.status == 1)
+                                      Text("Terlambat", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.red[600])),
+                                    if (a.status == 2)
+                                      Text("Tepat Waktu", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.blue[600])),
+                                  ],
+                                ),
                               ],
                             ),
                             const SizedBox(height: 8),
-                            AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
-                            const SizedBox(height: 12),
+                            // AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
+                            // const SizedBox(height: 12),
                           ],
                         ),
                       ),

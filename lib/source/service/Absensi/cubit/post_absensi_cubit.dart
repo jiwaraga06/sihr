@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
@@ -25,11 +24,11 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       // "tanggal": "$tanggal",
       // "waktu_masuk": "08:00:00",
       // "waktu_keluar": "12:00:00",
-      "status": "Hadir",
+      "status": "$tipeScan",
       "keterangan": "$keterangan",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
       "latt": "$lat",
-      "terlambat": "1",
+      "terlambat": "",
       "att": "$long",
       "id_shift": "$idShift",
     });
@@ -52,7 +51,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
         print(distanceInMeters);
 
         if (tipeScan == 1 || tipeScan == 3) {
-          if (distanceInMeters >= 50) {
+          if (distanceInMeters <= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             repository!.postAbsensi(body, context).then((value) {
@@ -70,7 +69,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
             MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
           }
         } else if (tipeScan == 2 || tipeScan == 4) {
-          if (distanceInMeters >= 50) {
+          if (distanceInMeters >= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             var idAbsensi = pref.getString("idAbsensi");

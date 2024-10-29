@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/model/ModelShift/modelShift.dart';
 import 'package:sihr/source/repository/RepositoryShift.dart';
-import 'package:sihr/source/widget/customDialog.dart';
 
 part 'get_shift_state.dart';
 

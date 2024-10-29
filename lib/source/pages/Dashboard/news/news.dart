@@ -18,7 +18,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("News", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("News", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocBuilder<GetPengumumanCubit, GetPengumumanState>(
         builder: (context, state) {
@@ -42,6 +42,7 @@ class _NewsScreenState extends State<NewsScreen> {
             return Container();
           }
           var data = (state as GetPengumumanLoaded).model;
+          List datafilter = data!.data!.where((e) => e.status == 1).toList();
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
@@ -50,29 +51,30 @@ class _NewsScreenState extends State<NewsScreen> {
                 BlocProvider.of<GetPengumumanCubit>(context).getPengumuman(context);
               },
               child: ListView.builder(
-                itemCount: data!.data!.length,
+                itemCount: datafilter.length,
                 itemBuilder: (context, index) {
-                  var a = data.data![index];
-                  return Container(
+                  var a = datafilter[index];
+                return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauLight2, borderRadius: BorderRadius.circular(12)),
                     child: Container(
                       margin: const EdgeInsets.only(left: 12),
                       padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: whiteCustom2,
                         borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(a.namaJenis!, style: TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 14)),
+                          Text(a.namaJenis!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 14)),
                           const SizedBox(height: 8),
-                          Text(a.keterangan!, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                          Text(a.keterangan!, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                         ],
                       ),
                     ),
                   );
+                
                 },
               ),
             ),

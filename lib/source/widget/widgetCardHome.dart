@@ -54,14 +54,14 @@ class WidgetCardHome extends StatelessWidget {
                             children: [
                               Image.asset("assets/images/checkin.png", height: 35),
                               const SizedBox(width: 8),
-                              Text("Check In", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const Text("Check In", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                             ],
                           ),
                           const SizedBox(height: 4),
-                          if (data!.jadwal!.isNotEmpty) Text(data!.jadwal![0].shift!.jamMulai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          if (data!.jadwal!.isEmpty) Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isNotEmpty) Text(data.jadwal![0].shift!.jamMulai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
-                          Text("Jadwal Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
+                          const Text("Jam Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
                       ),
                     ),
@@ -83,15 +83,15 @@ class WidgetCardHome extends StatelessWidget {
                             children: [
                               Image.asset("assets/images/checkout.png", height: 35),
                               const SizedBox(width: 8),
-                              Text("Check Out", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const Text("Check Out", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                             ],
                           ),
                           const SizedBox(height: 4),
-                          if (data!.jadwal!.isNotEmpty)
-                            Text(data!.jadwal![0].shift!.jamSelesai!, style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          if (data!.jadwal!.isEmpty) Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isNotEmpty)
+                            Text(data.jadwal![0].shift!.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
-                          Text("Jadwal Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
+                          const Text("Jam Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
                       ),
                     ),
@@ -135,9 +135,9 @@ class WidgetCardHome extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Izin", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const Text("Izin", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                               const SizedBox(height: 4),
-                              AutoSizeText("${data.data!.izin} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              AutoSizeText("${data.data!.izin} Hari", style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
                               const SizedBox(height: 4),
                               const Divider(color: Colors.blue, thickness: 2.5)
                             ],
@@ -157,9 +157,9 @@ class WidgetCardHome extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Sisa Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const Text("Sisa Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                               const SizedBox(height: 4),
-                              AutoSizeText("${data.data!.sisaCuti} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              AutoSizeText("${data.data!.sisaCuti} Hari", style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
                               const SizedBox(height: 4),
                               const Divider(color: Colors.indigo, thickness: 2.5)
                             ],
@@ -179,9 +179,9 @@ class WidgetCardHome extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Kehadiran", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
+                              const Text("Kehadiran", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                               const SizedBox(height: 4),
-                              AutoSizeText("${data.data!.kehadiran} Hari", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
+                              AutoSizeText("${data.data!.kehadiran} Hari", style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 25)),
                               const SizedBox(height: 4),
                               const Divider(color: Colors.green, thickness: 2.5)
                             ],

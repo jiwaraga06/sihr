@@ -9,59 +9,71 @@ ModelDataAbsensi modelDataAbsensiFromJson(String str) => ModelDataAbsensi.fromJs
 String modelDataAbsensiToJson(ModelDataAbsensi data) => json.encode(data.toJson());
 
 class ModelDataAbsensi {
-    final String? message;
-    final int? count;
-    final List<Datauser>? data;
+  final String? message;
+  final int? count;
+  final List<Datauser>? data;
 
-    ModelDataAbsensi({
-        this.message,
-        this.count,
-        this.data,
-    });
+  ModelDataAbsensi({
+    this.message,
+    this.count,
+    this.data,
+  });
 
-    factory ModelDataAbsensi.fromJson(Map<String, dynamic> json) => ModelDataAbsensi(
+  factory ModelDataAbsensi.fromJson(Map<String, dynamic> json) => ModelDataAbsensi(
         message: json["message"],
         count: json["count"],
         data: json["data"] == null ? [] : List<Datauser>.from(json["data"]!.map((x) => Datauser.fromJson(x))),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "message": message,
         "count": count,
         "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class Datauser {
-    final int? id;
-    final int? idPegawai;
-    final int? idShift;
-    final DateTime? tanggal;
-    final String? waktuMasuk;
-    final String? waktuKeluar;
-    final String? status;
-    final String? keterangan;
-    final String? fotoUrl;
-    final String? latt;
-    final String? att;
-    final int? terlambat;
+  final int? id;
+  final int? idPegawai;
+  final int? idShift;
+  final DateTime? tanggal;
+  final String? waktuMasuk;
+  final String? waktuKeluar;
+  final int? status;
+  final String? keterangan;
+  final String? fotoUrl;
+  final String? latt;
+  final String? att;
+  final int? terlambat;
+  final String? nip;
+  final String? namaPegawai;
+  final String? jabatan;
+  final String? divisi;
+  final String? departement;
+  final String? shift;
 
-    Datauser({
-        this.id,
-        this.idPegawai,
-        this.idShift,
-        this.tanggal,
-        this.waktuMasuk,
-        this.waktuKeluar,
-        this.status,
-        this.keterangan,
-        this.fotoUrl,
-        this.latt,
-        this.att,
-        this.terlambat,
-    });
+  Datauser({
+    this.nip,
+    this.namaPegawai,
+    this.jabatan,
+    this.divisi,
+    this.departement,
+    this.shift,
+    this.id,
+    this.idPegawai,
+    this.idShift,
+    this.tanggal,
+    this.waktuMasuk,
+    this.waktuKeluar,
+    this.status,
+    this.keterangan,
+    this.fotoUrl,
+    this.latt,
+    this.att,
+    this.terlambat,
+  });
 
-    factory Datauser.fromJson(Map<String, dynamic> json) => Datauser(
+  factory Datauser.fromJson(Map<String, dynamic> json) => Datauser(
         id: json["id"],
         idPegawai: json["id_pegawai"],
         idShift: json["id_shift"],
@@ -74,9 +86,16 @@ class Datauser {
         latt: json["latt"] ?? 0.0,
         att: json["att"] ?? 0.0,
         terlambat: json["terlambat"] ?? "",
-    );
+        nip: json["nip"] ?? "",
+        namaPegawai: json["nama_pegawai"] ?? "",
+        jabatan: json["jabatan"] ?? "",
+        divisi: json["divisi"] ?? "",
+        departement: json["departement"] ?? "",
+        shift: json["shift"] ?? "",
+        
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "id_pegawai": idPegawai,
         "id_shift": idShift,
@@ -89,5 +108,5 @@ class Datauser {
         "latt": latt,
         "att": att,
         "terlambat": terlambat,
-    };
+      };
 }

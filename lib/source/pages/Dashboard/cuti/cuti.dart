@@ -14,7 +14,7 @@ class _CutiScreenState extends State<CutiScreen> {
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [],
           ),
@@ -23,7 +23,7 @@ class _CutiScreenState extends State<CutiScreen> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("Tutup"))
+                child: const Text("Tutup"))
           ],
         );
       },
@@ -40,13 +40,13 @@ class _CutiScreenState extends State<CutiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Data Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Data Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, createCutiScreen);
           },
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           )),
@@ -64,7 +64,7 @@ class _CutiScreenState extends State<CutiScreen> {
             return Container();
           }
           var data = (state as GetCutiLoaded).model;
-          var idPegawai = (state as GetCutiLoaded).idPegawai;
+          var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           return Container(
             padding: const EdgeInsets.all(12),
@@ -83,7 +83,7 @@ class _CutiScreenState extends State<CutiScreen> {
                     child: Container(
                       margin: const EdgeInsets.only(left: 12),
                       padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: whiteCustom2,
                         borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
                       ),
@@ -93,35 +93,35 @@ class _CutiScreenState extends State<CutiScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Tanggal Cuti", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              const Text("Tanggal Pengajuan", style: TextStyle(fontFamily: 'MontserratSemiBold')),
                               if (a.status == 0)
                                 Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
-                                    child: Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                    child: const Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                               if (a.status == 1)
                                 Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
-                                    child: Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                    child: const Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                               if (a.status == 2)
                                 Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
-                                    child: Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                    child: const Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                             ],
                           ),
                           Row(
                             children: [
-                              AutoSizeText(formatDate(a.tglMulai!), style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Text(" - "),
-                              AutoSizeText(formatDate(a.tglSelesai!), style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              AutoSizeText(formatDate(a.tglMulai!), style: const TextStyle(fontFamily: 'MontserratSemiBold')),
+                              const Text(" - "),
+                              AutoSizeText(formatDate(a.tglSelesai!), style: const TextStyle(fontFamily: 'MontserratSemiBold')),
                             ],
                           ),
                           const SizedBox(height: 8),
-                          AutoSizeText("Jenis Cuti : " + a.jenisCuti!.namaCuti!, maxLines: 1, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                          AutoSizeText("Jenis Cuti : " + a.jenisCuti!.namaCuti!, maxLines: 1, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 8),
-                          AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                          AutoSizeText(a.keterangan!, maxLines: 2, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 12),
                         ],
                       ),

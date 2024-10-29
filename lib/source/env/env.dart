@@ -28,3 +28,6 @@ const whiteCustom = Color.fromRGBO(245, 245, 245, 1);
 const whiteCustom2 = Color.fromARGB(255, 255, 255, 255);
 const merah = Color(0XFFA91D3A);
 const biru = Color(0XFF125B9A);
+
+// data edit log book
+var tanggalLogbook, namalog, keteranganlog, idlogbook;

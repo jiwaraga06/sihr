@@ -42,22 +42,22 @@ class CustomField extends StatelessWidget {
         labelText: labelText,
         suffixIcon: suffixIcon,
         prefixIcon: preffixIcon,
-        hintStyle: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14),
+        hintStyle: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey, strokeAlign: 20),
+          borderSide: const BorderSide(color: Colors.grey, strokeAlign: 20),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: hijau, strokeAlign: 20),
+          borderSide: const BorderSide(color: hijau, strokeAlign: 20),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: merah, strokeAlign: 20),
+          borderSide: const BorderSide(color: merah, strokeAlign: 20),
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       ),

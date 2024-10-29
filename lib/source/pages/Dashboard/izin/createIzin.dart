@@ -42,7 +42,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pengajuan izin", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Pengajuan izin", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateIzinCubit, CreateIzinState>(
         listener: (context, state) {
@@ -63,7 +63,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess(context, 'Successfully');
+            MyDialog.dialogSuccess2(context, 'Successfully');
           }
         },
         child: SingleChildScrollView(
@@ -74,41 +74,41 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AutoSizeText("Tanggal Pembuatan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Tanggal Pembuatan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: true,
                       controller: controllerTanggal,
                       onTap: pickdate,
-                      suffixIcon: Icon(FontAwesomeIcons.calendar),
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
                   BlocBuilder<JenisIzinCubit, JenisIzinState>(
                     builder: (context, state) {
                       if (state is JenisIzinLoading) {
-                        return CustomField(readOnly: true, hintText: "Kategori ", textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
+                        return CustomField(readOnly: true, hintText: "Kategori ", textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       if (state is JenisIzinLoaded == false) {
                         return CustomField(
-                            readOnly: true, controller: controllerTanggal, textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
+                            readOnly: true, controller: controllerTanggal, textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       var data = (state as JenisIzinLoaded).model;
                       return Container(
                         child: DropdownButtonFormField(
-                          hint: Text("Kategori Izin"),
+                          hint: const Text("Kategori Izin"),
                           borderRadius: BorderRadius.circular(10),
                           isExpanded: true,
                           decoration: InputDecoration(
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: merah, strokeAlign: 20),
+                              borderSide: const BorderSide(color: merah, strokeAlign: 20),
                             ),
                           ),
                           value: valueIzin,
                           items: data!.data!.map((e) {
                             return DropdownMenuItem(
-                              child: Text(e.namaIzin!),
                               value: e.id,
+                              child: Text(e.namaIzin!),
                             );
                           }).toList(),
                           onChanged: (value) {
@@ -127,19 +127,19 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-                  AutoSizeText("Alasan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Alasan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       controller: controllerAlasan,
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
-                  AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       controller: controllerKeterangan,
                       maxline: 3,
-                      textstyle: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 40),
                   SizedBox(
@@ -149,7 +149,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
                       onTap: submit,
                       text: "Submit",
                       backgroundColor: hijauTeal1,
-                      textStyle: TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
+                      textStyle: const TextStyle(color: whiteCustom, fontSize: 20, fontFamily: 'JakartaSansSemiBold'),
                       roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
                   )
