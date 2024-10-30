@@ -58,7 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
     repository!.session(context).then((value) async {
       var json = value.data;
       var statusCode = value.statusCode;
-      print(statusCode);
+      print(json);
       if (statusCode == 200 || statusCode == 201) {
         pref.setString("id_pegawai", json['user']['id_pegawai'].toString());
         emit(AuthLoaded(statusCode: statusCode, json: data));

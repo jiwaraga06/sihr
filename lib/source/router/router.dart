@@ -132,6 +132,13 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const UpdateLogBookScreen(),
           transitionsBuilder: rightToLeft,
         );
+        //  slipgaji
+      case slipgajiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const SlipGajiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+
 
       default:
         return null;

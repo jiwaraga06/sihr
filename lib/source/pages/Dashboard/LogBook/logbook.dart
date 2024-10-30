@@ -42,7 +42,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
             );
           }
           if (state is GetLogBookFailed) {
-            return Container();
+            return Center(child: Text("Something Wrong"));
           }
           if (state is GetLogBookLoaded == false) {
             return Container();
@@ -50,7 +50,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
           var data = (state as GetLogBookLoaded).model;
           var idPegawai = (state).idPegawai;
           List datafilter = data!.dataLogBook!.where((e) => e.idPegawai == idPegawai).toList();
-          if (data.dataLogBook!.isEmpty) {
+          if (datafilter.isEmpty) {
             return Center(child: Text("Data Kosong"));
           }
           return Container(
@@ -61,9 +61,9 @@ class _LogBookScreenState extends State<LogBookScreen> {
                 BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
               },
               child: ListView.builder(
-                itemCount: data.dataLogBook!.length,
+                itemCount: datafilter.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var a = data.dataLogBook![index];
+                  var a = datafilter![index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -143,12 +143,12 @@ class _LogBookScreenState extends State<LogBookScreen> {
                             child: CustomButton2(
                               onTap: () {
                                 Navigator.pushNamed(context, updatelogbookScreen);
-                                    setState(() {
-                                      idlogbook = a.id;
-                                      namalog = a.namaLog;
-                                      tanggalLogbook = a.tanggal.toString().split(' ')[0];
-                                      keteranganlog = a.keterangan;
-                                    });
+                                setState(() {
+                                  idlogbook = a.id;
+                                  namalog = a.namaLog;
+                                  tanggalLogbook = a.tanggal.toString().split(' ')[0];
+                                  keteranganlog = a.keterangan;
+                                });
                               },
                               text: "Edit LogBook",
                               backgroundColor: Colors.deepPurple,

@@ -60,12 +60,18 @@ class _CutiScreenState extends State<CutiScreen> {
               ),
             );
           }
+          if (state is GetCutiFailed) {
+            return Center(child: Text("Something Wrong"));
+          }
           if (state is GetCutiLoaded == false) {
             return Container();
           }
           var data = (state as GetCutiLoaded).model;
           var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
+           if (datafilter.isEmpty) {
+            return Center(child: Text("Data Kosong"));
+          }
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
@@ -119,7 +125,8 @@ class _CutiScreenState extends State<CutiScreen> {
                             ],
                           ),
                           const SizedBox(height: 8),
-                          AutoSizeText("Jenis Cuti : " + a.jenisCuti!.namaCuti!, maxLines: 1, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                          AutoSizeText("Jenis Cuti : " + a.jenisCuti!.namaCuti!,
+                              maxLines: 1, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 8),
                           AutoSizeText(a.keterangan!, maxLines: 2, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                           const SizedBox(height: 12),

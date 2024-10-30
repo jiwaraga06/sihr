@@ -24,11 +24,11 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       // "tanggal": "$tanggal",
       // "waktu_masuk": "08:00:00",
       // "waktu_keluar": "12:00:00",
-      "status": "$tipeScan",
+      "status": "Hadir",
+      "jenis": "$tipeScan",
       "keterangan": "$keterangan",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
       "latt": "$lat",
-      "terlambat": "",
       "att": "$long",
       "id_shift": "$idShift",
     });
@@ -51,14 +51,14 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
         print(distanceInMeters);
 
         if (tipeScan == 1 || tipeScan == 3) {
-          if (distanceInMeters <= 150) {
+          if (distanceInMeters >= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             repository!.postAbsensi(body, context).then((value) {
               var json = value.data;
               var statusCode = value.statusCode;
               print("POST: $json");
-              if (statusCode >= 200) {
+              if (statusCode == 200 || statusCode == 201) {
                 pref.setString("idAbsensi", json['data']['id'].toString());
                 emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
               } else {
@@ -78,7 +78,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
               var json = value.data;
               var statusCode = value.statusCode;
               print("POST: $json");
-              if (statusCode >= 200) {
+              if (statusCode == 200 || statusCode ==201) {
                 emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
               } else {
                 emit(PostAbsensiFailed(statusCode: statusCode, json: json));
@@ -94,7 +94,8 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
             var json = value.data;
             var statusCode = value.statusCode;
             print("POST: $json");
-            if (statusCode >= 200) {
+             MyDialog.dialogAlert(context, "$json");
+            if (statusCode == 200 || statusCode ==201) {
               pref.setString("idAbsensi", json['data']['id'].toString());
               emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
             } else {

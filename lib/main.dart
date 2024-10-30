@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
@@ -8,6 +11,7 @@ import 'package:sihr/source/repository/RepositoryLogBook.dart';
 import 'package:sihr/source/repository/RepositoryPelatihan.dart';
 import 'package:sihr/source/repository/RepositoryPengumuman.dart';
 import 'package:sihr/source/repository/RepositoryShift.dart';
+import 'package:sihr/source/repository/RepositorySlipGaji.dart';
 import 'package:sihr/source/repository/repositoryCuti.dart';
 import 'package:sihr/source/repository/repositoryIzin.dart';
 import 'package:sihr/source/repository/repositoryLembur.dart';
@@ -35,9 +39,13 @@ import 'package:sihr/source/service/Pelatihan/cubit/jenis_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
+import 'package:sihr/source/service/SlipGaji/cubit/get_slip_gaji_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
   runApp(MyApp(router: RouterNavigation()));
 }
 
@@ -59,6 +67,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => Repositorypengumuman()),
         RepositoryProvider(create: (context) => PelatihanRepository()),
         RepositoryProvider(create: (context) => RepositoryLogBook()),
+        RepositoryProvider(create: (context) => RepositorySlipGaji()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -94,6 +103,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetLogBookCubit(repository: RepositoryLogBook())),
           BlocProvider(create: (context) => CreateLogBookCubit(repository: RepositoryLogBook())),
           BlocProvider(create: (context) => UpdateLogBookCubit(repository: RepositoryLogBook())),
+          // SLIP GAJI
+          BlocProvider(create: (context) => GetSlipGajiCubit(repository: RepositorySlipGaji())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

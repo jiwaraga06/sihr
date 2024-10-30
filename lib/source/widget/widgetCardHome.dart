@@ -58,8 +58,8 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          if (data!.jadwal!.isNotEmpty) Text(data.jadwal![0].shift!.jamMulai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          // if (data!.jadwal!.isNotEmpty) Text(data.data., style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          // if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
                           const Text("Jam Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
@@ -87,9 +87,9 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          if (data.jadwal!.isNotEmpty)
-                            Text(data.jadwal![0].shift!.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          // if (data.jadwal!.isNotEmpty)
+                          //   Text(data.jadwal![0].shift!.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          // if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
                           const Text("Jam Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],

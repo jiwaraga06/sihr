@@ -8,6 +8,7 @@ const String ACCEPT = "Accept";
 const String AUTHORIZATION = "authorization";
 
 const url = "https://api.hris.rsuumc.com";
+const url2 = "https://api-v2.rsuumc.com";
 var tanggal = DateFormat('yyyy-MM-dd').format(DateTime.now());
 PermissionStatus? storagePermission;
 PermissionStatus? locationPermission;

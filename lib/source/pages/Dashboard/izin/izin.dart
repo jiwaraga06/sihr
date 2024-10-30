@@ -38,12 +38,18 @@ class _IzinScreenState extends State<IzinScreen> {
               ),
             );
           }
+          if (state is GetIzinFailed) {
+            return Center(child: Text("Something Wrong"));
+          }
           if (state is GetIzinLoaded == false) {
             return Container();
           }
           var data = (state as GetIzinLoaded).model!;
           var idPegawai = (state).idPegawai;
           List datafilter = data.data!.where((e) => e.idPegawai == idPegawai).toList();
+          if (datafilter.isEmpty) {
+            return Center(child: Text("Data Kosong"));
+          }
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(

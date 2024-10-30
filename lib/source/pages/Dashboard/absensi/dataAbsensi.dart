@@ -30,6 +30,9 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
               ),
             );
           }
+          if (state is GetAbsensiFailed) {
+            return Center(child: Text("Something Wrong"));
+          }
           if (state is GetAbsensiLoaded == false) {
             return Container();
           }

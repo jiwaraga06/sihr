@@ -19,6 +19,7 @@ class GetCutiCubit extends Cubit<GetCutiState> {
     repository!.getCuti(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
+      print(json);
       if (statusCode == 200 || statusCode == 201) {
         emit(GetCutiLoaded(statusCode: statusCode, model: modelCutiFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {

@@ -43,6 +43,9 @@ class _NewsScreenState extends State<NewsScreen> {
           }
           var data = (state as GetPengumumanLoaded).model;
           List datafilter = data!.data!.where((e) => e.status == 1).toList();
+          if (datafilter.isEmpty) {
+            return Center(child: Text("Data Kosong"));
+          }
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
@@ -54,7 +57,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                return Container(
+                  return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauLight2, borderRadius: BorderRadius.circular(12)),
                     child: Container(
@@ -74,7 +77,6 @@ class _NewsScreenState extends State<NewsScreen> {
                       ),
                     ),
                   );
-                
                 },
               ),
             ),

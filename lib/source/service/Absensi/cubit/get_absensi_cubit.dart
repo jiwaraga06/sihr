@@ -20,7 +20,7 @@ class GetAbsensiCubit extends Cubit<GetAbsensiState> {
     repository!.getAbsensi(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      if (statusCode >= 200) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(GetAbsensiLoaded(statusCode: statusCode, idPegawai: int.parse(idPegawai!), model: modelDataAbsensiFromJson(jsonEncode(json))));
       } else {
         emit(GetAbsensiFailed(statusCode: statusCode, json: json));
