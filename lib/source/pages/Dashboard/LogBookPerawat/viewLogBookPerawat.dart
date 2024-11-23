@@ -1,39 +1,33 @@
 part of '../../index.dart';
 
-class LogBookScreen extends StatefulWidget {
-  const LogBookScreen({super.key});
+class LogBookPerawatScreen extends StatefulWidget {
+  const LogBookPerawatScreen({super.key});
 
   @override
-  State<LogBookScreen> createState() => _LogBookScreenState();
+  State<LogBookPerawatScreen> createState() => _LogBookPerawatScreenState();
 }
 
-class _LogBookScreenState extends State<LogBookScreen> {
-  void showUpload(link) async {
-    if (!await launchUrl(Uri.parse("$link"))) {
-      throw Exception('Could not launch $link');
-    }
-  }
-
+class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+    BlocProvider.of<GetLogBookPerawatCubit>(context).getLogBookPerawat(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Log Book", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Log Book Perawat", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, createlogbookScreen);
+            Navigator.pushNamed(context, createlogbookPerawatScreen);
           },
           child: const Icon(Icons.add, color: Colors.white)),
-      body: BlocBuilder<GetLogBookCubit, GetLogBookState>(
+      body: BlocBuilder<GetLogBookPerawatCubit, GetLogBookPerawatState>(
         builder: (context, state) {
-          if (state is GetLogBookLoading) {
+          if (state is GetLogBookPerawatLoading) {
             return Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 12),
               child: Column(
@@ -41,30 +35,26 @@ class _LogBookScreenState extends State<LogBookScreen> {
               ),
             );
           }
-          if (state is GetLogBookFailed) {
+          if (state is GetLogBookPerawatFailed) {
             var data = state.json;
             return Center(child: Text(data['message']));
           }
-          if (state is GetLogBookLoaded == false) {
+          if (state is GetLogBookPerawatLoaded == false) {
             return Container();
           }
-          var data = (state as GetLogBookLoaded).model;
-          var idPegawai = (state).idPegawai;
-          List datafilter = data!.dataLogBook!.where((e) => e.idPegawai == idPegawai).toList();
-          if (datafilter.isEmpty) {
-            return const Center(child: Text("Data Kosong"));
-          }
+          var data = (state as GetLogBookPerawatLoaded).model;
+
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 1));
-                BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+                BlocProvider.of<GetLogBookPerawatCubit>(context).getLogBookPerawat(context);
               },
               child: ListView.builder(
-                itemCount: datafilter.length,
+                itemCount: data!.dataLogbook!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var a = datafilter[index];
+                  var a = data!.dataLogbook![index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -107,7 +97,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
                                 children: [
                                   const Text('Log Book', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.namaLog!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text(a.mlogbook!.namaLog!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -115,9 +105,19 @@ class _LogBookScreenState extends State<LogBookScreen> {
                               ),
                               TableRow(
                                 children: [
-                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text('Jumlah', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text(a.jumlah!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
+                              TableRow(
+                                children: [
+                                  const Text('Kategori', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.mlogbook!.kategori!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -125,30 +125,17 @@ class _LogBookScreenState extends State<LogBookScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: CustomButton2(
-                              onTap: () {
-                                showUpload(a.upload);
-                              },
-                              text: "Lihat Upload",
-                              backgroundColor: Colors.indigo,
-                              textStyle: const TextStyle(color: Colors.white),
-                              roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            ),
-                          ),
                           const SizedBox(height: 4),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: CustomButton2(
                               onTap: () {
-                                Navigator.pushNamed(context, updatelogbookScreen);
+                                Navigator.pushNamed(context, updatelogbookPerawatScreen);
                                 setState(() {
                                   idlogbook = a.id;
-                                  namalog = a.namaLog;
-                                  tanggalLogbook = a.tanggal.toString().split(' ')[0];
-                                  keteranganlog = a.keterangan;
+                                  mlogbook = a.idMLogbook;
+                                  tanggalLogbookPerawat = a.tanggal.toString().split(' ')[0];
+                                  jumlahLogBookPerawat = a.jumlah;
                                 });
                               },
                               text: "Edit LogBook",

@@ -79,8 +79,7 @@ Widget tipeUmum(BuildContext context) {
                 margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(color: hijauLight2, borderRadius: BorderRadius.circular(12)),
                 child: Container(
-                  margin: const EdgeInsets.only(left: 12),
-                  padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   decoration: const BoxDecoration(
                     color: whiteCustom2,
                     borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
@@ -88,9 +87,11 @@ Widget tipeUmum(BuildContext context) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(a.namaPengumuman!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 14)),
-                      const SizedBox(height: 8),
-                      Text(a.isi!, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                      ListTile(
+                        title: Text(a.namaPengumuman!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 12)),
+                        subtitle: Text(a.isi!, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 11)),
+                        trailing: Text(formatDate(a.tanggal), style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                      ),
                     ],
                   ),
                 ),
@@ -141,8 +142,7 @@ Widget tipeKhusus(BuildContext context) {
                 margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(color: hijauLight2, borderRadius: BorderRadius.circular(12)),
                 child: Container(
-                  margin: const EdgeInsets.only(left: 12),
-                  padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   decoration: const BoxDecoration(
                     color: whiteCustom2,
                     borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
@@ -150,9 +150,11 @@ Widget tipeKhusus(BuildContext context) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(a.namaPengumuman!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 14)),
-                      const SizedBox(height: 8),
-                      Text(a.isi!, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                      ListTile(
+                        title: Text(a.namaPengumuman!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 12)),
+                        subtitle: Text(a.isi!, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 11)),
+                        trailing: Text(formatDate(a.tanggal), style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
+                      ),
                     ],
                   ),
                 ),

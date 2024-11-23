@@ -56,7 +56,7 @@ class _UpdateLogBookScreenState extends State<UpdateLogBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Update Log Book"),
+        title: const Text("Update Log Book", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<UpdateLogBookCubit, UpdateLogBookState>(
         listener: (context, state) {

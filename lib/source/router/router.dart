@@ -150,6 +150,24 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const UpdateLogBookScreen(),
           transitionsBuilder: rightToLeft,
         );
+      case logbookPerawatScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const LogBookPerawatScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case createlogbookPerawatScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const CreateLogBookPerawatScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case updatelogbookPerawatScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const UpdateLogBookPerawatScreen(),
+          transitionsBuilder: rightToLeft,
+        );
       //  slipgaji
       case slipgajiScreen:
         return PageRouteBuilder(

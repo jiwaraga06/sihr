@@ -38,8 +38,12 @@ import 'package:sihr/source/service/Izin/cubit/jenis_izin_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/get_lembur_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/create_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/create_log_book_perawat_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/get_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/get_log_book_perawat_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/master_log_book_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/update_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/update_log_book_perawat_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/absen_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/kategori_pelatihan_cubit.dart';
@@ -62,7 +66,6 @@ part './Auth/login.dart';
 part './Auth/profile.dart';
 part './Auth/changePassword.dart';
 part './Auth/cv.dart';
-
 
 part './Dashboard/dashboard.dart';
 part './Dashboard/home/home.dart';
@@ -89,6 +92,11 @@ part './Dashboard/pelatihan/addResumePelatihan.dart';
 part './Dashboard/LogBook/logbook.dart';
 part './Dashboard/LogBook/createLogBook.dart';
 part './Dashboard/LogBook/updateLogBook.dart';
+
+part './Dashboard/LogBookPerawat/viewLogBookPerawat.dart';
+part './Dashboard/LogBookPerawat/createLogBookPerawat.dart';
+part './Dashboard/LogBookPerawat/updateLogBookPerawat.dart';
+
 // slipgaji
 part './Dashboard/SlipGaji/slipgaji.dart';
 part './Dashboard/SlipGaji/detailSlipGaji.dart';

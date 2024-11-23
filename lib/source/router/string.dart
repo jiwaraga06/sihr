@@ -27,6 +27,9 @@ const addResumePelatihanScreen = "/pelatihan/addResume";
 const logbookScreen = "/logbook/logbook";
 const createlogbookScreen = "/logbook/createLogBook";
 const updatelogbookScreen = "/logbook/updateLogBook";
+const logbookPerawatScreen = "/logbook/logbookPerawat";
+const createlogbookPerawatScreen = "/logbook/createlogbookPerawat";
+const updatelogbookPerawatScreen = "/logbook/updatelogbookPerawat";
 // slip gaji
 const slipgajiScreen = "/slipgaji/slipgaji";
 const detailSlipgajiScreen = "/slipgaji/detailslipgaji";

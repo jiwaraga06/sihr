@@ -33,8 +33,12 @@ import 'package:sihr/source/service/Izin/cubit/jenis_izin_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/create_lembur_cubit.dart';
 import 'package:sihr/source/service/Lembur/cubit/get_lembur_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/create_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/create_log_book_perawat_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/get_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/get_log_book_perawat_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/master_log_book_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/update_log_book_cubit.dart';
+import 'package:sihr/source/service/LogBook/cubit/update_log_book_perawat_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/absen_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/jenis_pelatihan_cubit.dart';
@@ -109,6 +113,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetLogBookCubit(repository: RepositoryLogBook())),
           BlocProvider(create: (context) => CreateLogBookCubit(repository: RepositoryLogBook())),
           BlocProvider(create: (context) => UpdateLogBookCubit(repository: RepositoryLogBook())),
+          BlocProvider(create: (context) => MasterLogBookCubit(repository: RepositoryLogBook())),
+          BlocProvider(create: (context) => CreateLogBookPerawatCubit(repository: RepositoryLogBook())),
+          BlocProvider(create: (context) => GetLogBookPerawatCubit(repository: RepositoryLogBook())),
+          BlocProvider(create: (context) => UpdateLogBookPerawatCubit(repository: RepositoryLogBook())),
           // SLIP GAJI
           BlocProvider(create: (context) => GetSlipGajiCubit(repository: RepositorySlipGaji())),
         ],

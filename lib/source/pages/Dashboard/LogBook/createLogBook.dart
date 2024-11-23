@@ -52,7 +52,7 @@ class _CreateLogBookScreenState extends State<CreateLogBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create Log Book"),
+        title: const Text("Create Log Book", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateLogBookCubit, CreateLogBookState>(
         listener: (context, state) {
