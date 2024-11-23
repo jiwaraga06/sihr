@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/env/env.dart';
-import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/repository/RepositoryAbsensi.dart';
 import 'package:sihr/source/widget/customDialog.dart';
 
 part 'post_absensi_state.dart';
@@ -24,7 +24,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       // "tanggal": "$tanggal",
       // "waktu_masuk": "08:00:00",
       // "waktu_keluar": "12:00:00",
-      "status": "Hadir",
+      "status": "1",
       "jenis": "$tipeScan",
       "keterangan": "$keterangan",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
@@ -68,7 +68,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
           } else {
             MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
           }
-        } else if (tipeScan == 2 || tipeScan == 4) {
+        } else if (tipeScan == 2 || tipeScan == 4 || tipeScan == 6) {
           if (distanceInMeters >= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());

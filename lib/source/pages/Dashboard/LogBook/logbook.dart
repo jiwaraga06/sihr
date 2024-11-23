@@ -24,7 +24,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Log Book"),
+        title: const Text("Log Book"),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -42,7 +42,8 @@ class _LogBookScreenState extends State<LogBookScreen> {
             );
           }
           if (state is GetLogBookFailed) {
-            return Center(child: Text("Something Wrong"));
+            var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetLogBookLoaded == false) {
             return Container();
@@ -51,7 +52,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
           var idPegawai = (state).idPegawai;
           List datafilter = data!.dataLogBook!.where((e) => e.idPegawai == idPegawai).toList();
           if (datafilter.isEmpty) {
-            return Center(child: Text("Data Kosong"));
+            return const Center(child: Text("Data Kosong"));
           }
           return Container(
             padding: const EdgeInsets.all(12),
@@ -63,7 +64,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
               child: ListView.builder(
                 itemCount: datafilter.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var a = datafilter![index];
+                  var a = datafilter[index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -133,7 +134,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
                               },
                               text: "Lihat Upload",
                               backgroundColor: Colors.indigo,
-                              textStyle: TextStyle(color: Colors.white),
+                              textStyle: const TextStyle(color: Colors.white),
                               roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                             ),
                           ),
@@ -152,7 +153,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
                               },
                               text: "Edit LogBook",
                               backgroundColor: Colors.deepPurple,
-                              textStyle: TextStyle(color: Colors.white),
+                              textStyle: const TextStyle(color: Colors.white),
                               roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                             ),
                           ),

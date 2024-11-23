@@ -33,11 +33,11 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Slip Gaji"),
+        title: const Text("Slip Gaji"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: selectMonth,
-        child: Icon(Icons.search, color: Colors.white),
+        child: const Icon(Icons.search, color: Colors.white),
       ),
       body: BlocBuilder<GetSlipGajiCubit, GetSlipGajiState>(
         builder: (context, state) {
@@ -50,7 +50,8 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
             );
           }
           if (state is GetSlipGajiFailed) {
-            return Center(child: Text("Something Wrong"));
+            var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetSlipGajiLoaded == false) {
             return Container();
@@ -59,7 +60,7 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
           var idPegawai = (state).idPegawai;
           List datafilter = data!.dataSlipgaji!.where((e) => e.idPegawai == idPegawai).toList();
           if (datafilter.isEmpty) {
-            return Center(child: Text("Data Kosong"));
+            return const Center(child: Text("Data Kosong"));
           }
           return Container(
             padding: const EdgeInsets.all(12),
@@ -69,9 +70,9 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
                 BlocProvider.of<GetSlipGajiCubit>(context).getSlipGaji(month, year, context);
               },
               child: ListView.builder(
-                itemCount: datafilter!.length,
+                itemCount: datafilter.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var a = datafilter![index];
+                  var a = datafilter[index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -88,7 +89,7 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(a.noreff!, style: TextStyle(fontFamily: 'JakartaSansMedium')),
+                              Text(a.noreff!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                               Text("${a.bulan} - ${a.tahun}", style: const TextStyle(fontFamily: 'MontserratSemiBold')),
                             ],
                           ),
@@ -98,11 +99,15 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
                             children: [
                               CustomButton2(
                                 onTap: () {
-                                  showSlipGaji(a.id);
+                                  // showSlipGaji(a.id);
+                                  setState(() {
+                                    id_slip_gaji = a.id;
+                                    Navigator.pushNamed(context, detailSlipgajiScreen);
+                                  });
                                 },
                                 text: "Lihat Slip Gaji",
                                 backgroundColor: Colors.blue[600],
-                                textStyle: TextStyle(color: Colors.white),
+                                textStyle: const TextStyle(color: Colors.white),
                                 roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                               ),
                             ],

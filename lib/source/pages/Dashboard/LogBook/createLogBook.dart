@@ -52,7 +52,7 @@ class _CreateLogBookScreenState extends State<CreateLogBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Log Book"),
+        title: const Text("Create Log Book"),
       ),
       body: BlocListener<CreateLogBookCubit, CreateLogBookState>(
         listener: (context, state) {
@@ -64,7 +64,10 @@ class _CreateLogBookScreenState extends State<CreateLogBookScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+              });
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }
@@ -73,7 +76,10 @@ class _CreateLogBookScreenState extends State<CreateLogBookScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess2(context, 'Successfully');
+            MyDialog.dialogSuccess(context, 'Successfully', onPressedOk: () {
+              Navigator.of(context).pop();
+              BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+            });
           }
         },
         child: SingleChildScrollView(

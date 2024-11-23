@@ -31,7 +31,8 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
             );
           }
           if (state is GetAbsensiFailed) {
-            return Center(child: Text("Something Wrong"));
+            var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetAbsensiLoaded == false) {
             return Container();
@@ -65,13 +66,13 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(children: [
+                              // if (a.)
                               Image.asset("assets/images/male.png"),
                               const SizedBox(width: 6),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(a.namaPegawai!, style: const TextStyle(fontFamily: 'MontserratSemiBold', fontSize: 13)),
-                                  Text(a.departement, style: const TextStyle(fontFamily: 'MontserratMedium', fontSize: 12)),
                                 ],
                               )
                             ]),
@@ -83,6 +84,26 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                 1: FixedColumnWidth(15),
                               },
                               children: [
+                                TableRow(
+                                  children: [
+                                    const Text('Departemen', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.departement!}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jabatan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.jabatan!}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
                                 TableRow(
                                   children: [
                                     const Text('Jam Masuk', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),

@@ -50,9 +50,17 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
           transitionsBuilder: bottomToTop,
         );
+      case changePasswordScreen:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => const ChangePasswordScreen(), transitionsBuilder: bottomToTop, settings: settings);
       case dashboardScreen:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const DashboardScreen(),
+          transitionsBuilder: topToBottom,
+        );
+      case cvScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CVScreen(),
           transitionsBuilder: topToBottom,
         );
       case profileScreen:
@@ -115,6 +123,16 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const PelatihanScreen(),
           transitionsBuilder: rightToLeft,
         );
+      case addPartisipasiScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const AddPartisipasiPelatihanScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case addResumePelatihanScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const AddResumePelatihanScreen(),
+          transitionsBuilder: rightToLeft,
+        );
       // Log Book
       case logbookScreen:
         return PageRouteBuilder(
@@ -132,13 +150,18 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const UpdateLogBookScreen(),
           transitionsBuilder: rightToLeft,
         );
-        //  slipgaji
+      //  slipgaji
       case slipgajiScreen:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const SlipGajiScreen(),
           transitionsBuilder: rightToLeft,
         );
-
+      case detailSlipgajiScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const DetailSlipGajiScreen(),
+          transitionsBuilder: rightToLeft,
+        );
 
       default:
         return null;

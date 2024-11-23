@@ -32,3 +32,10 @@ const biru = Color(0XFF125B9A);
 
 // data edit log book
 var tanggalLogbook, namalog, keteranganlog, idlogbook;
+
+// send param slip gaji
+var id_slip_gaji;
+
+// pelatihan
+var id_pelatihan;
+var id_partisipasi;

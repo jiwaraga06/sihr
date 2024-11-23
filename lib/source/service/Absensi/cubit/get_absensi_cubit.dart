@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/model/ModelDataAbsensi/modelDataAbsensi.dart';
-import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/repository/RepositoryAbsensi.dart';
 
 part 'get_absensi_state.dart';
 

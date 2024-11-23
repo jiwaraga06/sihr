@@ -54,7 +54,10 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+                Navigator.of(context).pop();
+                 BlocProvider.of<GetIzinCubit>(context).getizin(context);
+              });
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }
@@ -63,7 +66,10 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess2(context, 'Successfully');
+            MyDialog.dialogSuccess(context, 'Successfully', onPressedOk: () {
+              Navigator.of(context).pop();
+              BlocProvider.of<GetIzinCubit>(context).getizin(context);
+            });
           }
         },
         child: SingleChildScrollView(

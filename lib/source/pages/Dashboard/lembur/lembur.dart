@@ -39,7 +39,8 @@ class _LemburScreenState extends State<LemburScreen> {
             );
           }
           if (state is GetLemburFailed) {
-            return Center(child: Text("Something Wrong"));
+              var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetLemburLoaded == false) {
             return Container();
@@ -48,7 +49,7 @@ class _LemburScreenState extends State<LemburScreen> {
           var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
           if (datafilter.isEmpty) {
-            return Center(child: Text("Data Kosong"));
+            return const Center(child: Text("Data Kosong"));
           }
           return Container(
             padding: const EdgeInsets.all(12),

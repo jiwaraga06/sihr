@@ -51,9 +51,9 @@ class DataCuti {
 
     factory DataCuti.fromJson(Map<String, dynamic> json) => DataCuti(
         id: json["id"],
-        namaCuti: json["nama_cuti"],
-        jatah: json["jatah"],
-        keterangan: json["keterangan"],
+        namaCuti: json["nama_cuti"] ?? "",
+        jatah: json["jatah"] ?? "",
+        keterangan: json["keterangan"] ?? "",
         createdBy: json["created_by"],
         isDelete: json["is_delete"],
     );

@@ -19,7 +19,7 @@ class CreateIzinCubit extends Cubit<CreateIzinState> {
       "id_pegawai": "$idPegawai",
       "tanggal": tanggal,
       "alasan": "$alasan",
-      "status": "2",
+      "status": "0",
       "id_jenis_izin": "$idjenis",
       "keterangan": "$keterangan",
       "tgl_input": "$datenow"

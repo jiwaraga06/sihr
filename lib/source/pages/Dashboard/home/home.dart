@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 10),
                       const WidgetMenuUtama(),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                     ],
                   );
                 }),

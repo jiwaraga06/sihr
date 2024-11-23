@@ -2,7 +2,9 @@ const splashScreen = "/";
 const loginScreen = "/login";
 const dashboardScreen = "/dashboard";
 // DASHBPARD
+const cvScreen = "/dashboard/cv";
 const profileScreen = "/dashboard/profile";
+const changePasswordScreen = "/dashboard/changePassword";
 const homeScreen = "/dashboard/home";
 const dataAbsensiScreen = "/dashboard/dataAbsensi";
 const absensiScreen = "/dashboard/absensi";
@@ -19,9 +21,12 @@ const createIzinScreen = "/dashboard/izin/create";
 const newsScreen = "/news/news";
 // pelatihan
 const pelatihanScreen = "/pelatihan/pelatihan";
+const addPartisipasiScreen = "/pelatihan/addPartisipasi";
+const addResumePelatihanScreen = "/pelatihan/addResume";
 // LOG Book
 const logbookScreen = "/logbook/logbook";
 const createlogbookScreen = "/logbook/createLogBook";
 const updatelogbookScreen = "/logbook/updateLogBook";
 // slip gaji
 const slipgajiScreen = "/slipgaji/slipgaji";
+const detailSlipgajiScreen = "/slipgaji/detailslipgaji";

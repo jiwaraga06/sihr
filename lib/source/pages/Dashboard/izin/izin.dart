@@ -39,7 +39,8 @@ class _IzinScreenState extends State<IzinScreen> {
             );
           }
           if (state is GetIzinFailed) {
-            return Center(child: Text("Something Wrong"));
+            var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetIzinLoaded == false) {
             return Container();
@@ -48,7 +49,7 @@ class _IzinScreenState extends State<IzinScreen> {
           var idPegawai = (state).idPegawai;
           List datafilter = data.data!.where((e) => e.idPegawai == idPegawai).toList();
           if (datafilter.isEmpty) {
-            return Center(child: Text("Data Kosong"));
+            return const Center(child: Text("Data Kosong"));
           }
           return Container(
             padding: const EdgeInsets.all(12),
@@ -77,32 +78,27 @@ class _IzinScreenState extends State<IzinScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Tanggal izin", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Text(
-                                formatDate(a.tanggal!),
-                                style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16, color: Colors.blue[600]),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              if (a.status == 0)
-                                Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
-                                    child: const Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                              if (a.status == 1)
-                                Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
-                                    child: const Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                              if (a.status == 2)
-                                Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
-                                    child: const Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                              Text("${a.jenisIzin.namaIzin}", style: TextStyle(fontFamily: 'MontserratSemiBold')),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (a.status == 0)
+                                    Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
+                                        child: const Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                  if (a.status == 1)
+                                    Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
+                                        child: const Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                  if (a.status == 2)
+                                    Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
+                                        child: const Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                ],
+                              ),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -115,9 +111,9 @@ class _IzinScreenState extends State<IzinScreen> {
                             children: [
                               TableRow(
                                 children: [
-                                  const Text('Jenis Izin', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text("${a.jenisIzin.namaIzin}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(

@@ -61,7 +61,8 @@ class _CutiScreenState extends State<CutiScreen> {
             );
           }
           if (state is GetCutiFailed) {
-            return Center(child: Text("Something Wrong"));
+            var data = state.json;
+            return Center(child: Text(data['message']));
           }
           if (state is GetCutiLoaded == false) {
             return Container();
@@ -69,8 +70,8 @@ class _CutiScreenState extends State<CutiScreen> {
           var data = (state as GetCutiLoaded).model;
           var idPegawai = (state).idPegawai;
           List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
-           if (datafilter.isEmpty) {
-            return Center(child: Text("Data Kosong"));
+          if (datafilter.isEmpty) {
+            return const Center(child: Text("Data Kosong"));
           }
           return Container(
             padding: const EdgeInsets.all(12),

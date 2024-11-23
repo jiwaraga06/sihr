@@ -33,7 +33,7 @@ Future selectTime(BuildContext context) async {
     return picked; 
 }
 
-String formatTime(TimeOfDay time) {
+String formatTimes(TimeOfDay time) {
   final now = DateTime.now();
   final formattedTime = DateFormat('HH:mm:ss').format(
     DateTime(now.year, now.month, now.day, time.hour, time.minute),

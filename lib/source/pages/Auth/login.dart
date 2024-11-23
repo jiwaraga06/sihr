@@ -56,8 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
           //   var statusCode = state.statusCode;
           //   if (statusCode == 200) {
           //     // MyDialog.dialogSuccess(context, json['message']);
-          //     await Future.delayed(const Duration(seconds: 1));
-          //     Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
+          //     // await Future.delayed(const Duration(seconds: 1));
+          //     // Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
           //   } else {
           //     MyDialog.dialogAlert(context, json['message']);
           //   }

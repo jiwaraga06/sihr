@@ -49,8 +49,8 @@ class Dataizin {
 
     factory Dataizin.fromJson(Map<String, dynamic> json) => Dataizin(
         id: json["id"],
-        namaIzin: json["nama_izin"],
-        keterangan: json["keterangan"],
+        namaIzin: json["nama_izin"] ?? "",
+        keterangan: json["keterangan"] ?? "",
         createdBy: json["created_by"],
         isDelete: json["is_delete"],
     );

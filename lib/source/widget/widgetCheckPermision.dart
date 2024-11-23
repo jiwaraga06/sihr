@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sihr/source/env/env.dart';
-import 'package:sihr/source/widget/customButton.dart';
 import 'package:sihr/source/widget/customButton2.dart';
 
 class CheckPermissionView extends StatelessWidget {

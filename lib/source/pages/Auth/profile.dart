@@ -96,11 +96,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
-                      if (data.data!.foto!.isEmpty)
+                      if (data.data!.foto!.isEmpty && data.data!.jenisKelamin != "L")
+                      
                         Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.asset("assets/images/avatar.png"),
+                          ),
+                        ),
+                     if (data.data!.foto!.isEmpty && data.data!.jenisKelamin == "L")
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset("assets/images/male.png"),
                           ),
                         ),
                       const SizedBox(height: 28),
@@ -128,16 +136,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const AutoSizeText("Tanggal Lahir", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
                       const SizedBox(height: 12),
                       CustomField(readOnly: true, initialValue: data.data!.tglLahir),
-                      const SizedBox(height: 24),
+                      // const SizedBox(height: 24),
+                      // CustomButton(
+                      //   onTap: () {
+                      //     cekcv(data.data!.id);
+                      //   },
+                      //   backgroundColor: hijauLight,
+                      //   text: "CV SAYA",
+                      //   textStyle: const TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
+                      // ),
+                      const SizedBox(height: 30),
                       CustomButton(
-                        onTap: () {
-                          cekcv(data.data!.id);
+                        onTap: (){
+                          Navigator.pushNamed(context, changePasswordScreen, arguments: {"email": data!.data!.users!.email});
                         },
-                        backgroundColor: hijauLight,
-                        text: "CV SAYA",
+                        backgroundColor: hijauLight2,
+                        text: "Ganti Password",
                         textStyle: const TextStyle(color: whiteCustom, fontFamily: 'JakartaSansSemiBold', fontSize: 18),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 12),
                       CustomButton(
                         onTap: logout,
                         backgroundColor: merah,

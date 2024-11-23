@@ -83,16 +83,15 @@ class Datauser {
         status: json["status"] ?? "",
         keterangan: json["keterangan"] ?? "",
         fotoUrl: json["foto_url"] ?? "",
-        latt: json["latt"] ?? 0.0,
-        att: json["att"] ?? 0.0,
-        terlambat: json["terlambat"] ?? "",
+        latt: json["latt"] ?? "",
+        att: json["att"] ?? "",
+        terlambat: json["terlambat"] ?? 0,
         nip: json["nip"] ?? "",
         namaPegawai: json["nama_pegawai"] ?? "",
         jabatan: json["jabatan"] ?? "",
         divisi: json["divisi"] ?? "",
         departement: json["departement"] ?? "",
         shift: json["shift"] ?? "",
-        
       );
 
   Map<String, dynamic> toJson() => {

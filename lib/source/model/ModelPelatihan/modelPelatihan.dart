@@ -102,7 +102,7 @@ class Pegawai {
     final String? tglResign;
     final String? ketResign;
     final int? statusResign;
-    final int? nomr;
+    final String? nomr;
     final int? idKepalaBagian;
     final int? idUsers;
     final int? jatahCuti;
@@ -323,18 +323,18 @@ class Pelatihan {
 
     factory Pelatihan.fromJson(Map<String, dynamic> json) => Pelatihan(
         id: json["id"],
-        namaPelatihan: json["nama_pelatihan"],
-        tipe: json["tipe"],
-        penyelenggara: json["penyelenggara"],
-        deskripsi: json["deskripsi"],
-        idJenisPelatihan: json["id_jenis_pelatihan"],
+        namaPelatihan: json["nama_pelatihan"] ?? "",
+        tipe: json["tipe"] ?? "",
+        penyelenggara: json["penyelenggara"] ?? "",
+        deskripsi: json["deskripsi"] ?? "",
+        idJenisPelatihan: json["id_jenis_pelatihan"] ?? 0,
         tanggalMulai: json["tanggal_mulai"] == null ? null : DateTime.parse(json["tanggal_mulai"]),
         jamMulai: json["jam_mulai"],
         tanggalSelesai: json["tanggal_selesai"] == null ? null : DateTime.parse(json["tanggal_selesai"]),
         jamSelesai: json["jam_selesai"],
-        tempat: json["tempat"],
-        jumlahJam: json["jumlah_jam"],
-        jumlahSkp: json["jumlah_skp"],
+        tempat: json["tempat"] ?? "",
+        jumlahJam: json["jumlah_jam"] ?? "",
+        jumlahSkp: json["jumlah_skp"] ?? 0,
         jenispelatihan: json["jenispelatihan"] == null ? null : Jenispelatihan.fromJson(json["jenispelatihan"]),
     );
 

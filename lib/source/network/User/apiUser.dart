@@ -8,4 +8,8 @@ class ApiUser {
   static session() {
     return "$url/api/v1/session";
   }
+
+  static changePassword(iduser) {
+    return "$url/api/v1/user/$iduser";
+  }
 }

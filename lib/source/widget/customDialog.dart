@@ -36,7 +36,6 @@ class MyDialog {
     return AwesomeDialog(
       dismissOnTouchOutside: false,
       dismissOnBackKeyPress: false,
-      autoDismiss: false,
       context: context,
       dialogType: DialogType.success,
       animType: AnimType.rightSlide,
@@ -56,6 +55,20 @@ class MyDialog {
       title: 'Success',
       desc: '$message',
       btnOkOnPress: () {},
+    )..show();
+  }
+
+  static dialogAlert2(context, message, {VoidCallback? onPressedOk}) {
+    return AwesomeDialog(
+      dismissOnTouchOutside: false,
+      dismissOnBackKeyPress: false,
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.rightSlide,
+      title: 'Alert',
+      desc: '$message',
+      btnCancelOnPress: () {},
+      btnOkOnPress: onPressedOk,
     )..show();
   }
 

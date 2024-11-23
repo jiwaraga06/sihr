@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/repository/RepositoryAbsensi.dart';
 
 import '../../../model/ModelJenisAbsen/modelJenisAbsen.dart';
 

@@ -28,17 +28,21 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
 
   void pilihtglMulai() {
     pickDateNextWeek(context).then((value) {
-      setState(() {
-        controllerTglMulai.text = value.toString().split(' ')[0];
-      });
+      if (value != null) {
+        setState(() {
+          controllerTglMulai.text = value.toString().split(' ')[0];
+        });
+      }
     });
   }
 
   void pilihtglSelesai() {
     pickDateNextWeek(context).then((value) {
-      setState(() {
-        controllerTglSelesai.text = value.toString().split(' ')[0];
-      });
+      if (value != null) {
+        setState(() {
+          controllerTglSelesai.text = value.toString().split(' ')[0];
+        });
+      }
     });
   }
 
@@ -73,16 +77,22 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<GetCutiCubit>(context).getCuti(context);
+              });
             } else {
-              MyDialog.dialogAlert(context, data['errors'].toString());
+              MyDialog.dialogAlert2(context, data['errors'].toString());
             }
           }
           if (state is CreateCutiLoaded) {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess2(context, "Successfully !");
+            MyDialog.dialogSuccess(context, "Successfully !", onPressedOk: () {
+              Navigator.of(context).pop();
+              BlocProvider.of<GetCutiCubit>(context).getCuti(context);
+            });
           }
         },
         child: SingleChildScrollView(
@@ -95,9 +105,12 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                 children: [
                   const AutoSizeText("Tanggal Pengajuan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
-                  CustomField(readOnly: true, controller: controllerTanggal, 
-                  onTap: pickdate,
-                   suffixIcon: const Icon(FontAwesomeIcons.calendar),textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                  CustomField(
+                      readOnly: true,
+                      controller: controllerTanggal,
+                      onTap: pickdate,
+                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
                   const SizedBox(height: 20),
                   const AutoSizeText("Pilih kategori Cuti", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
@@ -150,7 +163,8 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                   CustomField(
                       readOnly: true,
                       onTap: pilihtglMulai,
-                      controller: controllerTglMulai,suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                      controller: controllerTglMulai,
+                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),
@@ -159,7 +173,8 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                   CustomField(
                       readOnly: true,
                       onTap: pilihtglSelesai,
-                      controller: controllerTglSelesai,suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                      controller: controllerTglSelesai,
+                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 20),

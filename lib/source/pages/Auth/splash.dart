@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.network("https://api.hris.rsuumc.com/storage/assets/img/logo_perusahaan/logo_e629cec4f652fd5211e5f7eeb4324a70.png",
                 errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-              return Column(
+              return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.error, color: Colors.red, size: 48.0),

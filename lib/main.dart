@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
-import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/repository/RepositoryAbsensi.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
 import 'package:sihr/source/repository/RepositoryLogBook.dart';
 import 'package:sihr/source/repository/RepositoryPelatihan.dart';
@@ -21,6 +21,7 @@ import 'package:sihr/source/service/Absensi/cubit/get_absensi_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/jenis_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
+import 'package:sihr/source/service/Auth/cubit/change_password_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
 import 'package:sihr/source/service/Cuti/cubit/create_cuti_cubit.dart';
@@ -35,7 +36,9 @@ import 'package:sihr/source/service/LogBook/cubit/create_log_book_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/get_log_book_cubit.dart';
 import 'package:sihr/source/service/LogBook/cubit/update_log_book_cubit.dart';
 import 'package:sihr/source/service/MarkerLocation/cubit/marker_location_cubit.dart';
+import 'package:sihr/source/service/Pelatihan/cubit/absen_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/jenis_pelatihan_cubit.dart';
+import 'package:sihr/source/service/Pelatihan/cubit/kategori_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
@@ -72,6 +75,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => AuthCubit(repository: AuhtRepository())),
+          BlocProvider(create: (context) => ChangePasswordCubit(repository: AuhtRepository())),
           BlocProvider(create: (context) => MarkerLocationCubit()),
           BlocProvider(create: (context) => CheckPermissionCubit()),
           // PEGAWAI
@@ -99,6 +103,8 @@ class MyApp extends StatelessWidget {
           // pelatihan
           BlocProvider(create: (context) => JenisPelatihanCubit(repository: PelatihanRepository())),
           BlocProvider(create: (context) => PelatihanCubit(repository: PelatihanRepository())),
+          BlocProvider(create: (context) => KategoriPelatihanCubit(repository: PelatihanRepository())),
+          BlocProvider(create: (context) => AbsenPelatihanCubit(repository: PelatihanRepository())),
           // LOG BOOK
           BlocProvider(create: (context) => GetLogBookCubit(repository: RepositoryLogBook())),
           BlocProvider(create: (context) => CreateLogBookCubit(repository: RepositoryLogBook())),

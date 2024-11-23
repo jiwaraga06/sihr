@@ -18,9 +18,9 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
     selectTime(context).then((value) {
       if (value != null) {
         TimeOfDay result = value;
-        print(formatTime(result));
+        print(formatTimes(result));
         setState(() {
-          controllerJamMulai.text = formatTime(result);
+          controllerJamMulai.text = formatTimes(result);
         });
       }
     });
@@ -30,9 +30,9 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
     selectTime(context).then((value) {
       if (value != null) {
         TimeOfDay result = value;
-        print(formatTime(result));
+        print(formatTimes(result));
         setState(() {
-          controllerJamSelesai.text = formatTime(result);
+          controllerJamSelesai.text = formatTimes(result);
         });
       }
     });
@@ -80,14 +80,20 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
             if (statusCode == 403) {
               MyDialog.dialogAlert(context, data['message']);
             } else {
-              MyDialog.dialogAlert(context, data['errors'].toString());
+              MyDialog.dialogAlert2(context, data['errors'].toString(), onPressedOk: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<GetLemburCubit>(context).getLembur(context);
+              });
             }
           }
           if (state is CreateLemburLoaded) {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess2(context, 'Successfully');
+            MyDialog.dialogSuccess(context, 'Successfully', onPressedOk: () {
+              Navigator.of(context).pop();
+              BlocProvider.of<GetLemburCubit>(context).getLembur(context);
+            });
           }
         },
         child: SingleChildScrollView(

@@ -38,8 +38,7 @@ class _UpdateLogBookScreenState extends State<UpdateLogBookScreen> {
 
   void submit() {
     if (formkey.currentState!.validate()) {
-      BlocProvider.of<UpdateLogBookCubit>(context)
-          .updateLogBook(context,  controllerNamaLog.text, controllerTanggal.text, controllerKeterangan.text, file);
+      BlocProvider.of<UpdateLogBookCubit>(context).updateLogBook(context, controllerNamaLog.text, controllerTanggal.text, controllerKeterangan.text, file);
     }
   }
 
@@ -57,7 +56,7 @@ class _UpdateLogBookScreenState extends State<UpdateLogBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Update Log Book"),
+        title: const Text("Update Log Book"),
       ),
       body: BlocListener<UpdateLogBookCubit, UpdateLogBookState>(
         listener: (context, state) {
@@ -69,7 +68,10 @@ class _UpdateLogBookScreenState extends State<UpdateLogBookScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+              });
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }
@@ -78,7 +80,10 @@ class _UpdateLogBookScreenState extends State<UpdateLogBookScreen> {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
-            MyDialog.dialogSuccess2(context, data['message']);
+            MyDialog.dialogSuccess(context, data['message'], onPressedOk: () {
+              Navigator.of(context).pop();
+              BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
+            });
           }
         },
         child: SingleChildScrollView(

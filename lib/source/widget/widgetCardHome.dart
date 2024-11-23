@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sihr/source/env/env.dart';
+import 'package:sihr/source/env/formatTime.dart';
+import 'package:sihr/source/env/pickTime.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
@@ -58,8 +60,8 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          // if (data!.jadwal!.isNotEmpty) Text(data.data., style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          // if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data!.jadwal!.isNotEmpty) Text(formatTime(data.jadwal![0].shift!.jamMulai!), style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
                           const Text("Jam Masuk", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],
@@ -87,9 +89,9 @@ class WidgetCardHome extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          // if (data.jadwal!.isNotEmpty)
-                          //   Text(data.jadwal![0].shift!.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
-                          // if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isNotEmpty)
+                            Text(formatTime(data.jadwal![0].shift!.jamSelesai!), style: const TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
+                          if (data.jadwal!.isEmpty) const Text("-", style: TextStyle(fontFamily: 'JakartaSansBold', fontSize: 20)),
                           const SizedBox(height: 8),
                           const Text("Jam Pulang", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 16)),
                         ],

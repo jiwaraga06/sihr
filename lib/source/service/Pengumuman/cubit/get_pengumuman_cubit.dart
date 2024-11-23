@@ -16,7 +16,7 @@ class GetPengumumanCubit extends Cubit<GetPengumumanState> {
     repository!.getPengumuman(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
-      // print(json);
+      print(json);
      if (statusCode == 200 || statusCode == 201) {
         emit(GetPengumumanLoaded(statusCode: statusCode, model: modelPengumumanFromJson(jsonEncode(json))));
       } else {

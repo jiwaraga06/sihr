@@ -14,7 +14,7 @@ Future pickDate(BuildContext context) async {
 Future pickDateNextWeek(BuildContext context) async {
   DateTime? datetime;
   final DateTime currentDate = DateTime.now();
-  final DateTime nextWeek = currentDate.add(Duration(days: 7));
+  final DateTime nextWeek = currentDate.add(const Duration(days: 7));
   datetime = await showDatePicker(
     context: context,
     firstDate: nextWeek,

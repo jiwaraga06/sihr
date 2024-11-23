@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:sihr/source/model/ModelSisaAbsen/modelSisaAbsen.dart';
-import 'package:sihr/source/repository/RepositoryAbseni.dart';
+import 'package:sihr/source/repository/RepositoryAbsensi.dart';
 
 part 'get_sisa_absen_state.dart';
 

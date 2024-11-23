@@ -21,4 +21,13 @@ class AuhtRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
+
+  Future changePassword(context, body, idUser) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiUser.changePassword(idUser), method: "PUT", body: body, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
 }

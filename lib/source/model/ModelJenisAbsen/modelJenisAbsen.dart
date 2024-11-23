@@ -49,8 +49,8 @@ class Data {
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
-        namaAbsen: json["nama_absen"],
-        keterangan: json["keterangan"],
+        namaAbsen: json["nama_absen"] ?? "",
+        keterangan: json["keterangan"] ?? "",
         createdBy: json["created_by"],
         updatedBy: json["updated_by"],
     );

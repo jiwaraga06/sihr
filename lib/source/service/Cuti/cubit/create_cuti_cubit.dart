@@ -19,7 +19,7 @@ class CreateCutiCubit extends Cubit<CreateCutiState> {
       "tgl_mulai": "$tglMulai",
       "tgl_selesai": "$tglSelesai",
       "keterangan": "$keterangan",
-      "status": "Disetujui",
+      "status": "0",
       "tgl_input": "$tglPengajuan",
       "user_acc": "",
       "tgl_acc": ""

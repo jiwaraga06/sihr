@@ -24,14 +24,14 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
       var statusCode = value.statusCode;
       // print(json);
       if (statusCode == 200 || statusCode == 201) {
-        if (json['jadwal'] != null) {
-          // if (json['data']['shift'] != null) {
+        if (json['jadwal'] != null ) {
+          if (json['jadwal'].isNotEmpty) {
             // pref.setString('idShift', json['data']['shift']['id'].toString());
             pref.setString('idShift', json['jadwal'][0]['id_shift'].toString());
           } else {
             MyDialog.dialogAlert(context, "Maaf, jadwal shift kosong");
           }
-        // }
+        }
         emit(GetPegawaiLoaded(statusCode: statusCode, model: modelPegawaiFromJson(jsonEncode(json))));
       } else {
         emit(GetPegawaiFailed(statusCode: statusCode, messageError: "Ops, Terjadi Kesalahan"));
