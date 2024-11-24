@@ -134,6 +134,11 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(color: merah, strokeAlign: 20),
                             ),
+                           border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+        ),
+                            
                           ),
                           value: valueCuti,
                           items: data!.data!.map((e) {

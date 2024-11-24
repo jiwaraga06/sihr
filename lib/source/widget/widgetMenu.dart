@@ -209,7 +209,7 @@ class WidgetMenuUtama extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       decoration:
                           BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                      child: Image.asset("assets/images/Note.png")),
+                      child: Image.asset("assets/images/GoodNotes.png")),
                   const SizedBox(height: 6),
                   const AutoSizeText('Log Book Perawat', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],
@@ -266,7 +266,7 @@ class WidgetMenuUtama extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       decoration:
                           BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                      child: Image.asset("assets/images/CV.png")),
+                      child: Image.asset("assets/images/CheckFile.png")),
                   const SizedBox(height: 6),
                   const AutoSizeText('Approval', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                 ],

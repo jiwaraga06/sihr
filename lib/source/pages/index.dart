@@ -27,6 +27,7 @@ import 'package:sihr/source/service/Absensi/cubit/get_absensi_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/jenis_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
+import 'package:sihr/source/service/Approval/cubit/approval_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/change_password_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';

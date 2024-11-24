@@ -56,7 +56,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
             if (statusCode == 403) {
               MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
                 Navigator.of(context).pop();
-                 BlocProvider.of<GetIzinCubit>(context).getizin(context);
+                BlocProvider.of<GetIzinCubit>(context).getizin(context);
               });
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
@@ -108,6 +108,10 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
                             ),
                           ),
                           value: valueIzin,

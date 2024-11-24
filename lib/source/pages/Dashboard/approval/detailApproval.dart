@@ -11,11 +11,20 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
   TextEditingController controllerNama = TextEditingController();
   TextEditingController controllerTanggal = TextEditingController();
   TextEditingController controllerKeterangan = TextEditingController();
+  var valueStatus;
   final formkey = GlobalKey<FormState>();
-
+  List listStatus = [
+    {"value": 0, "name": "Proses"},
+    {"value": 1, "name": "ACC KEPALA"},
+    {"value": 2, "name": "Reject"},
+    {"value": 3, "name": "ACC HRD"},
+  ];
   void submit() {
-    print(menuApproval);
-    print(idApproval);
+    if (formkey.currentState!.validate()) {
+      print(menuApproval);
+      print(idApproval);
+      BlocProvider.of<ApprovalCubit>(context).approval(context, valueStatus);
+    }
   }
 
   @override
@@ -70,6 +79,7 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
         },
         child: SingleChildScrollView(
           child: Form(
+            key: formkey,
             child: Padding(
               padding: const EdgeInsets.only(left: 12, right: 12),
               child: Column(
@@ -78,7 +88,7 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
                   const AutoSizeText("Nama Pegawai", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
-                      readOnly: false,
+                      readOnly: true,
                       controller: controllerNama,
                       preffixIcon: const Icon(FontAwesomeIcons.user),
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
@@ -87,7 +97,7 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
                   const AutoSizeText("Tanggal", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
-                      readOnly: false,
+                      readOnly: true,
                       controller: controllerTanggal,
                       preffixIcon: const Icon(FontAwesomeIcons.calendar),
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
@@ -96,11 +106,49 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
                   const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
-                      readOnly: false,
+                      readOnly: true,
                       controller: controllerKeterangan,
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       maxline: 4,
                       messageError: "Kolom tidak boleh kosong"),
+                  const SizedBox(height: 20),
+                  const AutoSizeText("Status", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  Container(
+                    child: DropdownButtonFormField(
+                      hint: const Text("Kategori Status"),
+                      borderRadius: BorderRadius.circular(10),
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                        ),
+                      ),
+                      value: valueStatus,
+                      items: listStatus.map((e) {
+                        return DropdownMenuItem(
+                          value: e['value'],
+                          child: Text(e['name']),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          valueStatus = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.toString().isEmpty) {
+                          return 'Please select an category';
+                        }
+                        return null; // If validation is passed
+                      },
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,

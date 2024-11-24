@@ -107,6 +107,8 @@ flutter:
     - assets/images/Note.png
     - assets/images/Money.png
     - assets/images/CV.png
+    - assets/images/CheckFile.png
+    - assets/images/GoodNotes.png
   #   vector
     - assets/images/vectorpermision.jpg
   #   - images/a_dot_ham.jpeg
