@@ -74,76 +74,93 @@ class _IzinScreenState extends State<IzinScreen> {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("${a.jenisIzin.namaIzin}", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  if (a.status == 0)
-                                    Container(
-                                        padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
-                                        child: const Text("Pending", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                                  if (a.status == 1)
-                                    Container(
-                                        padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
-                                        child: const Text("Disetujui", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                                  if (a.status == 2)
-                                    Container(
-                                        padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
-                                        child: const Text("Ditolak", style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Table(
-                            border: TableBorder.all(style: BorderStyle.none),
-                            columnWidths: const <int, TableColumnWidth>{
-                              0: FixedColumnWidth(100),
-                              1: FixedColumnWidth(15),
-                            },
-                            children: [
-                              TableRow(
-                                children: [
-                                  const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Alasan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text("${a.alasan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text("${a.keterangan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
+                          Expanded(flex: 3, child: AutoSizeText(a.pegawai!.nama!, style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                          if (a.status == 0)
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                  width: 120,
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(color: Colors.amber[600], borderRadius: BorderRadius.circular(8)),
+                                  child: const Text("Pending",
+                                      textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                            ),
+                          if (a.status == 1)
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8)),
+                                  child: const Text("Disetujui",
+                                      textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                            ),
+                          if (a.status == 2)
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8)),
+                                  child: const Text("Ditolak",
+                                      textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                            ),
+                          if (a.status == 3)
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(8)),
+                                  child: const Text("ACC HRD",
+                                      textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                            ),
                         ],
                       ),
+                      const SizedBox(height: 8),
+                      Table(
+                        border: TableBorder.all(style: BorderStyle.none),
+                        columnWidths: const <int, TableColumnWidth>{
+                          0: FixedColumnWidth(100),
+                          1: FixedColumnWidth(15),
+                        },
+                        children: [
+                          TableRow(
+                            children: [
+                              const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                            ],
+                          ),
+                          const TableRow(
+                            children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                          ),
+                          TableRow(
+                            children: [
+                              const Text('Alasan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              Text("${a.alasan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                            ],
+                          ),
+                          const TableRow(
+                            children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                          ),
+                          TableRow(
+                            children: [
+                              const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              Text("${a.keterangan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                            ],
+                          ),
+                          const TableRow(
+                            children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                  ),
                     ),
                   );
                 },

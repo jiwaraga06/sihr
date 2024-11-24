@@ -180,6 +180,19 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const DetailSlipGajiScreen(),
           transitionsBuilder: rightToLeft,
         );
+      // approval
+      case approvalScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const ApprovalScreen(),
+          transitionsBuilder: rightToLeft,
+        );
+      case approvalDetailScreen:
+        return PageRouteBuilder(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => const ApprovalDetailScreen(),
+          transitionsBuilder: topToBottom,
+        );
 
       default:
         return null;

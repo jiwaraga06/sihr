@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryAbsensi.dart';
+import 'package:sihr/source/repository/RepositoryApproval.dart';
 import 'package:sihr/source/repository/RepositoryAuth.dart';
 import 'package:sihr/source/repository/RepositoryLogBook.dart';
 import 'package:sihr/source/repository/RepositoryPelatihan.dart';
@@ -21,6 +22,7 @@ import 'package:sihr/source/service/Absensi/cubit/get_absensi_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/jenis_absen_cubit.dart';
 import 'package:sihr/source/service/Absensi/cubit/post_absensi_cubit.dart';
+import 'package:sihr/source/service/Approval/cubit/approval_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/change_password_cubit.dart';
 import 'package:sihr/source/service/Auth/cubit/auth_cubit.dart';
 import 'package:sihr/source/service/CheckPermission/cubit/check_permission_cubit.dart';
@@ -75,6 +77,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => PelatihanRepository()),
         RepositoryProvider(create: (context) => RepositoryLogBook()),
         RepositoryProvider(create: (context) => RepositorySlipGaji()),
+        RepositoryProvider(create: (context) => RepostoryApproval()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -119,6 +122,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => UpdateLogBookPerawatCubit(repository: RepositoryLogBook())),
           // SLIP GAJI
           BlocProvider(create: (context) => GetSlipGajiCubit(repository: RepositorySlipGaji())),
+          //approval
+          BlocProvider(create: (context) => ApprovalCubit(repository: RepostoryApproval())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -33,3 +33,7 @@ const updatelogbookPerawatScreen = "/logbook/updatelogbookPerawat";
 // slip gaji
 const slipgajiScreen = "/slipgaji/slipgaji";
 const detailSlipgajiScreen = "/slipgaji/detailslipgaji";
+
+//approcval
+const approvalScreen = "/approval/approval";
+const approvalDetailScreen = "/approval/detail";

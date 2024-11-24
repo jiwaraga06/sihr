@@ -40,3 +40,6 @@ var id_slip_gaji;
 // pelatihan
 var id_pelatihan;
 var id_partisipasi;
+
+//detail approval
+var idApproval, namaApproval, tanggalApproval, keteranganApproval, menuApproval;

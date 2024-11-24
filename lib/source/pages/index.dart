@@ -4,6 +4,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -100,3 +101,7 @@ part './Dashboard/LogBookPerawat/updateLogBookPerawat.dart';
 // slipgaji
 part './Dashboard/SlipGaji/slipgaji.dart';
 part './Dashboard/SlipGaji/detailSlipGaji.dart';
+
+// approval
+part './Dashboard/approval/approval.dart';
+part './Dashboard/approval/detailApproval.dart';
