@@ -8,6 +8,9 @@ class ApiCuti {
   static getCuti() {
     return "$url/api/v1/t_cuti";
   }
+  static getCutiKepalaBagian(idKepalaBagian) {
+    return "$url/api/v1/t_cuti?id_kepala_bagian=$idKepalaBagian";
+  }
 
   static createCuti() {
     return "$url/api/v1/t_cuti";

@@ -32,7 +32,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
           }
           if (state is PelatihanFailed) {
             var data = state.json;
-            return Center(child: Text(data['message']));
+            return Center(child: Text("This user does not have access."));
           }
           if (state is PelatihanLoaded == false) {
             return Container();
@@ -201,6 +201,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                 onTap: () {
                                   setState(() {
                                     id_pelatihan = a.idPelatihan;
+                                    id_partisipasi = a.id;
                                   });
                                   Navigator.pushNamed(context, addPartisipasiScreen);
                                 },

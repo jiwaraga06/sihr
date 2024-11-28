@@ -10,7 +10,7 @@ class CreateLemburCubit extends Cubit<CreateLemburState> {
   final LemburRepository? repository;
   CreateLemburCubit({this.repository}) : super(CreateLemburInitial());
 
-  void createLembur(tanggal, jamMulai, jamSelesai, keterangan, context) async {
+  void createLembur(tanggal, jamMulai, jamSelesai, keterangan, jenis, kategori, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var body = FormData.fromMap({
@@ -19,8 +19,12 @@ class CreateLemburCubit extends Cubit<CreateLemburState> {
       "jam_mulai": "$jamMulai",
       "jam_selesai": "$jamSelesai",
       "keterangan": "$keterangan",
+      // "noreff": "109120971205",
+      "status": "0",
+      "jenis": "$jenis",
+      "kategori": "$kategori"
     });
-    // print(body.fields);
+    print(body.fields);
     emit(CreateLemburLoading());
     repository!.createLembur(body, context).then((value) {
       var json = value.data;

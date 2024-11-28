@@ -32,14 +32,22 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
           }
           if (state is GetAbsensiFailed) {
             var data = state.json;
-            return Center(child: Text(data['message']));
+            var statusCode = state.statusCode;
+            if (statusCode == 403) {
+              return Center(child: Text("This user does not have access."));
+            } else {
+              return Center(child: Text(data['message'].toString()));
+            }
           }
           if (state is GetAbsensiLoaded == false) {
             return Container();
           }
           var data = (state as GetAbsensiLoaded).model;
           var idPegawai = (state).idPegawai;
-          List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList();
+          List datafilter = data!.data!.where((e) => e.idPegawai == idPegawai).toList().reversed.toList();
+          if (datafilter.isEmpty) {
+            return const Center(child: Text("Data Kosong"));
+          }
           return Container(
             padding: const EdgeInsets.all(12),
             child: RefreshIndicator(
@@ -108,7 +116,8 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                   children: [
                                     const Text('Jam Masuk', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text("${a.waktuMasuk!}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.waktuMasuk!.isNotEmpty) AutoSizeText(a.waktuMasuk!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.waktuMasuk!.isEmpty) const AutoSizeText("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
@@ -129,24 +138,37 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                   children: [
                                     const Text('Tgl Masuk', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
                                   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
                                 ),
-                                TableRow(
-                                  children: [
-                                    const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    if (a.status == 1)
-                                      Text("Terlambat", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.red[600])),
-                                    if (a.status == 2)
+                                if (a.status == 2)
+                                  TableRow(
+                                    children: [
+                                      const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                      const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                       Text("Tepat Waktu", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.blue[600])),
-                                  ],
-                                ),
+                                      //  Text(a.status.toString(), style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                      // if (a.status == 1)
+                                      //   Text("Terlambat", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.red[600])),
+                                    ],
+                                  ),
+                                if (a.status == 1)
+                                  TableRow(
+                                    children: [
+                                      const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                      const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                      // Text("Tepat Waktu", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.blue[600])),
+                                      Text("Terlambat", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.red[600])),
+                                      //  Text(a.status.toString(), style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                      // if (a.status == 1)
+                                    ],
+                                  ),
                               ],
                             ),
+
                             const SizedBox(height: 8),
                             // AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
                             // const SizedBox(height: 12),

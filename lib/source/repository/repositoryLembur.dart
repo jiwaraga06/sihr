@@ -21,4 +21,13 @@ class LemburRepository {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
     }
   }
+
+  Future getLemburKepalaBagian(context, idKepalaBagian) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiLembur.getLemburKepalaBagian(idKepalaBagian), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
 }

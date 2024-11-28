@@ -1,115 +1,53 @@
-// To parse this JSON data, do
-//
-//     final modelLembur = modelLemburFromJson(jsonString);
-
 import 'dart:convert';
 
-ModelLembur modelLemburFromJson(String str) => ModelLembur.fromJson(json.decode(str));
+ModelPengumumanPeserta modelPengumumanPesertaFromJson(String str) => ModelPengumumanPeserta.fromJson(json.decode(str));
 
-String modelLemburToJson(ModelLembur data) => json.encode(data.toJson());
-
-class ModelLembur {
+class ModelPengumumanPeserta {
   final String? message;
   final int? count;
   final List<Datum>? data;
 
-  ModelLembur({
+  ModelPengumumanPeserta({
     this.message,
     this.count,
     this.data,
   });
 
-  factory ModelLembur.fromJson(Map<String, dynamic> json) => ModelLembur(
+  factory ModelPengumumanPeserta.fromJson(Map<String, dynamic> json) => ModelPengumumanPeserta(
         message: json["message"],
         count: json["count"],
         data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
       );
-
-  Map<String, dynamic> toJson() => {
-        "message": message,
-        "count": count,
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-      };
 }
 
 class Datum {
   final int? id;
   final int? idPegawai;
-  final DateTime? tanggal;
-  final String? jamMulai;
-  final String? jamSelesai;
-  final String? jumlahJam;
-  final String? jumlahJamAcc;
-  final int? nilai;
-  final String? keterangan;
-  final String? noreff;
-  final int? status;
-  final String? jenis;
-  final String? kategori;
-  final String? feedback;
-  final DateTime? tglAcc;
-  final int? userAcc;
+  final int? idPengumuman;
+  final String? cekin;
+  final String? resume;
   final Pegawai? pegawai;
+  final Pengumuman? pengumuman;
 
   Datum({
     this.id,
     this.idPegawai,
-    this.tanggal,
-    this.jamMulai,
-    this.jamSelesai,
-    this.jumlahJam,
-    this.jumlahJamAcc,
-    this.nilai,
-    this.keterangan,
-    this.noreff,
-    this.status,
-    this.jenis,
-    this.kategori,
-    this.feedback,
-    this.tglAcc,
-    this.userAcc,
+    this.idPengumuman,
+    this.cekin,
+    this.resume,
     this.pegawai,
+    this.pengumuman,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         idPegawai: json["id_pegawai"],
-        tanggal: json["tanggal"] == null ? null : DateTime.parse(json["tanggal"]),
-        jamMulai: json["jam_mulai"],
-        jamSelesai: json["jam_selesai"],
-        jumlahJam: json["jumlah_jam"],
-        jumlahJamAcc: json["jumlah_jam_acc"],
-        nilai: json["nilai"],
-        keterangan: json["keterangan"],
-        noreff: json["noreff"],
-        status: json["status"],
-        jenis: json["jenis"],
-        kategori: json["kategori"],
-        feedback: json["feedback"],
-        tglAcc: json["tgl_acc"] == null ? null : DateTime.parse(json["tgl_acc"]),
-        userAcc: json["user_acc"],
+        idPengumuman: json["id_pengumuman"],
+        cekin: json["cekin"] ?? "",
+        resume: json["resume"] ?? "",
         pegawai: json["pegawai"] == null ? null : Pegawai.fromJson(json["pegawai"]),
+        pengumuman: json["pengumuman"] == null ? null : Pengumuman.fromJson(json["pengumuman"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "id_pegawai": idPegawai,
-        "tanggal": "${tanggal!.year.toString().padLeft(4, '0')}-${tanggal!.month.toString().padLeft(2, '0')}-${tanggal!.day.toString().padLeft(2, '0')}",
-        "jam_mulai": jamMulai,
-        "jam_selesai": jamSelesai,
-        "jumlah_jam": jumlahJam,
-        "jumlah_jam_acc": jumlahJamAcc,
-        "nilai": nilai,
-        "keterangan": keterangan,
-        "noreff": noreff,
-        "status": status,
-        "jenis": jenis,
-        "kategori": kategori,
-        "feedback": feedback,
-        "tgl_acc": "${tglAcc!.year.toString().padLeft(4, '0')}-${tglAcc!.month.toString().padLeft(2, '0')}-${tglAcc!.day.toString().padLeft(2, '0')}",
-        "user_acc": userAcc,
-        "pegawai": pegawai?.toJson(),
-      };
 }
 
 class Pegawai {
@@ -151,7 +89,7 @@ class Pegawai {
   final int? idUsers;
   final int? jatahCuti;
   final Jabatan? jabatan;
-  final Divisi? divisi;
+  final Golongan? golongan;
 
   Pegawai({
     this.id,
@@ -192,49 +130,49 @@ class Pegawai {
     this.idUsers,
     this.jatahCuti,
     this.jabatan,
-    this.divisi,
+    this.golongan,
   });
 
   factory Pegawai.fromJson(Map<String, dynamic> json) => Pegawai(
-        id: json["id"] ?? 0,
-        nip: json["nip"] ?? "",
-        noKtp: json["no_ktp"] ?? "",
-        nama: json["nama"] ?? "",
-        tmptLahir: json["tmpt_lahir"] ?? "",
+        id: json["id"],
+        nip: json["nip"],
+        noKtp: json["no_ktp"],
+        nama: json["nama"],
+        tmptLahir: json["tmpt_lahir"],
         tglLahir: json["tgl_lahir"] == null ? null : DateTime.parse(json["tgl_lahir"]),
-        jenisKelamin: json["jenis_kelamin"] ?? "",
-        goldar: json["goldar"] ?? "",
-        agama: json["agama"] ?? "",
-        alamat: json["alamat"] ?? "",
-        desa: json["desa"] ?? "",
-        kecamatan: json["kecamatan"] ?? "",
-        kota: json["kota"] ?? "",
-        propinsi: json["propinsi"] ?? "",
+        jenisKelamin: json["jenis_kelamin"],
+        goldar: json["goldar"],
+        agama: json["agama"],
+        alamat: json["alamat"],
+        desa: json["desa"],
+        kecamatan: json["kecamatan"],
+        kota: json["kota"],
+        propinsi: json["propinsi"],
         tglMasuk: json["tgl_masuk"] == null ? null : DateTime.parse(json["tgl_masuk"]),
-        tentangKamu: json["tentang_kamu"] ?? "",
-        idGolongan: json["id_golongan"] ?? 0,
-        idJabatan: json["id_jabatan"] ?? 0,
-        idDivisi: json["id_divisi"] ?? 0,
-        idDepartement: json["id_departement"] ?? 0,
-        idUnit: json["id_unit"] ?? 0,
-        idBank: json["id_bank"] ?? 0,
-        noRek: json["no_rek"] ?? "",
-        foto: json["foto"] ?? "",
-        hp: json["hp"] ?? "",
-        pendidikan: json["pendidikan"] ?? "",
-        prodi: json["prodi"] ?? "",
-        npwp: json["npwp"] ?? "",
-        statusMenikah: json["status_menikah"] ?? "",
-        statusKeluarga: json["status_keluarga"] ?? 0,
+        tentangKamu: json["tentang_kamu"],
+        idGolongan: json["id_golongan"],
+        idJabatan: json["id_jabatan"],
+        idDivisi: json["id_divisi"],
+        idDepartement: json["id_departement"],
+        idUnit: json["id_unit"],
+        idBank: json["id_bank"],
+        noRek: json["no_rek"],
+        foto: json["foto"],
+        hp: json["hp"],
+        pendidikan: json["pendidikan"],
+        prodi: json["prodi"],
+        npwp: json["npwp"],
+        statusMenikah: json["status_menikah"],
+        statusKeluarga: json["status_keluarga"],
         tglResign: json["tgl_resign"] == null ? null : DateTime.parse(json["tgl_resign"]),
-        ketResign: json["ket_resign"]?? "",
-        statusResign: json["status_resign"] ?? 0,
-        nomr: json["nomr"] ?? "",
-        idKepalaBagian: json["id_kepala_bagian"] ?? 0,
-        idUsers: json["id_users"] ?? 0,
-        jatahCuti: json["jatah_cuti"] ?? 0,
+        ketResign: json["ket_resign"],
+        statusResign: json["status_resign"],
+        nomr: json["nomr"],
+        idKepalaBagian: json["id_kepala_bagian"],
+        idUsers: json["id_users"],
+        jatahCuti: json["jatah_cuti"],
         jabatan: json["jabatan"] == null ? null : Jabatan.fromJson(json["jabatan"]),
-        divisi: json["divisi"] == null ? null : Divisi.fromJson(json["divisi"]),
+        golongan: json["golongan"] == null ? null : Golongan.fromJson(json["golongan"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -277,30 +215,30 @@ class Pegawai {
         "id_users": idUsers,
         "jatah_cuti": jatahCuti,
         "jabatan": jabatan?.toJson(),
-        "divisi": divisi?.toJson(),
+        "golongan": golongan?.toJson(),
       };
 }
 
-class Divisi {
+class Golongan {
   final int? id;
-  final String? namaDivisi;
+  final String? namaGolongan;
   final String? keterangan;
 
-  Divisi({
+  Golongan({
     this.id,
-    this.namaDivisi,
+    this.namaGolongan,
     this.keterangan,
   });
 
-  factory Divisi.fromJson(Map<String, dynamic> json) => Divisi(
-        id: json["id"] ?? 0,
-        namaDivisi: json["nama_divisi"] ?? "",
-        keterangan: json["keterangan"] ?? "",
+  factory Golongan.fromJson(Map<String, dynamic> json) => Golongan(
+        id: json["id"],
+        namaGolongan: json["nama_golongan"],
+        keterangan: json["keterangan"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "nama_divisi": namaDivisi,
+        "nama_golongan": namaGolongan,
         "keterangan": keterangan,
       };
 }
@@ -321,11 +259,11 @@ class Jabatan {
   });
 
   factory Jabatan.fromJson(Map<String, dynamic> json) => Jabatan(
-        id: json["id"] ?? 0,
-        kode: json["kode"] ?? "",
-        namaJabatan: json["nama_jabatan"] ?? "",
-        keterangan: json["keterangan"] ?? "",
-        potonganTelat: json["potongan_telat"] ?? 0,
+        id: json["id"],
+        kode: json["kode"],
+        namaJabatan: json["nama_jabatan"],
+        keterangan: json["keterangan"],
+        potonganTelat: json["potongan_telat"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -335,4 +273,31 @@ class Jabatan {
         "keterangan": keterangan,
         "potongan_telat": potonganTelat,
       };
+}
+
+class Pengumuman {
+  final int? id;
+  final int? idJenisPengumuman;
+  final String? namaPengumuman;
+  final String? isi;
+  final DateTime? tanggal;
+  final String? tipe;
+
+  Pengumuman({
+    this.id,
+    this.idJenisPengumuman,
+    this.namaPengumuman,
+    this.isi,
+    this.tanggal,
+    this.tipe,
+  });
+
+  factory Pengumuman.fromJson(Map<String, dynamic> json) => Pengumuman(
+        id: json["id"],
+        idJenisPengumuman: json["id_jenis_pengumuman"],
+        namaPengumuman: json["nama_pengumuman"],
+        isi: json["isi"],
+        tanggal: json["tanggal"] == null ? null : DateTime.parse(json["tanggal"]),
+        tipe: json["tipe"],
+      );
 }

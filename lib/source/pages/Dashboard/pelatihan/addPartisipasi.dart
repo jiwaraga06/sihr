@@ -56,7 +56,7 @@ class _AddPartisipasiPelatihanScreenState extends State<AddPartisipasiPelatihanS
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message'].toString());
+              MyDialog.dialogAlert(context, "This user does not have access.");
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }

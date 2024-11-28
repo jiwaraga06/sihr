@@ -22,6 +22,15 @@ class CutiRepository {
     }
   }
 
+  Future getCutiKepalaBagian(context, idKepalaBagian) async {
+    if (await internetChecker()) {
+      var json = await network(url: ApiCuti.getCutiKepalaBagian(idKepalaBagian), method: "GET", body: null, context: context);
+      return json;
+    } else {
+      MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");
+    }
+  }
+
   Future createCuti(body, context) async {
     if (await internetChecker()) {
       var json = await network(url: ApiCuti.createCuti(), method: "POST", body: body, context: context);

@@ -73,7 +73,14 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
           if (state is PostAbsensiFailed) {
             Navigator.of(context).pop();
             var data = state.json;
-            MyDialog.dialogAlert(context, data['message'].toString());
+            var statusCode = state.statusCode;
+            if (statusCode == 403) {
+              MyDialog.dialogAlert(context, "This user does not have access.");
+            } else if (statusCode == 400) {
+              MyDialog.dialogAlert(context, data['message']);
+            } else {
+              MyDialog.dialogAlert(context, data['errors']);
+            }
           }
           if (state is PostAbsensiLoaded) {
             Navigator.of(context).pop();
@@ -335,7 +342,6 @@ class _AbsensiScreenState extends State<AbsensiScreen> {
             );
           },
         ),
-     
       ),
     );
   }

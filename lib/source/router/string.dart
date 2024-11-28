@@ -19,6 +19,7 @@ const izinScreen = "/dashboard/izin";
 const createIzinScreen = "/dashboard/izin/create";
 // news
 const newsScreen = "/news/news";
+const newsCheckinScreen = "/news/news/checkin";
 // pelatihan
 const pelatihanScreen = "/pelatihan/pelatihan";
 const addPartisipasiScreen = "/pelatihan/addPartisipasi";

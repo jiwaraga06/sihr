@@ -51,6 +51,8 @@ import 'package:sihr/source/service/Pelatihan/cubit/absen_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/kategori_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_cubit.dart';
+import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_peserta_cubit.dart';
+import 'package:sihr/source/service/Pengumuman/cubit/update_pengumuman_peserta_cubit.dart';
 import 'package:sihr/source/service/SlipGaji/cubit/get_slip_gaji_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 import 'package:sihr/source/widget/customButton.dart';
@@ -82,8 +84,9 @@ part './Dashboard/cuti/createCuti.dart';
 // izin
 part './Dashboard/izin/izin.dart';
 part './Dashboard/izin/createIzin.dart';
-
+// news
 part './Dashboard/news/news.dart';
+part './Dashboard/news/Checkin.dart';
 
 // pelatihan
 part './Dashboard/pelatihan/pelatihan.dart';

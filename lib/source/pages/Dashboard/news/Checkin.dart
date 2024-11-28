@@ -1,20 +1,30 @@
 part of '../../index.dart';
 
-class AddResumePelatihanScreen extends StatefulWidget {
-  const AddResumePelatihanScreen({super.key});
+class CheckInNewsScreen extends StatefulWidget {
+  const CheckInNewsScreen({super.key});
 
   @override
-  State<AddResumePelatihanScreen> createState() => _AddResumePelatihanScreenState();
+  State<CheckInNewsScreen> createState() => _CheckInNewsScreenState();
 }
 
-class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
+class _CheckInNewsScreenState extends State<CheckInNewsScreen> {
   final TextEditingController controllerResume = TextEditingController();
   final formkey = GlobalKey<FormState>();
 
   void submit() {
     if (formkey!.currentState!.validate()) {
-      BlocProvider.of<AbsenPelatihanCubit>(context).updatePartisipasi(context, controllerResume.text);
+      BlocProvider.of<UpdatePengumumanPesertaCubit>(context).updatePengumumanPeserta(context, idNews, gambar, controllerResume.text);
     }
+  }
+
+  XFile? gambar;
+  void pickImage() async {
+    selectPhoto(source: ImageSource.camera).then((value) {
+      setState(() {
+        gambar = value;
+        print("gambar: ${gambar!.path}");
+      });
+    });
   }
 
   @override
@@ -23,14 +33,14 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
       appBar: AppBar(
         backgroundColor: biru,
         iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Resume Pelatihan", style: TextStyle(color: Colors.white)),
+        title: Text("Check In News", style: TextStyle(color: Colors.white)),
       ),
-      body: BlocListener<AbsenPelatihanCubit, AbsenPelatihanState>(
+      body: BlocListener<UpdatePengumumanPesertaCubit, UpdatePengumumanPesertaState>(
         listener: (context, state) {
-          if (state is AbsenPelatihanLoading) {
+          if (state is UpdatePengumumanPesertaLoading) {
             MyDialog.dialogLoading(context);
           }
-          if (state is AbsenPelatihanFailed) {
+          if (state is UpdatePengumumanPesertaFailed) {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
@@ -40,12 +50,12 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }
           }
-          if (state is AbsenPelatihanLoaded) {
+          if (state is UpdatePengumumanPesertaLoaded) {
             Navigator.of(context).pop();
             var data = state.json;
             MyDialog.dialogSuccess(context, data['message'], onPressedOk: () {
               Navigator.of(context).pop();
-              BlocProvider.of<PelatihanCubit>(context).getPelatihan(context);
+              BlocProvider.of<GetPengumumanPesertaCubit>(context).getPengumumanPeserta(context);
             });
           }
         },
@@ -58,6 +68,21 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 12),
+                  const AutoSizeText("Foto", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  InkWell(
+                    onTap: pickImage,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 450,
+                      margin: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.black.withOpacity(0.5), width: 1)),
+                      child: gambar == null ? Center(child: Icon(FontAwesomeIcons.image)) : Image.file(File(gambar!.path)),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   const AutoSizeText("Resume", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
@@ -78,7 +103,8 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
                       backgroundColor: hijauLight2,
                       roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),

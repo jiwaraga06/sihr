@@ -37,7 +37,12 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
           }
           if (state is GetLogBookPerawatFailed) {
             var data = state.json;
-            return Center(child: Text(data['message']));
+               var statusCode = state.statusCode;
+            if (statusCode == 403) {
+              return Center(child: Text("This user does not have access."));
+            } else {
+              return Center(child: Text(data['message'].toString()));
+            }
           }
           if (state is GetLogBookPerawatLoaded == false) {
             return Container();

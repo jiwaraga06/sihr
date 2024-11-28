@@ -117,6 +117,11 @@ class RouterNavigation {
           pageBuilder: (context, animation, secondaryAnimation) => const NewsScreen(),
           transitionsBuilder: rightToLeft,
         );
+      case newsCheckinScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const CheckInNewsScreen(),
+          transitionsBuilder: rightToLeft,
+        );
       // pelatihan
       case pelatihanScreen:
         return PageRouteBuilder(

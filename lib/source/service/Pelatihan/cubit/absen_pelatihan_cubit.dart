@@ -20,7 +20,7 @@ class AbsenPelatihanCubit extends Cubit<AbsenPelatihanState> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var datenow = DateTime.now();
-    var body = FormData.fromMap({
+    FormData body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
       "id_pelatihan": "$id_pelatihan",
       "status": "Mengikuti",
@@ -30,8 +30,10 @@ class AbsenPelatihanCubit extends Cubit<AbsenPelatihanState> {
       "latt": "$lat",
       "att": "$long",
     });
+
     emit(AbsenPelatihanLoading());
-    repository!.postPartisipasiPelatihan(context, body).then((value) {
+    // print(body.fields);
+    repository!.updatePartisipasiPelatihan(context, id_partisipasi, body).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       print("POST PARTISIPASI: \n$json");

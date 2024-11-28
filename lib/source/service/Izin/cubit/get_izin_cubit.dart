@@ -27,4 +27,20 @@ class GetIzinCubit extends Cubit<GetIzinState> {
       }
     });
   }
+  void getizinKepalaBagian(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? idPegawai = pref.getString("id_pegawai");
+    String? idKepalaBagian = pref.getString("idKepalaBagian");
+    emit(GetIzinLoading());
+    repository!.getIzinKepalaBagian(context, idKepalaBagian).then((value) {
+      var json = value.data;
+  var statusCode = value.statusCode;
+      print(json);
+      // if (statusCode == 200 || statusCode == 201) {
+        emit(GetIzinLoaded(statusCode: statusCode, model: modelIzinFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
+      // } else {
+      //   emit(GetIzinFailed(statusCode: statusCode, json: json));
+      // }
+    });
+  }
 }

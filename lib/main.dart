@@ -47,6 +47,8 @@ import 'package:sihr/source/service/Pelatihan/cubit/jenis_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/kategori_pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pelatihan/cubit/pelatihan_cubit.dart';
 import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_cubit.dart';
+import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_peserta_cubit.dart';
+import 'package:sihr/source/service/Pengumuman/cubit/update_pengumuman_peserta_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/SlipGaji/cubit/get_slip_gaji_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
@@ -107,6 +109,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetIzinCubit(repository: IzinRepository())),
           // pengumuman
           BlocProvider(create: (context) => GetPengumumanCubit(repository: Repositorypengumuman())),
+          BlocProvider(create: (context) => GetPengumumanPesertaCubit(repository: Repositorypengumuman())),
+          BlocProvider(create: (context) => UpdatePengumumanPesertaCubit(repository: Repositorypengumuman())),
           // pelatihan
           BlocProvider(create: (context) => JenisPelatihanCubit(repository: PelatihanRepository())),
           BlocProvider(create: (context) => PelatihanCubit(repository: PelatihanRepository())),

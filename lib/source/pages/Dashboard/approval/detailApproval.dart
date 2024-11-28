@@ -53,7 +53,7 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+              MyDialog.dialogAlert2(context, "This user does not have access.", onPressedOk: () {
                 Navigator.of(context).pop();
                 BlocProvider.of<GetCutiCubit>(context).getCuti(context);
               });
@@ -68,11 +68,11 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
             MyDialog.dialogSuccess(context, "Successfully !", onPressedOk: () {
               Navigator.of(context).pop();
               if (menuApproval == "cuti") {
-                BlocProvider.of<GetCutiCubit>(context).getCuti(context);
+                BlocProvider.of<GetCutiCubit>(context).getCutiKepalaBagian(context);
               } else if (menuApproval == "izin") {
-                BlocProvider.of<GetIzinCubit>(context).getizin(context);
+                BlocProvider.of<GetIzinCubit>(context).getizinKepalaBagian(context);
               } else if (menuApproval == "lembur") {
-                BlocProvider.of<GetLemburCubit>(context).getLembur(context);
+                BlocProvider.of<GetLemburCubit>(context).getLemburKepalaBagian(context);
               }
             });
           }

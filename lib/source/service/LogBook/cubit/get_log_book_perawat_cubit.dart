@@ -19,6 +19,7 @@ class GetLogBookPerawatCubit extends Cubit<GetLogBookPerawatState> {
     repository!.getLogBookPerawat(context, idPegawai).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
+      print("PERAWAT: $statusCode");
       if (statusCode == 200 || statusCode == 201) {
         emit(GetLogBookPerawatLoaded(statusCode: statusCode, model: modelLogBookPerawatFromJson(jsonEncode(json))));
       } else {

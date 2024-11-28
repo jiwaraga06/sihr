@@ -19,11 +19,28 @@ class GetLemburCubit extends Cubit<GetLemburState> {
     repository!.getLembur(context).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
+      print(json);
       if (statusCode == 200 || statusCode == 201) {
         emit(GetLemburLoaded(statusCode: statusCode, model: modelLemburFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
       } else {
         emit(GetLemburFailed(statusCode: statusCode, json: json));
       }
+    });
+  }
+
+  void getLemburKepalaBagian(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? idPegawai = pref.getString("id_pegawai");
+    String? idKepalaBagian = pref.getString("idKepalaBagian");
+    emit(GetLemburLoading());
+    repository!.getLemburKepalaBagian(context, idKepalaBagian).then((value) {
+      var json = value.data;
+      var statusCode = value.statusCode;
+      // if (statusCode == 200 || statusCode == 201) {
+        emit(GetLemburLoaded(statusCode: statusCode, model: modelLemburFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
+      // } else {
+      //   emit(GetLemburFailed(statusCode: statusCode, json: json));
+      // }
     });
   }
 }

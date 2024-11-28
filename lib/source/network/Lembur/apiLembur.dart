@@ -5,6 +5,10 @@ class ApiLembur {
     return "$url/api/v1/t_lembur";
   }
 
+  static getLemburKepalaBagian(idKepalaBagian) {
+    return "$url/api/v1/t_lembur?id_kepala_bagian=$idKepalaBagian";
+  }
+
   static createLembur() {
     return "$url/api/v1/t_lembur";
   }

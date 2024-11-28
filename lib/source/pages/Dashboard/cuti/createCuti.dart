@@ -77,7 +77,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+              MyDialog.dialogAlert2(context, "This user does not have access.", onPressedOk: () {
                 Navigator.of(context).pop();
                 BlocProvider.of<GetCutiCubit>(context).getCuti(context);
               });
@@ -134,11 +134,10 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(color: merah, strokeAlign: 20),
                             ),
-                           border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
-        ),
-                            
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                            ),
                           ),
                           value: valueCuti,
                           items: data!.data!.map((e) {

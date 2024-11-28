@@ -9,7 +9,10 @@ Future network({String? method, String? url, body, context}) async {
   final dio = Dio();
   SharedPreferences pref = await SharedPreferences.getInstance();
   var token = pref.getString('token');
-  var headers = {'Authorization': 'Bearer $token', "Accept": "application/json", "Content-type": "application/json"};
+  var headers = {
+    'Authorization': 'Bearer $token',
+    // "Content-Type": "multipart/form-data",
+  };
   Response? response;
   try {
     if (method == "GET") {

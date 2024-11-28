@@ -24,7 +24,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       // "tanggal": "$tanggal",
       // "waktu_masuk": "08:00:00",
       // "waktu_keluar": "12:00:00",
-      "status": "1",
+      "status": "0",
       "jenis": "$tipeScan",
       "keterangan": "$keterangan",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
@@ -50,14 +50,14 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
         num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
         print(distanceInMeters);
 
-        if (tipeScan == 1 || tipeScan == 3) {
+        if (tipeScan == 1 || tipeScan == 3 || tipeScan == 7) {
           if (distanceInMeters >= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             repository!.postAbsensi(body, context).then((value) {
               var json = value.data;
               var statusCode = value.statusCode;
-              print("POST: $json");
+              print("POST: $statusCode");
               if (statusCode == 200 || statusCode == 201) {
                 pref.setString("idAbsensi", json['data']['id'].toString());
                 emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
@@ -68,17 +68,18 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
           } else {
             MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
           }
-        } else if (tipeScan == 2 || tipeScan == 4 || tipeScan == 6) {
+        } else if (tipeScan == 2 || tipeScan == 4 || tipeScan == 6 || tipeScan == 8) {
           if (distanceInMeters >= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             var idAbsensi = pref.getString("idAbsensi");
             print(idAbsensi);
-            repository!.updateAbsensi(idAbsensi, body, context).then((value) {
+            repository!.postAbsensi( body, context).then((value) {
               var json = value.data;
               var statusCode = value.statusCode;
+              print("POST: $statusCode");
               print("POST: $json");
-              if (statusCode == 200 || statusCode ==201) {
+              if (statusCode == 200 || statusCode == 201) {
                 emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
               } else {
                 emit(PostAbsensiFailed(statusCode: statusCode, json: json));
@@ -94,8 +95,8 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
             var json = value.data;
             var statusCode = value.statusCode;
             print("POST: $json");
-             MyDialog.dialogAlert(context, "$json");
-            if (statusCode == 200 || statusCode ==201) {
+            MyDialog.dialogAlert(context, "$json");
+            if (statusCode == 200 || statusCode == 201) {
               pref.setString("idAbsensi", json['data']['id'].toString());
               emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
             } else {

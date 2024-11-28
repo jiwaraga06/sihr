@@ -8,7 +8,12 @@ class Apiizin {
   static createIzin() {
     return "$url/api/v1/t_izin";
   }
+
   static getIzin() {
     return "$url/api/v1/t_izin";
+  }
+
+  static getIzinKepalaBagian(idKepalaBagian) {
+    return "$url/api/v1/t_izin?id_kepala_bagian=$idKepalaBagian";
   }
 }

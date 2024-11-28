@@ -80,7 +80,7 @@ class Datauser {
         tanggal: json["tanggal"] == null ? null : DateTime.parse(json["tanggal"]),
         waktuMasuk: json["waktu_masuk"] ?? "",
         waktuKeluar: json["waktu_keluar"] ?? "",
-        status: json["status"] ?? "",
+        status: json["status"] ?? 0,
         keterangan: json["keterangan"] ?? "",
         fotoUrl: json["foto_url"] ?? "",
         latt: json["latt"] ?? "",

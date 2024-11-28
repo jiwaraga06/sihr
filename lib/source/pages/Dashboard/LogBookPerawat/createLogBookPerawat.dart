@@ -51,7 +51,7 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert2(context, data['message'], onPressedOk: () {
+              MyDialog.dialogAlert2(context, "This user does not have access.", onPressedOk: () {
                 Navigator.of(context).pop();
                 BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
               });

@@ -14,6 +14,17 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
   TextEditingController controllerKeterangan = TextEditingController();
   final formkey = GlobalKey<FormState>();
 
+  var valueKategori, valuejenis;
+
+  List kategoriLembur = [
+    {"value": "on call", "name": "On Call"},
+    {"value": "lembur", "name": "Lembur"},
+  ];
+  List jenisLembur = [
+    {"value": "operasi", "name": "Operasi"},
+    {"value": "reguler", "name": "Reguler"},
+  ];
+
   void pilihJamMulai() {
     selectTime(context).then((value) {
       if (value != null) {
@@ -40,7 +51,8 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
 
   void submit() {
     if (formkey.currentState!.validate()) {
-      BlocProvider.of<CreateLemburCubit>(context).createLembur(tanggal, controllerJamMulai.text, controllerJamSelesai.text, controllerKeterangan.text, context);
+      BlocProvider.of<CreateLemburCubit>(context)
+          .createLembur(tanggal, controllerJamMulai.text, controllerJamSelesai.text, controllerKeterangan.text,  valuejenis,valueKategori, context);
     }
   }
 
@@ -78,7 +90,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert(context, "This user does not have access.");
             } else {
               MyDialog.dialogAlert2(context, data['errors'].toString(), onPressedOk: () {
                 Navigator.of(context).pop();
@@ -132,6 +144,78 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
                       suffixIcon: const Icon(FontAwesomeIcons.clock),
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
+                  const SizedBox(height: 20),
+                  const AutoSizeText("Pilih Jenis Lembur", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField(
+                    hint: const Text("Jenis Lembur"),
+                    borderRadius: BorderRadius.circular(10),
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                      ),
+                    ),
+                    value: valuejenis,
+                    items: jenisLembur.map((e) {
+                      return DropdownMenuItem(
+                        value: e['value'],
+                        child: Text(e['name']),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        valuejenis = value;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.toString().isEmpty) {
+                        return 'Please select an option';
+                      }
+                      return null; // If validation is passed
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  const AutoSizeText("Pilih Kategori Lembur", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField(
+                    hint: const Text("Kategori Lembur"),
+                    borderRadius: BorderRadius.circular(10),
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                      ),
+                    ),
+                    value: valueKategori,
+                    items: kategoriLembur.map((e) {
+                      return DropdownMenuItem(
+                        value: e['value'],
+                        child: Text(e['name']),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        valueKategori = value;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.toString().isEmpty) {
+                        return 'Please select an option';
+                      }
+                      return null; // If validation is passed
+                    },
+                  ),
                   const SizedBox(height: 20),
                   const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),

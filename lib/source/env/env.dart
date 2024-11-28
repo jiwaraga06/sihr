@@ -8,7 +8,8 @@ const String ACCEPT = "Accept";
 const String AUTHORIZATION = "authorization";
 
 const url = "https://api.hris.rsuumc.com";
-const url2 = "https://api-v2.rsuumc.com";
+const url2 = "https://api-v3.hris.rsuumc.com";
+// const url2 = "https://api-v2.rsuumc.com";
 var tanggal = DateFormat('yyyy-MM-dd').format(DateTime.now());
 PermissionStatus? storagePermission;
 PermissionStatus? locationPermission;
@@ -29,6 +30,7 @@ const whiteCustom = Color.fromRGBO(245, 245, 245, 1);
 const whiteCustom2 = Color.fromARGB(255, 255, 255, 255);
 const merah = Color(0XFFA91D3A);
 const biru = Color(0XFF125B9A);
+const amber = Color(0XFFFAB12F);
 
 // data edit log book
 var tanggalLogbook, namalog, keteranganlog, idlogbook;
@@ -43,3 +45,6 @@ var id_partisipasi;
 
 //detail approval
 var idApproval, namaApproval, tanggalApproval, keteranganApproval, menuApproval;
+
+// news
+var idNews;
