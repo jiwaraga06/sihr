@@ -10,10 +10,13 @@ class CVScreen extends StatefulWidget {
 class _CVScreenState extends State<CVScreen> {
   var loadingPercentage = 0;
   late final WebViewController? controller;
-  var idPegawai;
+  var idPegawai, token;
   void getSession() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
+     token = pref.getString("token");
+     print("token: $token");
     idPegawai = pref.getString("id_pegawai");
+     print("pegawai: $idPegawai");
   }
 
   @override
@@ -39,7 +42,7 @@ class _CVScreenState extends State<CVScreen> {
         },
       ))
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai"));
+      ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"));
   }
 
   @override

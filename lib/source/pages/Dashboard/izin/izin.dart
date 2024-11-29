@@ -67,7 +67,7 @@ class _IzinScreenState extends State<IzinScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                  if (a.status != 3) {
+                  if (a.status == 1 || a.status == 2) {
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -84,7 +84,7 @@ class _IzinScreenState extends State<IzinScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(flex: 3, child: AutoSizeText(a.pegawai!.nama!, style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                                Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
                                 if (a.status == 0)
                                   Expanded(
                                     flex: 1,
@@ -164,7 +164,19 @@ class _IzinScreenState extends State<IzinScreen> {
                                   children: [
                                     const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tanggal! == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
@@ -185,6 +197,16 @@ class _IzinScreenState extends State<IzinScreen> {
                                     const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text("${a.keterangan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Feedback', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.feedback}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(

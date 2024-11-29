@@ -47,4 +47,4 @@ var id_partisipasi;
 var idApproval, namaApproval, tanggalApproval, keteranganApproval, menuApproval;
 
 // news
-var idNews;
+var idNews, statusAbsenNews;

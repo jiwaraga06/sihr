@@ -300,6 +300,28 @@ class _NewsScreenState extends State<NewsScreen> {
                               onTap: () {
                                 setState(() {
                                   idNews = a.id;
+                                  statusAbsenNews = "Resume";
+                                });
+                                Navigator.pushNamed(context, newsCheckinScreen);
+                              },
+                              text: "Resume",
+                              backgroundColor: biru,
+                              textStyle: const TextStyle(color: whiteCustom, fontSize: 15, fontFamily: 'JakartaSansSemiBold'),
+                              roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 40,
+                            child: CustomButton2(
+                              onTap: () {
+                                setState(() {
+                                  idNews = a.id;
+                                  statusAbsenNews = "CheckIn";
                                 });
                                 Navigator.pushNamed(context, newsCheckinScreen);
                               },

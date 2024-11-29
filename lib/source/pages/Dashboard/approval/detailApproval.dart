@@ -11,19 +11,24 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
   TextEditingController controllerNama = TextEditingController();
   TextEditingController controllerTanggal = TextEditingController();
   TextEditingController controllerKeterangan = TextEditingController();
+  TextEditingController controllerFeedback = TextEditingController();
   var valueStatus;
   final formkey = GlobalKey<FormState>();
   List listStatus = [
-    {"value": 0, "name": "Proses"},
+    // {"value": 0, "name": "Proses"},
     {"value": 1, "name": "ACC KEPALA"},
     {"value": 2, "name": "Reject"},
-    {"value": 3, "name": "ACC HRD"},
+    // {"value": 3, "name": "ACC HRD"},
   ];
   void submit() {
     if (formkey.currentState!.validate()) {
       print(menuApproval);
       print(idApproval);
-      BlocProvider.of<ApprovalCubit>(context).approval(context, valueStatus);
+      if (valueStatus == 2) {
+        BlocProvider.of<ApprovalCubit>(context).approval(context, valueStatus, controllerFeedback.text);
+      } else {
+        BlocProvider.of<ApprovalCubit>(context).approval(context, valueStatus, "-");
+      }
     }
   }
 
@@ -139,6 +144,10 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
                       onChanged: (value) {
                         setState(() {
                           valueStatus = value;
+                          print(valueStatus);
+                          if (valueStatus == 1) {
+                            controllerFeedback.clear();
+                          }
                         });
                       },
                       validator: (value) {
@@ -149,6 +158,21 @@ class _ApprovalDetailScreenState extends State<ApprovalDetailScreen> {
                       },
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  if (valueStatus == 2)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const AutoSizeText("Feedback", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                        const SizedBox(height: 12),
+                        CustomField(
+                            readOnly: false,
+                            controller: controllerFeedback,
+                            textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                            maxline: 4,
+                            messageError: "Kolom tidak boleh kosong"),
+                      ],
+                    ),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,

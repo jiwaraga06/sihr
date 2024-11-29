@@ -12,8 +12,12 @@ class _CheckInNewsScreenState extends State<CheckInNewsScreen> {
   final formkey = GlobalKey<FormState>();
 
   void submit() {
-    if (formkey!.currentState!.validate()) {
-      BlocProvider.of<UpdatePengumumanPesertaCubit>(context).updatePengumumanPeserta(context, idNews, gambar, controllerResume.text);
+    if (statusAbsenNews == "Resume") {
+      if (formkey!.currentState!.validate()) {
+        BlocProvider.of<UpdatePengumumanPesertaCubit>(context).updateResumePengumumanPeserta(context, idNews, controllerResume.text);
+      }
+    } else {
+      BlocProvider.of<UpdatePengumumanPesertaCubit>(context).updateCheckInPengumumanPeserta(context, idNews, gambar);
     }
   }
 
@@ -67,30 +71,40 @@ class _CheckInNewsScreenState extends State<CheckInNewsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 12),
-                  const AutoSizeText("Foto", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
-                  const SizedBox(height: 12),
-                  InkWell(
-                    onTap: pickImage,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 450,
-                      margin: EdgeInsets.all(8),
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.black.withOpacity(0.5), width: 1)),
-                      child: gambar == null ? Center(child: Icon(FontAwesomeIcons.image)) : Image.file(File(gambar!.path)),
-                    ),
+                  if (statusAbsenNews == "CheckIn")
+                  Column(
+                    children: [
+                      const SizedBox(height: 12),
+                      const AutoSizeText("Foto", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                      const SizedBox(height: 12),
+                      InkWell(
+                        onTap: pickImage,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 450,
+                          margin: EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.black.withOpacity(0.5), width: 1)),
+                          child: gambar == null ? Center(child: Icon(FontAwesomeIcons.image)) : Image.file(File(gambar!.path)),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  const AutoSizeText("Resume", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
-                  const SizedBox(height: 12),
-                  CustomField(
-                    readOnly: false,
-                    controller: controllerResume,
-                    maxline: 6,
-                    textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
-                    messageError: "Kolom harus di isi",
+                  if (statusAbsenNews == "Resume")
+                  Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      const AutoSizeText("Resume", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                      const SizedBox(height: 12),
+                      CustomField(
+                        readOnly: false,
+                        controller: controllerResume,
+                        maxline: 6,
+                        textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                        messageError: "Kolom harus di isi",
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 25),
                   SizedBox(

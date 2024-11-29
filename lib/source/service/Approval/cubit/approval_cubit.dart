@@ -10,10 +10,10 @@ class ApprovalCubit extends Cubit<ApprovalState> {
   final RepostoryApproval? repository;
   ApprovalCubit({this.repository}) : super(ApprovalInitial());
 
-  void approval(context, status) async {
+  void approval(context, status, feedback) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (menuApproval == "cuti") {
-      var body = {"status": "$status", "feedback": "-"};
+      var body = {"status": "$status", "feedback": "$feedback"};
       print(body);
       emit(ApprovalLoading());
       repository!.postApprovalCuti(idApproval, body, context).then((value) {
@@ -27,7 +27,7 @@ class ApprovalCubit extends Cubit<ApprovalState> {
         }
       });
     } else if (menuApproval == "lembur") {
-      var body = {"status": "$status"};
+      var body = {"status": "$status", "feedback": "$feedback"};
       print(body);
       emit(ApprovalLoading());
       repository!.postApprovalLembur(idApproval, body, context).then((value) {
@@ -41,7 +41,7 @@ class ApprovalCubit extends Cubit<ApprovalState> {
         }
       });
     } else if (menuApproval == "izin") {
-      var body = {"status": "$status"};
+      var body = {"status": "$status", "feedback": "$feedback"};
       print(body);
       emit(ApprovalLoading());
       repository!.postApprovalIzin(idApproval, body, context).then((value) {

@@ -54,7 +54,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data!.data!.length,
               itemBuilder: (context, index) {
                 var a = data!.data![index];
-                if (a.status != 3) {
+                if (a.status == 0 || a.status == 1 || a.status == 2) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -140,56 +140,77 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          Table(
-                            border: TableBorder.all(style: BorderStyle.none),
-                            columnWidths: const <int, TableColumnWidth>{
-                              0: FixedColumnWidth(100),
-                              1: FixedColumnWidth(15),
-                            },
-                            children: [
-                              TableRow(
-                                children: [
-                                  const Text('Tgl Mulai Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(formatDate(a.tglMulai!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Tgl Selesai Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(formatDate(a.tglSelesai!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Jenis Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.jenisCuti!.namaCuti!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
+                            Table(
+                              border: TableBorder.all(style: BorderStyle.none),
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(100),
+                                1: FixedColumnWidth(15),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Mulai Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(formatDate(a.tglMulai!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Selesai Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(formatDate(a.tglSelesai!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                               TableRow(
+                                  children: [
+                                    const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jenis Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jenisCuti!.namaCuti!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Feedback', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.feedback!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                              ],
+                            ),
+                           const SizedBox(height: 12),
                           if (a.status == 0)
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
@@ -260,7 +281,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data!.data!.length,
               itemBuilder: (context, index) {
                 var a = data!.data![index];
-                if (a.status != 3) {
+               if (a.status == 0 || a.status == 1 || a.status == 2) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -346,66 +367,88 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          Table(
-                            border: TableBorder.all(style: BorderStyle.none),
-                            columnWidths: const <int, TableColumnWidth>{
-                              0: FixedColumnWidth(100),
-                              1: FixedColumnWidth(15),
-                            },
-                            children: [
-                              TableRow(
-                                children: [
-                                  const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Jam Mulai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.jamMulai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Jam Selesai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
+                         Table(
+                              border: TableBorder.all(style: BorderStyle.none),
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(100),
+                                1: FixedColumnWidth(15),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tanggal! == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jam Mulai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jamMulai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jam Selesai', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jamSelesai!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Feedback', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.feedback!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                              ],
+                            ),
+                              const SizedBox(height: 12),
                           if (a.status == 0)
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -476,7 +519,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data.data!.length,
               itemBuilder: (context, index) {
                 var a = data.data![index];
-                if (a.status != 3) {
+                  if (a.status == 0 || a.status == 1 || a.status == 2) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -563,45 +606,67 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                           ),
                           const SizedBox(height: 12),
                           Table(
-                            border: TableBorder.all(style: BorderStyle.none),
-                            columnWidths: const <int, TableColumnWidth>{
-                              0: FixedColumnWidth(100),
-                              1: FixedColumnWidth(15),
-                            },
-                            children: [
-                              TableRow(
-                                children: [
-                                  const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Alasan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text("${a.alasan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text("${a.keterangan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
+                              border: TableBorder.all(style: BorderStyle.none),
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(100),
+                                1: FixedColumnWidth(15),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tanggal! == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Alasan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.alasan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.keterangan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Feedback', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text("${a.feedback}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                              ],
+                            ),
+                             const SizedBox(height: 12),
                           if (a.status == 0)
                           SizedBox(
                             width: MediaQuery.of(context).size.width,

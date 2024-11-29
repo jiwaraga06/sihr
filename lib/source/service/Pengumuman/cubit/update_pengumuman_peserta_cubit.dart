@@ -11,10 +11,34 @@ class UpdatePengumumanPesertaCubit extends Cubit<UpdatePengumumanPesertaState> {
   final Repositorypengumuman? repository;
   UpdatePengumumanPesertaCubit({this.repository}) : super(UpdatePengumumanPesertaInitial());
 
-  void updatePengumumanPeserta(context, id, XFile? foto, resume) async {
+  void updateResumePengumumanPeserta(context, id, resume) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
-    var body = FormData.fromMap({"cekin": await MultipartFile.fromFile(foto!.path, filename: foto.name), "resume": "$resume"});
+    var body = FormData.fromMap({
+      // "cekin": await MultipartFile.fromFile(foto!.path, filename: foto.name),
+      "resume": "$resume",
+    });
+    print(body.fields);
+    emit(UpdatePengumumanPesertaLoading());
+    repository!.updatePengumumanPeserta(context, id, body).then((value) {
+      var json = value.data;
+      var statusCode = value.statusCode;
+      print("UPDATE NEWS: $statusCode");
+      if (statusCode == 200 || statusCode == 201) {
+        emit(UpdatePengumumanPesertaLoaded(statusCode: statusCode, json: json));
+      } else {
+        emit(UpdatePengumumanPesertaFailed(statusCode: statusCode, json: json));
+      }
+    });
+  }
+
+  void updateCheckInPengumumanPeserta(context, id, XFile? foto) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var idPegawai = pref.getString("id_pegawai");
+    var body = FormData.fromMap({
+      "cekin": await MultipartFile.fromFile(foto!.path, filename: foto.name),
+      // "resume": "$resume",
+    });
     print(body.fields);
     emit(UpdatePengumumanPesertaLoading());
     repository!.updatePengumumanPeserta(context, id, body).then((value) {

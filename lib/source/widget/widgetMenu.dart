@@ -212,7 +212,7 @@ class WidgetMenuUtama extends StatelessWidget {
                   ),
                 ),
               ),
-              // if (data!.data!.idJabatan == 21 || data!.data!.idJabatan == 23)
+              if (data!.data!.idJabatan == 21 || data!.data!.idJabatan == 23)
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, logbookPerawatScreen);
@@ -270,6 +270,7 @@ class WidgetMenuUtama extends StatelessWidget {
                   ),
                 ),
               ),
+                  // if (data!.data!.idJabatan == 5)
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, approvalScreen);

@@ -89,7 +89,7 @@ class _CutiScreenState extends State<CutiScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                  if (a.status != 3) {
+                  if (a.status == 1 || a.status == 2) {
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -106,14 +106,14 @@ class _CutiScreenState extends State<CutiScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(flex: 3, child: AutoSizeText(a.pegawai!.nama!, style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                                Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
                                 if (a.status == 0)
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                         width: 120,
                                         padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: amber, borderRadius: BorderRadius.circular(8),boxShadow: [
+                                        decoration: BoxDecoration(color: amber, borderRadius: BorderRadius.circular(8), boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
                                             spreadRadius: 1,
@@ -129,7 +129,7 @@ class _CutiScreenState extends State<CutiScreen> {
                                     flex: 1,
                                     child: Container(
                                         padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8),boxShadow: [
+                                        decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8), boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
                                             spreadRadius: 1,
@@ -145,7 +145,7 @@ class _CutiScreenState extends State<CutiScreen> {
                                     flex: 1,
                                     child: Container(
                                         padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: merah, borderRadius: BorderRadius.circular(8),boxShadow: [
+                                        decoration: BoxDecoration(color: merah, borderRadius: BorderRadius.circular(8), boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
                                             spreadRadius: 1,
@@ -161,7 +161,7 @@ class _CutiScreenState extends State<CutiScreen> {
                                     flex: 1,
                                     child: Container(
                                         padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(8),boxShadow: [
+                                        decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(8), boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
                                             spreadRadius: 1,
@@ -201,6 +201,17 @@ class _CutiScreenState extends State<CutiScreen> {
                                 const TableRow(
                                   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
                                 ),
+                               TableRow(
+                                  children: [
+                                    const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
                                 TableRow(
                                   children: [
                                     const Text('Jenis Cuti', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
@@ -216,6 +227,16 @@ class _CutiScreenState extends State<CutiScreen> {
                                     const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Feedback', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.feedback!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(

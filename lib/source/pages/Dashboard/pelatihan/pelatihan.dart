@@ -118,7 +118,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                   ],
                                 ),
                                 const TableRow(
-                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                  children: [SizedBox(height: 8), SizedBox(height: 8), SizedBox(height: 8)],
                                 ),
                                 TableRow(
                                   children: [
@@ -164,6 +164,16 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                     const Text('SKP', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text(a.pelatihan!.jumlahSkp.toString()!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.resume!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
