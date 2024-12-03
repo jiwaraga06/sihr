@@ -184,7 +184,7 @@ class Pegawai {
         pendidikan: json["pendidikan"] ?? "",
         prodi: json["prodi"] ?? "",
         npwp: json["npwp"] ?? "",
-        statusMenikah: json["status_menikah"] ?? 0,
+        statusMenikah: json["status_menikah"] ?? "",
         statusKeluarga: json["status_keluarga"] ?? 0,
         tglResign: json["tgl_resign"] == null ? null : DateTime.parse(json["tgl_masuk"]),
         ketResign: json["ket_resign"] ?? "",

@@ -110,7 +110,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                               ),
                               TableRow(
                                 children: [
-                                  const Text('Jumlah', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   Text(a.jumlah!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],

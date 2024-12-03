@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/repositoryIzin.dart';
 
 part 'create_izin_state.dart';
@@ -11,7 +10,7 @@ class CreateIzinCubit extends Cubit<CreateIzinState> {
   final IzinRepository? repository;
   CreateIzinCubit({this.repository}) : super(CreateIzinInitial());
 
-  void createIzin(alasan, keterangan, idjenis, context) async {
+  void createIzin(tanggal, alasan, keterangan, idjenis, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var datenow = DateTime.now();

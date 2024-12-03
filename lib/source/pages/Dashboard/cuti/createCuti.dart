@@ -49,7 +49,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
   void submit() {
     if (formkey.currentState!.validate()) {
       BlocProvider.of<CreateCutiCubit>(context)
-          .createCuti(valueCuti, controllerTglMulai.text, controllerTglSelesai.text, controllerKeterangan.text, controllerTanggal.text, context);
+          .createCuti(valueCuti, controllerTglMulai.text, controllerTglSelesai.text, controllerKeterangan.text, tanggal, context);
     }
   }
 
@@ -103,15 +103,15 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText("Tanggal Pengajuan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
-                  const SizedBox(height: 12),
-                  CustomField(
-                      readOnly: true,
-                      controller: controllerTanggal,
-                      onTap: pickdate,
-                      suffixIcon: const Icon(FontAwesomeIcons.calendar),
-                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
-                  const SizedBox(height: 20),
+                  // const AutoSizeText("Tanggal Pengajuan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  // const SizedBox(height: 12),
+                  // CustomField(
+                  //     readOnly: true,
+                  //     controller: controllerTanggal,
+                  //     onTap: pickdate,
+                  //     suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                  //     textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+                  // const SizedBox(height: 20),
                   const AutoSizeText("Pilih kategori Cuti", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   BlocBuilder<JenisCutiCubit, JenisCutiState>(

@@ -38,7 +38,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              MyDialog.dialogAlert(context, data['message']);
+              MyDialog.dialogAlert(context, "This user does not have access.");
             } else {
               MyDialog.dialogAlert(context, data['errors'].toString());
             }
@@ -49,7 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             var statusCode = state.statusCode;
             MyDialog.dialogSuccess(context, data['message'], onPressedOk: () {
               Navigator.pop(context);
-              BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
+              // BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
             });
           }
         },

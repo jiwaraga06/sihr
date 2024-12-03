@@ -9,7 +9,7 @@ class DetailSlipGajiScreen extends StatefulWidget {
 
 class _DetailSlipGajiScreenState extends State<DetailSlipGajiScreen> {
   var loadingPercentage = 0;
-  late final WebViewController? controller;
+  WebViewController? controller = WebViewController();
   var token;
   void getSession() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -20,26 +20,28 @@ class _DetailSlipGajiScreenState extends State<DetailSlipGajiScreen> {
   void initState() {
     super.initState();
     getSession();
-    controller = WebViewController()
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-          });
-        },
-        onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
-        },
-        onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
-        },
-      ))
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id_slip_gaji?token=$token"));
+    Future.delayed(const Duration(seconds: 2), () {
+      controller = WebViewController()
+        ..setNavigationDelegate(NavigationDelegate(
+          onPageStarted: (url) {
+            setState(() {
+              loadingPercentage = 0;
+            });
+          },
+          onProgress: (progress) {
+            setState(() {
+              loadingPercentage = progress;
+            });
+          },
+          onPageFinished: (url) {
+            setState(() {
+              loadingPercentage = 100;
+            });
+          },
+        ))
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..loadRequest(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id_slip_gaji?token=$token"));
+    });
   }
 
   @override

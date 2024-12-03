@@ -43,6 +43,8 @@ class _LemburScreenState extends State<LemburScreen> {
             var statusCode = state.statusCode;
             if (statusCode == 403) {
               return Center(child: Text("This user does not have access."));
+            } else if (statusCode == 404) {
+              return Center(child: Text("Not Found"));
             } else {
               return Center(child: Text(data['message'].toString()));
             }
@@ -67,7 +69,7 @@ class _LemburScreenState extends State<LemburScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                  if (a.status == 1 || a.status == 2) {
+                if (a.status == 0 || a.status == 1 || a.status == 2) {
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -115,7 +117,7 @@ class _LemburScreenState extends State<LemburScreen> {
                                             offset: const Offset(1, 2),
                                           ),
                                         ]),
-                                        child: const Text("Disetujui",
+                                        child: const Text("ACC KEPALA",
                                             textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                                   ),
                                 if (a.status == 2)
@@ -131,7 +133,7 @@ class _LemburScreenState extends State<LemburScreen> {
                                             offset: const Offset(1, 2),
                                           ),
                                         ]),
-                                        child: const Text("Ditolak",
+                                        child: const Text("Rejected",
                                             textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
                                   ),
                                 if (a.status == 3)

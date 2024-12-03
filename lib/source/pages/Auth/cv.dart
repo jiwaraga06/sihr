@@ -9,40 +9,42 @@ class CVScreen extends StatefulWidget {
 
 class _CVScreenState extends State<CVScreen> {
   var loadingPercentage = 0;
-  late final WebViewController? controller;
+  WebViewController? controller = WebViewController();
   var idPegawai, token;
   void getSession() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-     token = pref.getString("token");
-     print("token: $token");
+    token = pref.getString("token");
+    print("token: $token");
     idPegawai = pref.getString("id_pegawai");
-     print("pegawai: $idPegawai");
+    print("pegawai: $idPegawai");
   }
 
   @override
   void initState() {
     super.initState();
     getSession();
-    controller = WebViewController()
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-          });
-        },
-        onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
-        },
-        onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
-        },
-      ))
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"));
+    Future.delayed(const Duration(seconds: 2), () {
+      controller = WebViewController()
+        ..setNavigationDelegate(NavigationDelegate(
+          onPageStarted: (url) {
+            setState(() {
+              loadingPercentage = 0;
+            });
+          },
+          onProgress: (progress) {
+            setState(() {
+              loadingPercentage = progress;
+            });
+          },
+          onPageFinished: (url) {
+            setState(() {
+              loadingPercentage = 100;
+            });
+          },
+        ))
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"));
+    });
   }
 
   @override
@@ -55,7 +57,7 @@ class _CVScreenState extends State<CVScreen> {
         color: Colors.white,
         child: Stack(
           children: [
-            WebViewWidget(controller: controller!),
+            if (controller != null) WebViewWidget(controller: controller!),
             if (loadingPercentage > 0)
               LinearProgressIndicator(
                 value: loadingPercentage / 100,

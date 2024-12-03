@@ -142,7 +142,7 @@ class _UpdateLogBookPerawatScreenState extends State<UpdateLogBookPerawatScreen>
                     },
                   ),
                   const SizedBox(height: 20),
-                  const AutoSizeText("Jumlah", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: false,

@@ -85,6 +85,7 @@ class Data {
     final Bank? bank;
     final Users? users;
 
+
     Data({
         this.id,
         this.nip,

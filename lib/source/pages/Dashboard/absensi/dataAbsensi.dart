@@ -144,6 +144,16 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                 const TableRow(
                                   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
                                 ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jenis!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
                                 if (a.status == 2)
                                   TableRow(
                                     children: [

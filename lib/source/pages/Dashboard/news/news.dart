@@ -212,7 +212,9 @@ class _NewsScreenState extends State<NewsScreen> {
           var statusCode = state.statusCode;
           if (statusCode == 403) {
             return Center(child: Text("This user does not have access."));
-          } else {
+          } if (statusCode == 404) {
+            return Center(child: Text("Not Found"));
+          }else {
             return Center(child: Text(data['message'].toString()));
           }
         }
@@ -312,6 +314,7 @@ class _NewsScreenState extends State<NewsScreen> {
                           ),
                         ),
                         const SizedBox(height: 12),
+                        if (a.cekin!.isEmpty)
                         Padding(
                           padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                           child: SizedBox(
@@ -355,24 +358,24 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             indicatorColor: hijau,
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
-              Tab(child: Text("KHUSUS", style: TextStyle(fontFamily: 'JakartaSansBold'))),
               Tab(child: Text("UMUM", style: TextStyle(fontFamily: 'JakartaSansBold'))),
-              Tab(child: Text("History", style: TextStyle(fontFamily: 'JakartaSansBold'))),
+              // Tab(child: Text("KHUSUS", style: TextStyle(fontFamily: 'JakartaSansBold'))),
+              Tab(child: Text("KHUSUS", style: TextStyle(fontFamily: 'JakartaSansBold'))),
             ],
           ),
           title: Text('Berita', style: TextStyle(fontFamily: 'JakartaSansMedium')),
         ),
         body: TabBarView(
           children: [
-            tipeKhusus(context),
             tipeUmum(context),
+            // tipeKhusus(context),
             tipeHistory(context),
           ],
         ),

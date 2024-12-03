@@ -27,7 +27,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
       var json = value.data;
       var statusCode = value.statusCode;
       print(statusCode);
-      print(json);
+      print("CHANGE PW: $json");
       if (statusCode == 200 || statusCode == 201) {
         emit(ChangePasswordLoaded(statusCode: statusCode, json: json));
       } else {

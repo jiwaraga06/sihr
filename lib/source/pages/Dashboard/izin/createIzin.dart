@@ -16,7 +16,7 @@ class _CreateIzinScreenState extends State<CreateIzinScreen> {
 
   void submit() {
     if (formkey.currentState!.validate()) {
-      BlocProvider.of<CreateIzinCubit>(context).createIzin(controllerAlasan.text, controllerKeterangan.text, valueIzin, context);
+      BlocProvider.of<CreateIzinCubit>(context).createIzin(controllerTanggal.text,  controllerAlasan.text, controllerKeterangan.text, valueIzin, context);
     }
   }
 

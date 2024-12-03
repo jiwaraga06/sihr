@@ -51,6 +51,7 @@ class Datauser {
   final String? divisi;
   final String? departement;
   final String? shift;
+  final String? jenis;
 
   Datauser({
     this.nip,
@@ -71,6 +72,7 @@ class Datauser {
     this.latt,
     this.att,
     this.terlambat,
+    this.jenis,
   });
 
   factory Datauser.fromJson(Map<String, dynamic> json) => Datauser(
@@ -82,6 +84,7 @@ class Datauser {
         waktuKeluar: json["waktu_keluar"] ?? "",
         status: json["status"] ?? 0,
         keterangan: json["keterangan"] ?? "",
+        jenis: json["jenis"] ?? "",
         fotoUrl: json["foto_url"] ?? "",
         latt: json["latt"] ?? "",
         att: json["att"] ?? "",

@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/repository/RepositoryPelatihan.dart';
+import 'package:sihr/source/widget/customDialog.dart';
 
 part 'absen_pelatihan_state.dart';
 
@@ -30,7 +31,6 @@ class AbsenPelatihanCubit extends Cubit<AbsenPelatihanState> {
       "latt": "$lat",
       "att": "$long",
     });
-
     emit(AbsenPelatihanLoading());
     // print(body.fields);
     repository!.updatePartisipasiPelatihan(context, id_partisipasi, body).then((value) {

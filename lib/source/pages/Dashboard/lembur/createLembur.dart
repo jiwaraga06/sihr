@@ -52,7 +52,7 @@ class _CreateLemburScreenState extends State<CreateLemburScreen> {
   void submit() {
     if (formkey.currentState!.validate()) {
       BlocProvider.of<CreateLemburCubit>(context)
-          .createLembur(tanggal, controllerJamMulai.text, controllerJamSelesai.text, controllerKeterangan.text,  valuejenis,valueKategori, context);
+          .createLembur(controllerTanggal.text, controllerJamMulai.text, controllerJamSelesai.text, controllerKeterangan.text,  valuejenis,valueKategori, context);
     }
   }
 
