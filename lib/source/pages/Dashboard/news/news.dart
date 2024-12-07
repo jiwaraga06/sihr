@@ -89,12 +89,12 @@ class _NewsScreenState extends State<NewsScreen> {
         }
         if (state is GetPengumumanFailed) {
           var data = state.json;
-            var statusCode = state.statusCode;
-            if (statusCode == 403) {
-              return Center(child: Text("This user does not have access."));
-            } else {
-              return Center(child: Text(data['message'].toString()));
-            }
+          var statusCode = state.statusCode;
+          if (statusCode == 403) {
+            return Center(child: Text("This user does not have access."));
+          } else {
+            return Center(child: Text(data['message'].toString()));
+          }
         }
         if (state is GetPengumumanLoaded == false) {
           return Container();
@@ -212,9 +212,10 @@ class _NewsScreenState extends State<NewsScreen> {
           var statusCode = state.statusCode;
           if (statusCode == 403) {
             return Center(child: Text("This user does not have access."));
-          } if (statusCode == 404) {
+          }
+          if (statusCode == 404) {
             return Center(child: Text("Not Found"));
-          }else {
+          } else {
             return Center(child: Text(data['message'].toString()));
           }
         }
@@ -261,16 +262,16 @@ class _NewsScreenState extends State<NewsScreen> {
                               1: FixedColumnWidth(15),
                             },
                             children: [
-                              TableRow(
-                                children: [
-                                  const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.resume!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                ],
-                              ),
-                              const TableRow(
-                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                              ),
+                              // TableRow(
+                              //   children: [
+                              //     const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              //     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                              //     Text(a.resume!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                              //   ],
+                              // ),
+                              // const TableRow(
+                              //   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              // ),
                             ],
                           ),
                         ),
@@ -303,6 +304,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                 setState(() {
                                   idNews = a.id;
                                   statusAbsenNews = "Resume";
+                                  valueResume = a.resume!;
                                 });
                                 Navigator.pushNamed(context, newsCheckinScreen);
                               },
@@ -315,26 +317,26 @@ class _NewsScreenState extends State<NewsScreen> {
                         ),
                         const SizedBox(height: 12),
                         if (a.cekin!.isEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 40,
-                            child: CustomButton2(
-                              onTap: () {
-                                setState(() {
-                                  idNews = a.id;
-                                  statusAbsenNews = "CheckIn";
-                                });
-                                Navigator.pushNamed(context, newsCheckinScreen);
-                              },
-                              text: "Check In",
-                              backgroundColor: biru,
-                              textStyle: const TextStyle(color: whiteCustom, fontSize: 15, fontFamily: 'JakartaSansSemiBold'),
-                              roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 40,
+                              child: CustomButton2(
+                                onTap: () {
+                                  setState(() {
+                                    idNews = a.id;
+                                    statusAbsenNews = "CheckIn";
+                                  });
+                                  Navigator.pushNamed(context, newsCheckinScreen);
+                                },
+                                text: "Check In",
+                                backgroundColor: biru,
+                                textStyle: const TextStyle(color: whiteCustom, fontSize: 15, fontFamily: 'JakartaSansSemiBold'),
+                                roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
                             ),
                           ),
-                        ),
                         const SizedBox(height: 16),
                       ],
                     ),

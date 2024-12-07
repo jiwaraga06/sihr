@@ -16,7 +16,15 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
       BlocProvider.of<AbsenPelatihanCubit>(context).updatePartisipasi(context, controllerResume.text);
     }
   }
-
+@override
+void initState() {
+  super.initState();
+  if (valueResume != null || valueResume.isNotEmpty) {
+    setState(() {
+      controllerResume.text = valueResume.toString();
+    });
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(

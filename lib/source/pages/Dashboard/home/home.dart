@@ -18,9 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<AuthCubit>(context).session(context);
-    BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
-    BlocProvider.of<GetSisaAbsenCubit>(context).getSisaAbsensi(context);
-    BlocProvider.of<JenisAbsenCubit>(context).getJenisAbsensi(context);
+
+    // BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
+    // BlocProvider.of<GetSisaAbsenCubit>(context).getSisaAbsensi(context);
+    // BlocProvider.of<JenisAbsenCubit>(context).getJenisAbsensi(context);
     // BlocProvider.of<GetShiftCubit>(context).getShift(context);
     WidgetsBinding.instance.addPostFrameCallback((context) {
       handleCheck();
@@ -31,17 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: key,
-      // drawer: CustomDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        // leading: IconButton(
-        //     onPressed: () {
-        //       key.currentState!.openDrawer();
-        //     },
-        //     icon: Image.asset("assets/images/vectorMenu.png")),
         title: const Text("Si - HR", style: TextStyle(color: Colors.indigo, fontFamily: 'JakartaSansMedium', fontSize: 25)),
       ),
-      body: BlocBuilder<AuthCubit, AuthState>(
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthLoaded) {
+            BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
+            BlocProvider.of<GetSisaAbsenCubit>(context).getSisaAbsensi(context);
+            BlocProvider.of<JenisAbsenCubit>(context).getJenisAbsensi(context);
+          }
+        },
         builder: (context, state) {
           if (state is AuthLoading) {
             return const Center(
@@ -49,15 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           if (state is AuthLoaded == false) {
-            return Container();
+            return Container(
+              child: Text("Raga"),
+            );
           }
           var load = (state as AuthLoaded).json;
           return RefreshIndicator(
             onRefresh: () async {
               await Future.delayed(const Duration(seconds: 1));
-              BlocProvider.of<AuthCubit>(context).session(context);
+              // BlocProvider.of<AuthCubit>(context).session(context);
               BlocProvider.of<GetPegawaiCubit>(context).getPegawai(context);
-              BlocProvider.of<GetPengumumanCubit>(context).getPengumuman(context);
+            BlocProvider.of<GetSisaAbsenCubit>(context).getSisaAbsensi(context);
+            BlocProvider.of<JenisAbsenCubit>(context).getJenisAbsensi(context);
             },
             child: ListView.builder(
                 itemCount: 1,
@@ -94,20 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(right: 10),
-                            //   child: InkWell(
-                            //     onTap: () {},
-                            //     child: const badges.Badge(
-                            //       badgeContent: Text('1'),
-                            //       child: Icon(FontAwesomeIcons.bell),
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
-                    
                       const SizedBox(height: 12),
                       const WidgetCardHome(),
                       const SizedBox(height: 12),

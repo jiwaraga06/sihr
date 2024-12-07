@@ -55,11 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
           //   var json = state.json;
           //   var statusCode = state.statusCode;
           //   if (statusCode == 200) {
+          //         // BlocProvider.of<AuthCubit>(context).session(context);
           //     // MyDialog.dialogSuccess(context, json['message']);
           //     // await Future.delayed(const Duration(seconds: 1));
           //     // Navigator.pushNamedAndRemoveUntil(context, dashboardScreen, (Route<dynamic> route) => false);
           //   } else {
-          //     MyDialog.dialogAlert(context, json['message']);
+          //     // MyDialog.dialogAlert(context, json['message']);
           //   }
           // }
         },

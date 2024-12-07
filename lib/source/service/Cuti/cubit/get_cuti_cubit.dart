@@ -33,15 +33,15 @@ class GetCutiCubit extends Cubit<GetCutiState> {
     String? idPegawai = pref.getString("id_pegawai");
     String? idKepalaBagian = pref.getString("idKepalaBagian");
     emit(GetCutiLoading());
-    repository!.getCutiKepalaBagian(context, idKepalaBagian).then((value) {
+    repository!.getCutiKepalaBagian(context, idPegawai).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       print(json);
-      // if (statusCode == 200 || statusCode == 201) {
+      if (statusCode == 200 || statusCode == 201) {
         emit(GetCutiLoaded(statusCode: statusCode, model: modelCutiFromJson(jsonEncode(json)), idPegawai: int.parse(idPegawai!)));
-      // } else {
-      //   emit(GetCutiFailed(statusCode: statusCode, json: json));
-      // }
+      } else {
+        emit(GetCutiFailed(statusCode: statusCode, json: json));
+      }
     });
   }
 }

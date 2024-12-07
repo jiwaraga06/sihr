@@ -72,6 +72,7 @@ class Data {
     final DateTime? createdAt;
     final DateTime? updatedAt;
     final int? idUsers;
+    final int? idKepalaBagian;
     final String? createdBy;
     final String? updatedBy;
     final int? isDelete;
@@ -136,6 +137,7 @@ class Data {
         this.unit,
         this.bank,
         this.users,
+        this.idKepalaBagian
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -173,6 +175,7 @@ class Data {
         ketResign: json["ket_resign"] ?? "",
         statusResign: json["status_resign"] ?? 0,
         nomr: json["nomr"] ?? "",
+        idKepalaBagian: json["id_kepala_bagian"] ?? 0,
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         idUsers: json["id_users"],

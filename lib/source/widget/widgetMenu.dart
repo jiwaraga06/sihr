@@ -213,25 +213,25 @@ class WidgetMenuUtama extends StatelessWidget {
               //   ),
               // ),
               if (data!.data!.idJabatan == 21 || data!.data!.idJabatan == 23)
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, logbookPerawatScreen);
-                },
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                          child: Image.asset("assets/images/GoodNotes.png")),
-                      const SizedBox(height: 6),
-                      const AutoSizeText('Log Book Perawat', style: TextStyle(fontSize: 10, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                    ],
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, logbookPerawatScreen);
+                  },
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                            child: Image.asset("assets/images/GoodNotes.png")),
+                        const SizedBox(height: 6),
+                        const AutoSizeText('Log Book Perawat', style: TextStyle(fontSize: 10, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                      ],
+                    ),
                   ),
                 ),
-              ),
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, slipgajiScreen);
@@ -270,26 +270,26 @@ class WidgetMenuUtama extends StatelessWidget {
                   ),
                 ),
               ),
-                  // if (data!.data!.idJabatan == 5)
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, approvalScreen);
-                },
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
-                          child: Image.asset("assets/images/CheckFile.png")),
-                      const SizedBox(height: 6),
-                      const AutoSizeText('Approval', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
-                    ],
+              // if (data!.data!.idKepalaBagian != 0)
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, approvalScreen);
+                  },
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                            child: Image.asset("assets/images/CheckFile.png")),
+                        const SizedBox(height: 6),
+                        const AutoSizeText('Approval', style: TextStyle(fontSize: 14, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                      ],
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         );

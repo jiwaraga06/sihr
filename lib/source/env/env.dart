@@ -48,3 +48,6 @@ var idApproval, namaApproval, tanggalApproval, keteranganApproval, menuApproval;
 
 // news
 var idNews, statusAbsenNews;
+
+// resumevalue
+var valueResume;

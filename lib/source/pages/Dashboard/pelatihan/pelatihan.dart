@@ -169,16 +169,16 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                 const TableRow(
                                   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
                                 ),
-                                TableRow(
-                                  children: [
-                                    const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
-                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text(a.resume!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  ],
-                                ),
-                                const TableRow(
-                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
-                                ),
+                                // TableRow(
+                                //   children: [
+                                //     const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
+                                //     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                //     Text(a.resume!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                //   ],
+                                // ),
+                                // const TableRow(
+                                //   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                // ),
                                 TableRow(
                                   children: [
                                     const Text('Penyelenggara', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
@@ -231,6 +231,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                   setState(() {
                                     id_pelatihan = a.idPelatihan;
                                     id_partisipasi = a.id;
+                                    valueResume = a.resume!;
                                   });
                                   print(a.id);
                                   Navigator.pushNamed(context, addResumePelatihanScreen);

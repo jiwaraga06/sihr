@@ -30,7 +30,15 @@ class _CheckInNewsScreenState extends State<CheckInNewsScreen> {
       });
     });
   }
-
+@override
+void initState() {
+  super.initState();
+  if (valueResume != null || valueResume.isNotEmpty) {
+    setState(() {
+      controllerResume.text = valueResume.toString();
+    });
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(

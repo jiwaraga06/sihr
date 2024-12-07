@@ -148,7 +148,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                   children: [
                                     const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text(a.jenis!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    Text(a.shift!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
