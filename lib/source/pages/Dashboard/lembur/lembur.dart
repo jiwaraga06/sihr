@@ -69,7 +69,7 @@ class _LemburScreenState extends State<LemburScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                if (a.status == 0 || a.status == 1 || a.status == 2) {
+                  if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -209,6 +209,26 @@ class _LemburScreenState extends State<LemburScreen> {
                                     const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Kategori', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.kategori! , style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jenis! , style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(

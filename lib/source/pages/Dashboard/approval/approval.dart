@@ -56,7 +56,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data!.data!.length,
               itemBuilder: (context, index) {
                 var a = data!.data![index];
-                if (a.status == 0 || a.status == 1 || a.status == 2) {
+                if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -290,7 +290,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data!.data!.length,
               itemBuilder: (context, index) {
                 var a = data!.data![index];
-                if (a.status == 0 || a.status == 1 || a.status == 2) {
+                if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -535,7 +535,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               itemCount: data.data!.length,
               itemBuilder: (context, index) {
                 var a = data.data![index];
-                if (a.status == 0 || a.status == 1 || a.status == 2) {
+                if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),

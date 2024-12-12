@@ -42,10 +42,12 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       if (location.isMocked == true) {
         EasyLoading.dismiss();
         MyDialog.dialogAlert(context, "Maaf, fake gps terdeteksi");
-      } else if (idShift == null) {
-        EasyLoading.dismiss();
-        MyDialog.dialogAlert(context, "Maaf, anda tidak punya jadwal shift");
-      } else {
+      }
+      //  else if (idShift == null) {
+      //   EasyLoading.dismiss();
+      //   MyDialog.dialogAlert(context, "Maaf, anda tidak punya jadwal shift");
+      // } 
+      else {
         EasyLoading.dismiss();
         num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
         print(distanceInMeters);

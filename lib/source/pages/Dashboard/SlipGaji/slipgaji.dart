@@ -24,6 +24,9 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
   void showSlipGaji(id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString("token");
+    print("");
+    print("https://hris.rsuumc.com/payroll/print-slip/$id?token=$token");
+    print("");
     if (!await launchUrl(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id?token=$token"))) {
       throw Exception('Could not launch URL');
     }
@@ -99,11 +102,11 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
                             children: [
                               CustomButton2(
                                 onTap: () {
-                                  // showSlipGaji(a.id);
-                                  setState(() {
-                                    id_slip_gaji = a.id;
-                                    Navigator.pushNamed(context, detailSlipgajiScreen);
-                                  });
+                                  showSlipGaji(a.id);
+                                  // setState(() {
+                                  //   id_slip_gaji = a.id;
+                                  //   Navigator.pushNamed(context, detailSlipgajiScreen);
+                                  // });
                                 },
                                 text: "Lihat Slip Gaji",
                                 backgroundColor: Colors.blue[600],

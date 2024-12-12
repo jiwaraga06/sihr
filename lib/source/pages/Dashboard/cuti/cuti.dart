@@ -91,7 +91,7 @@ class _CutiScreenState extends State<CutiScreen> {
                 itemCount: datafilter.length,
                 itemBuilder: (context, index) {
                   var a = datafilter[index];
-                  if (a.status == 0 || a.status == 1 || a.status == 2) {
+                  if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                     return Container(
                       margin: const EdgeInsets.only(top: 10),
                       decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),

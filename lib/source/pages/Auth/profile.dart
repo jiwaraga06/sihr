@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 24),
                       const AutoSizeText("Nomor Ponsel", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
                       const SizedBox(height: 12),
-                      CustomField(readOnly: true, initialValue: data.data!.nomr),
+                      CustomField(readOnly: true, initialValue: data.data!.hp),
                       const SizedBox(height: 24),
                       const AutoSizeText("Jenis Kelamin", maxLines: 1, style: TextStyle(fontFamily: 'MontserratRegular', fontSize: 14)),
                       const SizedBox(height: 12),

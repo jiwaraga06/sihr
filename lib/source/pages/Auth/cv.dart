@@ -19,32 +19,45 @@ class _CVScreenState extends State<CVScreen> {
     print("pegawai: $idPegawai");
   }
 
+  void cekcv() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var idPegawai = pref.getString("id_pegawai");
+    token = pref.getString("token");
+        print("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token");
+    Future.delayed(const Duration(seconds: 2), () async {
+      if (!await launchUrl(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"))) {
+        throw Exception('Could not launch "https://hris.rsuumc.com/pegawai/$idPegawai"');
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     getSession();
-    Future.delayed(const Duration(seconds: 2), () {
-      controller = WebViewController()
-        ..setNavigationDelegate(NavigationDelegate(
-          onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
-          },
-          onPageFinished: (url) {
-            setState(() {
-              loadingPercentage = 100;
-            });
-          },
-        ))
-        ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"));
-    });
+    cekcv();
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   controller = WebViewController()
+    //     ..setNavigationDelegate(NavigationDelegate(
+    //       onPageStarted: (url) {
+    //         setState(() {
+    //           loadingPercentage = 0;
+    //         });
+    //       },
+    //       onProgress: (progress) {
+    //         setState(() {
+    //           loadingPercentage = progress;
+    //         });
+    //       },
+    //       onPageFinished: (url) {
+    //         setState(() {
+    //           loadingPercentage = 100;
+    //         });
+    //       },
+    //     ))
+    //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    //     ..loadRequest(Uri.parse("https://hris.rsuumc.com/pegawai/$idPegawai?token=$token"));
+    // });
   }
 
   @override
