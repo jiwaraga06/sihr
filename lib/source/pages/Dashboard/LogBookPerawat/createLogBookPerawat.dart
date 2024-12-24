@@ -10,6 +10,7 @@ class CreateLogBookPerawatScreen extends StatefulWidget {
 class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen> {
   TextEditingController controllerTanggal = TextEditingController();
   TextEditingController controllerJumlah = TextEditingController();
+  TextEditingController controllerKeterangan = TextEditingController();
   var valueMasterlogBook;
   final formkey = GlobalKey<FormState>();
   void pickdate() {
@@ -25,7 +26,7 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
 
   void submit() {
     if (formkey!.currentState!.validate()) {
-      BlocProvider.of<CreateLogBookPerawatCubit>(context).createlogbook(context, controllerTanggal.text, controllerJumlah.text, valueMasterlogBook);
+      BlocProvider.of<CreateLogBookPerawatCubit>(context).createlogbook(context, controllerTanggal.text, controllerJumlah.text, valueMasterlogBook, controllerKeterangan.text);
     }
   }
 
@@ -141,7 +142,7 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
                   const SizedBox(height: 12),
                   CustomField(
                       readOnly: false,
-                      controller: controllerJumlah,
+                      controller: controllerKeterangan,
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
                       messageError: "Kolom tidak boleh kosong"),
                   const SizedBox(height: 40),

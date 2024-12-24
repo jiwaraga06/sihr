@@ -23,11 +23,11 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
 
   void showSlipGaji(id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var token = pref.getString("token");
+    String? token = pref.getString("token");
     print("");
     print("https://hris.rsuumc.com/payroll/print-slip/$id?token=$token");
     print("");
-    if (!await launchUrl(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id?token=$token"))) {
+    if (!await launchUrl(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id?token=" + token!))) {
       throw Exception('Could not launch URL');
     }
   }

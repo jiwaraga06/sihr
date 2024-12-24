@@ -186,6 +186,16 @@ class _IzinScreenState extends State<IzinScreen> {
                                 ),
                                 TableRow(
                                   children: [
+                                    const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jenisizin.namaIzin!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
                                     const Text('Alasan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text("${a.alasan}", style: const TextStyle(fontFamily: 'JakartaSansMedium')),

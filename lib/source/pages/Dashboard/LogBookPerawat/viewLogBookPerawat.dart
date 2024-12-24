@@ -37,7 +37,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
           }
           if (state is GetLogBookPerawatFailed) {
             var data = state.json;
-               var statusCode = state.statusCode;
+            var statusCode = state.statusCode;
             if (statusCode == 403) {
               return Center(child: Text("This user does not have access."));
             } else {
@@ -73,14 +73,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text("Tanggal Pembuatan", style: TextStyle(fontFamily: 'MontserratSemiBold')),
-                              Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'MontserratSemiBold')),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 4),
                           Table(
                             border: TableBorder.all(style: BorderStyle.none),
                             columnWidths: const <int, TableColumnWidth>{
@@ -88,6 +81,16 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                               1: FixedColumnWidth(15),
                             },
                             children: [
+                              TableRow(
+                                children: [
+                                  const Text('Tgl Pembuatan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
                               TableRow(
                                 children: [
                                   const Text('Karyawan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),

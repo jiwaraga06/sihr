@@ -206,6 +206,16 @@ class _LemburScreenState extends State<LemburScreen> {
                                 ),
                                 TableRow(
                                   children: [
+                                    const Text('Jam Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                    Text(a.jumlahJamAcc!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  ],
+                                ),
+                                const TableRow(
+                                  children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                                ),
+                                TableRow(
+                                  children: [
                                     const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),

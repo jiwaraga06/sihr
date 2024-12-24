@@ -10,8 +10,13 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPasswordBaru = TextEditingController();
-
+  bool hidePassword = true;
   final formkey = GlobalKey<FormState>();
+  void handlePassword() {
+    setState(() {
+      hidePassword = !hidePassword;
+    });
+  }
 
   void changePassword() {
     if (formkey!.currentState!.validate()) {
@@ -77,7 +82,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   CustomField(
                     controller: controllerPasswordBaru,
                     keyboardType: TextInputType.text,
-                    preffixIcon: const Icon(Icons.email),
+                    hidePassword: hidePassword,
+                    maxline: 1,
+                     preffixIcon: const Icon(FontAwesomeIcons.lock),
+                        suffixIcon:
+                              InkWell(onTap: handlePassword, child: hidePassword ? const Icon(FontAwesomeIcons.eyeSlash) : const Icon(FontAwesomeIcons.eye)),
                     hintText: "Masukan kata sandi baru ",
                     messageError: "Please fill this field",
                   ),
