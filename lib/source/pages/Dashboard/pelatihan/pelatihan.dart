@@ -202,7 +202,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                               ],
                             ),
                             const SizedBox(height: 12),
-                            if (a.status != "Mengikuti")
+                            // if (a.status != "Mengikuti")
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 45,

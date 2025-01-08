@@ -12,6 +12,11 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
   TextEditingController controllerJumlah = TextEditingController();
   TextEditingController controllerKeterangan = TextEditingController();
   var valueMasterlogBook;
+  var valuejenis;
+  List jenislogbook = [
+    {"value": "mandiri", "name": "Mandiri"},
+    {"value": "supervisi", "name": "Supervisi"},
+  ];
   final formkey = GlobalKey<FormState>();
   void pickdate() {
     pickDate(context).then((value) {
@@ -26,7 +31,8 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
 
   void submit() {
     if (formkey!.currentState!.validate()) {
-      BlocProvider.of<CreateLogBookPerawatCubit>(context).createlogbook(context, controllerTanggal.text, controllerJumlah.text, valueMasterlogBook, controllerKeterangan.text);
+      BlocProvider.of<CreateLogBookPerawatCubit>(context)
+          .createlogbook(context, controllerTanggal.text, controllerJumlah.text, valueMasterlogBook, controllerKeterangan.text, valuejenislogbook);
     }
   }
 
@@ -57,13 +63,14 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
                 BlocProvider.of<GetLogBookCubit>(context).getLogBook(context);
               });
             } else {
-              MyDialog.dialogAlert(context, data['errors'].toString());
+              MyDialog.dialogAlert(context, data['message'].toString());
             }
           }
           if (state is CreateLogBookPerawatLoaded) {
             Navigator.of(context).pop();
             var data = state.json;
             var statusCode = state.statusCode;
+            valuejenislogbook = null;
             MyDialog.dialogSuccess(context, data['message'].toString(), onPressedOk: () {
               Navigator.of(context).pop();
               BlocProvider.of<GetLogBookPerawatCubit>(context).getLogBookPerawat(context);
@@ -93,11 +100,12 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
                   BlocBuilder<MasterLogBookCubit, MasterLogBookState>(
                     builder: (context, state) {
                       if (state is MasterLogBookLoading) {
-                        return CustomField(readOnly: true, hintText: "Kategori ", textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
+                        return CustomField(
+                            readOnly: true, initialValue: "Tidak ada data", textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       if (state is MasterLogBookLoaded == false) {
                         return CustomField(
-                            readOnly: true, controller: controllerTanggal, textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
+                            readOnly: true, initialValue: "Tidak ada data", textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       var data = (state as MasterLogBookLoaded).model;
                       return Container(
@@ -138,9 +146,54 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
                     },
                   ),
                   const SizedBox(height: 20),
-                  const AutoSizeText("Keterangan", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const AutoSizeText("Jumlah", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
                   CustomField(
+                      readOnly: false,
+                      controller: controllerJumlah,
+                      textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),
+                      messageError: "Kolom tidak boleh kosong"),
+                  const SizedBox(height: 20),
+                  const AutoSizeText("Jenis", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  DropdownButtonFormField(
+                    hint: const Text("Jenis Logbook"),
+                    borderRadius: BorderRadius.circular(10),
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                      ),
+                    ),
+                    value: valuejenis,
+                    items: jenislogbook.map((e) {
+                      return DropdownMenuItem(
+                        value: e['value'],
+                        child: Text(e['name']),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        valuejenislogbook = value;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.toString().isEmpty) {
+                        return 'Please select an option';
+                      }
+                      return null; // If validation is passed
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  const AutoSizeText("Keterangan", maxLines: 2, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                  const SizedBox(height: 12),
+                  CustomField(
+                      maxline: 2,
                       readOnly: false,
                       controller: controllerKeterangan,
                       textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14),

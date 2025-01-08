@@ -9,7 +9,7 @@ class CreateLogBookPerawatCubit extends Cubit<CreateLogBookPerawatState> {
   final RepositoryLogBook? repository;
   CreateLogBookPerawatCubit({this.repository}) : super(CreateLogBookPerawatInitial());
 
-  void createlogbook(context, tanggal, jumlah, idmlogbook, keterangan ) async {
+  void createlogbook(context, tanggal, jumlah, idmlogbook, keterangan, jenis ) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var body = {
@@ -18,6 +18,8 @@ class CreateLogBookPerawatCubit extends Cubit<CreateLogBookPerawatState> {
       "tanggal": "$tanggal",
       "jumlah": "$jumlah",
       "keterangan": "$keterangan",
+      "jenis": "$jenis",
+      "status": "0",
     };
     print(body);
     emit(CreateLogBookPerawatLoading());

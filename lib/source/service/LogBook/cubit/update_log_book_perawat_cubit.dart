@@ -9,7 +9,7 @@ part 'update_log_book_perawat_state.dart';
 class UpdateLogBookPerawatCubit extends Cubit<UpdateLogBookPerawatState> {
   final RepositoryLogBook? repository;
   UpdateLogBookPerawatCubit({this.repository}) : super(UpdateLogBookPerawatInitial());
-  void updatelogbook(context, tanggal, jumlah, idmlogbook) async {
+  void updatelogbook(context, tanggal, jumlah, idmlogbook, keterangan, jenis) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var body = {
@@ -17,6 +17,9 @@ class UpdateLogBookPerawatCubit extends Cubit<UpdateLogBookPerawatState> {
       "id_m_logbook": "$idmlogbook",
       "tanggal": "$tanggal",
       "jumlah": "$jumlah",
+      "keterangan": "$keterangan",
+      "jenis": "$jenis",
+      "status": "$valuestatus",
     };
     print(body);
     emit(UpdateLogBookPerawatLoading());

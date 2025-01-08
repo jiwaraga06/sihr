@@ -53,7 +53,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
         print(distanceInMeters);
 
         if (tipeScan == 1 || tipeScan == 3 || tipeScan == 7) {
-          // if (distanceInMeters >= 150) {
+          if (distanceInMeters <= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             repository!.postAbsensi(body, context).then((value) {
@@ -67,11 +67,11 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
                 emit(PostAbsensiFailed(statusCode: statusCode, json: json));
               }
             });
-          // } else {
-          //   MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
-          // }
+          } else {
+            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+          }
         } else if (tipeScan == 2 || tipeScan == 4 || tipeScan == 6 || tipeScan == 8) {
-          // if (distanceInMeters >= 150) {
+          if (distanceInMeters <= 150) {
             print("bisa absen");
             emit(PostAbsensiLoading());
             var idAbsensi = pref.getString("idAbsensi");
@@ -87,9 +87,9 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
                 emit(PostAbsensiFailed(statusCode: statusCode, json: json));
               }
             });
-          // } else {
-          //   MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
-          // }
+          } else {
+            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+          }
         } else {
           print("bisa absen");
           emit(PostAbsensiLoading());

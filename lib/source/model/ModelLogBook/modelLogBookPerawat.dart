@@ -24,8 +24,11 @@ class DataLogbook {
   final int? id;
   final int? idPegawai;
   final int? idMLogbook;
+  final int? status;
   final DateTime? tanggal;
   final String? jumlah;
+  final String? keterangan;
+  final String? jenis;
   final Pegawai? pegawai;
   final Mlogbook? mlogbook;
 
@@ -33,8 +36,11 @@ class DataLogbook {
     this.id,
     this.idPegawai,
     this.idMLogbook,
+    this.status,
     this.tanggal,
+    this.jenis,
     this.jumlah,
+    this.keterangan,
     this.pegawai,
     this.mlogbook,
   });
@@ -43,8 +49,11 @@ class DataLogbook {
         id: json["id"],
         idPegawai: json["id_pegawai"],
         idMLogbook: json["id_m_logbook"],
+        status: json["status"] ?? 0,
         tanggal: json["tanggal"] == null ? null : DateTime.parse(json["tanggal"]),
-        jumlah: json["jumlah"],
+        jumlah: json["jumlah"] ?? "",
+        jenis: json["jenis"] ?? "",
+        keterangan: json["keterangan"] ?? "",
         pegawai: json["pegawai"] == null ? null : Pegawai.fromJson(json["pegawai"]),
         mlogbook: json["mlogbook"] == null ? null : Mlogbook.fromJson(json["mlogbook"]),
       );

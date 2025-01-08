@@ -1,8 +1,8 @@
 import 'package:sihr/source/env/env.dart';
 
 class ApiLogBook {
-  static masterLogBook() {
-    return "$url/api/v1/m_logbook";
+  static masterLogBook(idjabatan) {
+    return "$url/api/v1/m_logbook?id_jabatan=$idjabatan";
   }
 
   static getLogBook() {

@@ -25,6 +25,7 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
       // print(json);
       if (statusCode == 200 || statusCode == 201) {
         pref.setString('idKepalaBagian', json['data']['id_kepala_bagian'].toString());
+        pref.setString('idjabatan', json['data']['id_jabatan'].toString());
         if (json['jadwal'] != null) {
           if (json['jadwal'].isNotEmpty) {
             // pref.setString('idShift', json['data']['shift']['id'].toString());

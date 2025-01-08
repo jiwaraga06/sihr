@@ -154,7 +154,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                 const TableRow(
                                   children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
                                 ),
-                                if (a.status == 2)
+                                if (a.status == 0 && a.terlambat == 0)
                                   TableRow(
                                     children: [
                                       const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
@@ -165,7 +165,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                                       //   Text("Terlambat", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 12, color: Colors.red[600])),
                                     ],
                                   ),
-                                if (a.status == 1)
+                                if (a.terlambat != 0)
                                   TableRow(
                                     children: [
                                       const Text('Status', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),

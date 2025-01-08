@@ -18,7 +18,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Log Book Perawat", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Log Book", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -73,6 +73,61 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                              if (a.status == 0)
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                      width: 120,
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(color: amber, borderRadius: BorderRadius.circular(8), boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 3,
+                                          offset: const Offset(1, 2),
+                                        ),
+                                      ]),
+                                      child: const Text("Pending",
+                                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                ),
+                              if (a.status == 1)
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(color: Colors.green[600], borderRadius: BorderRadius.circular(8), boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 3,
+                                          offset: const Offset(1, 2),
+                                        ),
+                                      ]),
+                                      child: const Text("Verified",
+                                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                ),
+                              if (a.status == 2)
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(color: merah, borderRadius: BorderRadius.circular(8), boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 3,
+                                          offset: const Offset(1, 2),
+                                        ),
+                                      ]),
+                                      child: const Text("Rejected",
+                                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14, color: Colors.white))),
+                                ),
+                            ],
+                          ),
                           const SizedBox(height: 4),
                           Table(
                             border: TableBorder.all(style: BorderStyle.none),
@@ -115,6 +170,16 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                                 children: [
                                   const Text('Keterangan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  Text(a.keterangan!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                ],
+                              ),
+                              const TableRow(
+                                children: [SizedBox(height: 4), SizedBox(height: 4), SizedBox(height: 4)],
+                              ),
+                              TableRow(
+                                children: [
+                                  const Text('Jumlah', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   Text(a.jumlah!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
@@ -123,9 +188,11 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                               ),
                               TableRow(
                                 children: [
-                                  const Text('Kategori', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
+                                  const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.mlogbook!.kategori!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis! == "") Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis!.contains("mandiri")) Text("Mandiri", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis!.contains("supervisi")) Text("supervisi", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -144,6 +211,10 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                                   mlogbook = a.idMLogbook;
                                   tanggalLogbookPerawat = a.tanggal.toString().split(' ')[0];
                                   jumlahLogBookPerawat = a.jumlah;
+                                  valueketerangan = a.keterangan;
+                                  valuejenislogbook = a.jenis;
+                                  valuestatus = a.status;
+                                  print(a.jenis);
                                 });
                               },
                               text: "Edit LogBook",

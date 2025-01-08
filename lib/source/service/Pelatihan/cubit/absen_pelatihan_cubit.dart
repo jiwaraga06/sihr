@@ -25,12 +25,13 @@ class AbsenPelatihanCubit extends Cubit<AbsenPelatihanState> {
       "id_pegawai": "$idPegawai",
       "id_pelatihan": "$id_pelatihan",
       "status": "Mengikuti",
-      "resume": "",
+      "resume": "tes",
       "masuk": "$datenow",
       "foto": await MultipartFile.fromFile(foto!.path, filename: foto.name),
       "latt": "$lat",
       "att": "$long",
     });
+    print(body.fields);
     emit(AbsenPelatihanLoading());
     // print(body.fields);
     repository!.updatePartisipasiPelatihan(context, id_partisipasi, body).then((value) {

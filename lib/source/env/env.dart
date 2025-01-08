@@ -34,7 +34,7 @@ const amber = Color(0XFFFAB12F);
 
 // data edit log book
 var tanggalLogbook, namalog, keteranganlog, idlogbook;
-var tanggalLogbookPerawat, jumlahLogBookPerawat, idLogbookPerawat, mlogbook;
+var tanggalLogbookPerawat, jumlahLogBookPerawat, idLogbookPerawat, mlogbook, valuejenislogbook, valueketerangan, valuestatus;
 
 // send param slip gaji
 var id_slip_gaji;

@@ -15,35 +15,56 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
   var valueCuti;
   final formkey = GlobalKey<FormState>();
 
-  void pickdate() {
-    pickDate(context).then((value) {
-      if (value != null) {
-        var date = DateFormat('yyyy-MM-dd').format(value);
-        setState(() {
-          controllerTanggal.text = date;
-        });
-      }
-    });
+  DateTime? startDate;
+  DateTime? endDate;
+
+  // Format untuk menampilkan tanggal
+  final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+
+
+  void pilihtglMulai() async {
+    final DateTime today = DateTime.now();
+    final DateTime initialDate = today.add(const Duration(days: 7)); // 1 minggu dari sekarang
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: initialDate,
+      lastDate: today.add(const Duration(days: 365)), // Maksimal 1 tahun ke depan
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        startDate = pickedDate;
+        endDate = null;
+        controllerTglMulai.text = pickedDate.toString().split(' ')[0];
+      });
+    }
   }
 
-  void pilihtglMulai() {
-    pickDateNextWeek(context).then((value) {
-      if (value != null) {
-        setState(() {
-          controllerTglMulai.text = value.toString().split(' ')[0];
-        });
-      }
-    });
-  }
+  void pilihtglSelesai() async {
+    if (startDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pilih tanggal awal terlebih dahulu!')),
+      );
+      return;
+    }
 
-  void pilihtglSelesai() {
-    pickDateNextWeek(context).then((value) {
-      if (value != null) {
-        setState(() {
-          controllerTglSelesai.text = value.toString().split(' ')[0];
-        });
-      }
-    });
+    final DateTime initialDate = startDate!.add(const Duration(days: 1)); // 1 hari setelah startDate
+    final DateTime lastAllowedDate = startDate!.add(const Duration(days: 7)); // Maksimal 7 hari setelah startDate
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: initialDate,
+      lastDate: lastAllowedDate,
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        endDate = pickedDate;
+        controllerTglSelesai.text = pickedDate.toString().split(' ')[0];
+      });
+    }
+  
   }
 
   void submit() {

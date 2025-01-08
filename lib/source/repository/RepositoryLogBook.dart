@@ -4,9 +4,9 @@ import 'package:sihr/source/network/network.dart';
 import 'package:sihr/source/widget/customDialog.dart';
 
 class RepositoryLogBook {
-  Future masterLogBook(context) async {
+  Future masterLogBook(context, idjabatan) async {
     if (await internetChecker()) {
-      var json = await network(url: ApiLogBook.masterLogBook(), method: "GET", body: null, context: context);
+      var json = await network(url: ApiLogBook.masterLogBook(idjabatan), method: "GET", body: null, context: context);
       return json;
     } else {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");

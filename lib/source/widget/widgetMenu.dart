@@ -212,7 +212,7 @@ class WidgetMenuUtama extends StatelessWidget {
               //     ),
               //   ),
               // ),
-              if (data!.data!.idJabatan == 21 || data!.data!.idJabatan == 23)
+              // if (data!.data!.idJabatan == 21 || data!.data!.idJabatan == 23)
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, logbookPerawatScreen);
@@ -227,7 +227,7 @@ class WidgetMenuUtama extends StatelessWidget {
                                 color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey.withOpacity(0.5))),
                             child: Image.asset("assets/images/GoodNotes.png")),
                         const SizedBox(height: 6),
-                        const AutoSizeText('Log Book Perawat', style: TextStyle(fontSize: 10, fontFamily: 'MontserratSemiBold'), maxLines: 1)
+                        const AutoSizeText('Log Book', style: TextStyle(fontSize: 10, fontFamily: 'MontserratSemiBold'), maxLines: 1)
                       ],
                     ),
                   ),
