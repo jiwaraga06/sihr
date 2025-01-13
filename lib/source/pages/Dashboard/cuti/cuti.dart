@@ -40,7 +40,7 @@ class _CutiScreenState extends State<CutiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Data Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {

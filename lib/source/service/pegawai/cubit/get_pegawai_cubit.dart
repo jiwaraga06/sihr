@@ -17,7 +17,8 @@ class GetPegawaiCubit extends Cubit<GetPegawaiState> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var shift = pref.getString("idShift");
-    print("shift: $shift");
+    var username = pref.getString("username");
+    print("shift: $username");
     emit(GetPegawaiLoading());
     repository!.getPegawai(context, idPegawai).then((value) {
       var json = value.data;

@@ -22,9 +22,9 @@ class AbsensiRepository {
     }
   }
 
-  Future getAbsensi(context) async {
+  Future getAbsensi(context, tglAwal, tglAkhir) async {
     if (await internetChecker()) {
-      var json = await network(url: ApiAbsensi.postAbsensi(), method: "GET", body: null, context: context);
+      var json = await network(url: ApiAbsensi.getAbsensiDate(tglAwal, tglAkhir), method: "GET", body: null, context: context);
       return json;
     } else {
       MyDialog.dialogAlert(context, "Maaf, Ada Kesalahan Jaringan !");

@@ -19,6 +19,7 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idPegawai = pref.getString("id_pegawai");
     var idShift = pref.getString("idShift");
+    var username = pref.getString("username");
     var body = FormData.fromMap({
       "id_pegawai": "$idPegawai",
       // "tanggal": "$tanggal",
@@ -46,14 +47,14 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
       //  else if (idShift == null) {
       //   EasyLoading.dismiss();
       //   MyDialog.dialogAlert(context, "Maaf, anda tidak punya jadwal shift");
-      // } 
+      // }
       else {
         EasyLoading.dismiss();
         num distanceInMeters = Geolocator.distanceBetween(lat, long, latitudePlace, longitudePlace);
         print(distanceInMeters);
 
         if (tipeScan == 1 || tipeScan == 3 || tipeScan == 7) {
-          if (distanceInMeters <= 150) {
+          if (username == "Super Ngadmin") {
             print("bisa absen");
             emit(PostAbsensiLoading());
             repository!.postAbsensi(body, context).then((value) {
@@ -68,15 +69,31 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
               }
             });
           } else {
-            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+            if (distanceInMeters <= 150) {
+              print("bisa absen");
+              emit(PostAbsensiLoading());
+              repository!.postAbsensi(body, context).then((value) {
+                var json = value.data;
+                var statusCode = value.statusCode;
+                print("POST: $statusCode");
+                if (statusCode == 200 || statusCode == 201) {
+                  pref.setString("idAbsensi", json['data']['id'].toString());
+                  emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+                } else {
+                  emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+                }
+              });
+            } else {
+              MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+            }
           }
         } else if (tipeScan == 2 || tipeScan == 4 || tipeScan == 6 || tipeScan == 8) {
-          if (distanceInMeters <= 150) {
+          if (username == "Super Ngadmin") {
             print("bisa absen");
             emit(PostAbsensiLoading());
             var idAbsensi = pref.getString("idAbsensi");
             print(idAbsensi);
-            repository!.postAbsensi( body, context).then((value) {
+            repository!.postAbsensi(body, context).then((value) {
               var json = value.data;
               var statusCode = value.statusCode;
               print("POST: $statusCode");
@@ -88,7 +105,25 @@ class PostAbsensiCubit extends Cubit<PostAbsensiState> {
               }
             });
           } else {
-            MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+            if (distanceInMeters <= 150) {
+              print("bisa absen");
+              emit(PostAbsensiLoading());
+              var idAbsensi = pref.getString("idAbsensi");
+              print(idAbsensi);
+              repository!.postAbsensi(body, context).then((value) {
+                var json = value.data;
+                var statusCode = value.statusCode;
+                print("POST: $statusCode");
+                print("POST: $json");
+                if (statusCode == 200 || statusCode == 201) {
+                  emit(PostAbsensiLoaded(statusCode: statusCode, json: json));
+                } else {
+                  emit(PostAbsensiFailed(statusCode: statusCode, json: json));
+                }
+              });
+            } else {
+              MyDialog.dialogAlert(context, "Maaf, anda jauh dari radius ");
+            }
           }
         } else {
           print("bisa absen");

@@ -8,10 +8,82 @@ class DataAbsensiScreen extends StatefulWidget {
 }
 
 class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
+  TextEditingController controllerTanggalAwal = TextEditingController();
+  TextEditingController controllerTanggalAkhir = TextEditingController();
+
+  void pilihTanggalAwal() {
+    pickDate(context).then((value) {
+      if (value != null) {
+        var date = DateFormat('yyyy-MM-dd').format(value);
+        setState(() {
+          controllerTanggalAwal.text = date;
+        });
+      }
+    });
+  }
+
+  void pilihTanggalAkhir() {
+    pickDate(context).then((value) {
+      if (value != null) {
+        var date = DateFormat('yyyy-MM-dd').format(value);
+        setState(() {
+          controllerTanggalAkhir.text = date;
+        });
+      }
+    });
+  }
+
+  void filterTanggal() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Pilih Tanggal Absen"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Tanggal Awal", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+              const SizedBox(height: 12),
+              CustomField(
+                  readOnly: true,
+                  controller: controllerTanggalAwal,
+                  onTap: pilihTanggalAwal,
+                  suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                  textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+              const SizedBox(height: 20),
+              const Text("Tanggal Akhir", style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+              const SizedBox(height: 12),
+              CustomField(
+                  readOnly: true,
+                  controller: controllerTanggalAkhir,
+                  onTap: pilihTanggalAkhir,
+                  suffixIcon: const Icon(FontAwesomeIcons.calendar),
+                  textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14)),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Tutup")),
+            TextButton(
+                onPressed: () {
+                  BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context, controllerTanggalAwal.text, controllerTanggalAkhir.text);
+                  Navigator.of(context).pop();
+                },
+                child: Text("Cari")),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context);
+    BlocProvider.of<GetAbsensiCubit>(context).initial();
   }
 
   @override
@@ -19,9 +91,15 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Data Absensi", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        actions: [IconButton(onPressed: filterTanggal, icon: Icon(FontAwesomeIcons.filter))],
       ),
       body: BlocBuilder<GetAbsensiCubit, GetAbsensiState>(
         builder: (context, state) {
+          if (state is GetAbsensiInitial) {
+            return const Center(
+              child: Text("Klik icon Filter untuk melihat Absensi"),
+            );
+          }
           if (state is GetAbsensiLoading) {
             return Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 12),
@@ -53,7 +131,8 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
             child: RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 1));
-                BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context);
+                // BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context);
+                BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context, controllerTanggalAwal.text, controllerTanggalAkhir.text);
               },
               child: ListView.builder(
                   itemCount: datafilter.length,

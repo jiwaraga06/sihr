@@ -49,7 +49,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
       return;
     }
 
-    final DateTime initialDate = startDate!.add(const Duration(days: 1)); // 1 hari setelah startDate
+    final DateTime initialDate = startDate!; // 1 hari setelah startDate
     final DateTime lastAllowedDate = startDate!.add(const Duration(days: 7)); // Maksimal 7 hari setelah startDate
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -86,7 +86,7 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Surat Izin Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+        title: const Text("Surat Pengajuan Cuti", style: TextStyle(fontFamily: 'JakartaSansMedium')),
       ),
       body: BlocListener<CreateCutiCubit, CreateCutiState>(
         listener: (context, state) {

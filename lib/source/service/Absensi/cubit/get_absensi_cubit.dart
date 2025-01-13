@@ -12,12 +12,16 @@ class GetAbsensiCubit extends Cubit<GetAbsensiState> {
   final AbsensiRepository? repository;
   GetAbsensiCubit({this.repository}) : super(GetAbsensiInitial());
 
-  void getAbsensi(context) async {
+  void initial() {
+    emit(GetAbsensiInitial());
+  }
+
+  void getAbsensi(context, tglAwal, tglAkhir) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? idPegawai = pref.getString("id_pegawai");
     print(idPegawai);
     emit(GetAbsensiLoading());
-    repository!.getAbsensi(context).then((value) {
+    repository!.getAbsensi(context, tglAwal, tglAkhir).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       if (statusCode == 200 || statusCode == 201) {

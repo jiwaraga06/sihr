@@ -36,6 +36,7 @@ class _UpdateLogBookPerawatScreenState extends State<UpdateLogBookPerawatScreen>
     }
   }
 
+  var selectedvaluemaster;
   @override
   void initState() {
     super.initState();
@@ -105,7 +106,17 @@ class _UpdateLogBookPerawatScreenState extends State<UpdateLogBookPerawatScreen>
                   const SizedBox(height: 20),
                   const AutoSizeText("Kategori", maxLines: 1, style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                   const SizedBox(height: 12),
-                  BlocBuilder<MasterLogBookCubit, MasterLogBookState>(
+                  BlocConsumer<MasterLogBookCubit, MasterLogBookState>(
+                    listener: (context, state) {
+                      if (state is MasterLogBookLoading) {}
+                      if (state is MasterLogBookLoaded) {
+                        var data = state.model;
+                        data!.dataMaster!.where((e) => e.id == valueMasterlogBook).forEach((a) {
+                          valueMasterlogBook = a.id;
+                          selectedvaluemaster = a.namaLog;
+                        });
+                      }
+                    },
                     builder: (context, state) {
                       if (state is MasterLogBookLoading) {
                         return CustomField(
@@ -116,41 +127,62 @@ class _UpdateLogBookPerawatScreenState extends State<UpdateLogBookPerawatScreen>
                             readOnly: true, initialValue: "Tidak ada data", textstyle: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 14));
                       }
                       var data = (state as MasterLogBookLoaded).model;
-                      return Container(
-                        child: DropdownButtonFormField(
-                          hint: const Text("Kategori Log Book"),
-                          borderRadius: BorderRadius.circular(10),
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: merah, strokeAlign: 20),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
-                            ),
-                          ),
-                          value: valueMasterlogBook,
-                          items: data!.dataMaster!.map((e) {
-                            return DropdownMenuItem(
-                              value: e.id,
-                              child: Text(e.namaLog!),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              valueMasterlogBook = value!;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.toString().isEmpty) {
-                              return 'Kategori Log Book tidak boleh kosong';
-                            }
-                            return null; // If validation is passed
-                          },
+                      return DropdownSearch(
+                        popupProps: const PopupProps.menu(showSearchBox: true, fit: FlexFit.loose),
+                        items: data!.dataMaster!.map((e) => e.namaLog).toList(),
+                        dropdownDecoratorProps: const DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                              hintText: "Pilih Kategori",
+                              labelText: "Pilih Kategori",
+                              labelStyle: TextStyle(color: Colors.black),
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
+                        selectedItem: selectedvaluemaster,
+                        onChanged: (value) {
+                          setState(() {
+                            data!.dataMaster!.where((e) => e.namaLog == value).forEach((a) {
+                              valueMasterlogBook = a.id;
+                            });
+                          });
+                        },
                       );
+                      // return Container(
+                      //   child: DropdownButtonFormField(
+                      //     hint: const Text("Kategori Log Book"),
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     isExpanded: true,
+                      //     decoration: InputDecoration(
+                      //       errorBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         borderSide: const BorderSide(color: merah, strokeAlign: 20),
+                      //       ),
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         borderSide: BorderSide(color: Colors.grey.withOpacity(0.8), width: 2),
+                      //       ),
+                      //     ),
+                      //     value: valueMasterlogBook,
+                      //     items: data!.dataMaster!.map((e) {
+                      //       return DropdownMenuItem(
+                      //         value: e.id,
+                      //         child: Text(e.namaLog!),
+                      //       );
+                      //     }).toList(),
+                      //     onChanged: (value) {
+                      //       setState(() {
+                      //         valueMasterlogBook = value!;
+                      //       });
+                      //     },
+                      //     validator: (value) {
+                      //       if (value == null || value.toString().isEmpty) {
+                      //         return 'Kategori Log Book tidak boleh kosong';
+                      //       }
+                      //       return null; // If validation is passed
+                      //     },
+                      //   ),
+                      // );
                     },
                   ),
                   const SizedBox(height: 20),
