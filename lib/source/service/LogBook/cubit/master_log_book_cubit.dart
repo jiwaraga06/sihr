@@ -16,7 +16,7 @@ class MasterLogBookCubit extends Cubit<MasterLogBookState> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var idjabatan = pref.getString("idjabatan");
     emit(MasterLogBookLoading());
-    repository!.masterLogBook(context, 23).then((value) {
+    repository!.masterLogBook(context, idjabatan).then((value) {
       var json = value.data;
       var statusCode = value.statusCode;
       print("$idjabatan");

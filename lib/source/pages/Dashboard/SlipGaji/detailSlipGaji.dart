@@ -19,49 +19,51 @@ class _DetailSlipGajiScreenState extends State<DetailSlipGajiScreen> {
   @override
   void initState() {
     super.initState();
-    getSession();
-    Future.delayed(const Duration(seconds: 2), () {
-      controller = WebViewController()
-        ..setNavigationDelegate(NavigationDelegate(
-          onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
-          },
-          onPageFinished: (url) {
-            setState(() {
-              loadingPercentage = 100;
-            });
-          },
-        ))
-        ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..loadRequest(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id_slip_gaji?token=$token"));
-    });
+    // getSession();
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   controller = WebViewController()
+    //     ..setNavigationDelegate(NavigationDelegate(
+    //       onPageStarted: (url) {
+    //         setState(() {
+    //           loadingPercentage = 0;
+    //         });
+    //       },
+    //       onProgress: (progress) {
+    //         setState(() {
+    //           loadingPercentage = progress;
+    //         });
+    //       },
+    //       onPageFinished: (url) {
+    //         setState(() {
+    //           loadingPercentage = 100;
+    //         });
+    //       },
+    //     ))
+    //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    //     ..loadRequest(Uri.parse("https://hris.rsuumc.com/payroll/print-slip/$id_slip_gaji?token=$token"));
+    // });
+  
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail Slip Gaji"),
+        title: const Text("Detail Slip Gaji"),
       ),
-      body: Container(
-        color: Colors.white,
-        child: Stack(
-          children: [
-            WebViewWidget(controller: controller!),
-            if (loadingPercentage > 0)
-              LinearProgressIndicator(
-                value: loadingPercentage / 100,
-              )
-          ],
-        ),
-      ),
+      
+      // body: Container(
+      //   color: Colors.white,
+      //   child: Stack(
+      //     children: [
+      //       WebViewWidget(controller: controller!),
+      //       if (loadingPercentage > 0)
+      //         LinearProgressIndicator(
+      //           value: loadingPercentage / 100,
+      //         )
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

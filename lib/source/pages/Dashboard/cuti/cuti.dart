@@ -64,9 +64,9 @@ class _CutiScreenState extends State<CutiScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              return Center(child: Text("This user does not have access."));
+              return const Center(child: Text("This user does not have access."));
             } else if (statusCode == 404) {
-              return Center(child: Text("Not Found"));
+              return const Center(child: Text("Not Found"));
             } else {
               return Center(child: Text(data['message'].toString()));
             }
@@ -108,7 +108,7 @@ class _CutiScreenState extends State<CutiScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                                const Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
                                 if (a.status == 0)
                                   Expanded(
                                     flex: 1,
@@ -208,7 +208,7 @@ class _CutiScreenState extends State<CutiScreen> {
                                     const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                     if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                    if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    if (a.tglAcc == null) const Text("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(

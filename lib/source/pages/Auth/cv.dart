@@ -64,7 +64,7 @@ class _CVScreenState extends State<CVScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CV Saya"),
+        title: const Text("CV Saya"),
       ),
       body: Container(
         color: Colors.white,

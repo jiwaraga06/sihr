@@ -31,9 +31,9 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
           var data = state.json;
           var statusCode = state.statusCode;
           if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           } else if (statusCode == 404) {
-            return Center(child: Text("Not Found"));
+            return const Center(child: Text("Not Found"));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -53,9 +53,9 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               BlocProvider.of<GetCutiCubit>(context).getCutiKepalaBagian(context);
             },
             child: ListView.builder(
-              itemCount: data!.data!.length,
+              itemCount: data.data!.length,
               itemBuilder: (context, index) {
-                var a = data!.data![index];
+                var a = data.data![index];
                 if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -174,7 +174,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                   const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.tglAcc == null) const Text("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -264,9 +264,9 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
           var data = state.json;
           var statusCode  = state.statusCode;
           if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           } else if (statusCode == 404) {
-            return Center(child: Text("Not Found"));
+            return const Center(child: Text("Not Found"));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -287,9 +287,9 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
               BlocProvider.of<GetLemburCubit>(context).getLemburKepalaBagian(context);
             },
             child: ListView.builder(
-              itemCount: data!.data!.length,
+              itemCount: data.data!.length,
               itemBuilder: (context, index) {
-                var a = data!.data![index];
+                var a = data.data![index];
                 if (a.status == 0 || a.status == 1 || a.status == 2 || a.status == 3) {
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -387,8 +387,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                 children: [
                                   const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.tanggal! == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -399,7 +398,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                   const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.tglAcc == null) const Text("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -429,7 +428,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                 children: [
                                   const Text('Total Jam', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  Text(a.jumlahJam! + " jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text("${a.jumlahJam!} jam", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -509,9 +508,9 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
           var data = state.json;
           var statusCode = state.statusCode;
              if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           } else if (statusCode == 404) {
-            return Center(child: Text("Not Found"));
+            return const Center(child: Text("Not Found"));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -632,8 +631,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                 children: [
                                   const Text('Tgl Pengajuan', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  if (a.tanggal! != null) Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.tanggal! == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  Text(formatDate(a.tanggal!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -644,7 +642,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
                                   const Text('Tgl Acc', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   if (a.tglAcc != null) Text(formatDate(a.tglAcc!), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.tglAcc == null) Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.tglAcc == null) const Text("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(
@@ -736,7 +734,7 @@ class _ApprovalScreenState extends State<ApprovalScreen> {
             ],
           ),
           title: const Text('Approval', style: TextStyle(fontFamily: 'JakartaSansMedium', color: whiteCustom2)),
-          iconTheme: IconThemeData(color: whiteCustom2),
+          iconTheme: const IconThemeData(color: whiteCustom2),
         ),
         body: TabBarView(children: [
           cutiView(context),

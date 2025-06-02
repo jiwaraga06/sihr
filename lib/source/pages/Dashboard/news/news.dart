@@ -23,7 +23,7 @@ class _NewsScreenState extends State<NewsScreen> {
           var data = state.json;
           var statusCode = state.statusCode;
           if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -91,7 +91,7 @@ class _NewsScreenState extends State<NewsScreen> {
           var data = state.json;
           var statusCode = state.statusCode;
           if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -150,7 +150,7 @@ class _NewsScreenState extends State<NewsScreen> {
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -188,7 +188,7 @@ class _NewsScreenState extends State<NewsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text("Close"),
+              child: const Text("Close"),
             ),
           ],
         );
@@ -211,10 +211,10 @@ class _NewsScreenState extends State<NewsScreen> {
           var data = state.json;
           var statusCode = state.statusCode;
           if (statusCode == 403) {
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           }
           if (statusCode == 404) {
-            return Center(child: Text("Not Found"));
+            return const Center(child: Text("Not Found"));
           } else {
             return Center(child: Text(data['message'].toString()));
           }
@@ -234,7 +234,7 @@ class _NewsScreenState extends State<NewsScreen> {
             child: ListView.builder(
               itemCount: data!.data!.length,
               itemBuilder: (context, index) {
-                var a = data!.data![index];
+                var a = data.data![index];
                 return Container(
                   margin: const EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(color: hijauLight2, borderRadius: BorderRadius.circular(12)),
@@ -261,7 +261,7 @@ class _NewsScreenState extends State<NewsScreen> {
                               0: FixedColumnWidth(100),
                               1: FixedColumnWidth(15),
                             },
-                            children: [
+                            children: const [
                               // TableRow(
                               //   children: [
                               //     const Text('Resume', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
@@ -363,7 +363,7 @@ class _NewsScreenState extends State<NewsScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorColor: hijau,
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
@@ -372,7 +372,7 @@ class _NewsScreenState extends State<NewsScreen> {
               Tab(child: Text("KHUSUS", style: TextStyle(fontFamily: 'JakartaSansBold'))),
             ],
           ),
-          title: Text('Berita', style: TextStyle(fontFamily: 'JakartaSansMedium')),
+          title: const Text('Berita', style: TextStyle(fontFamily: 'JakartaSansMedium')),
         ),
         body: TabBarView(
           children: [

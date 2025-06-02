@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           if (state is AuthLoaded == false) {
             return Container(
-              child: Text("Raga"),
+              child: const Text("Raga"),
             );
           }
           var load = (state as AuthLoaded).json;

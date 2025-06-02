@@ -43,8 +43,8 @@ class _AddPartisipasiPelatihanScreenState extends State<AddPartisipasiPelatihanS
     return Scaffold(
       appBar: AppBar(
         backgroundColor: biru,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Form Partisipasi Pelatihan", style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text("Form Partisipasi Pelatihan", style: TextStyle(color: Colors.white)),
       ),
       body: BlocListener<AbsenPelatihanCubit, AbsenPelatihanState>(
         listener: (context, state) {

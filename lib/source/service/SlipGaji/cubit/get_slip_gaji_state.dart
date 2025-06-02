@@ -15,8 +15,9 @@ final class GetSlipGajiFailed extends GetSlipGajiState {
 }
 
 final class GetSlipGajiLoaded extends GetSlipGajiState {
-  final int? statusCode,idPegawai;
-  final ModelSlipGaji? model;
+  final int? statusCode;
+  ModelSlipGaji? model;
+  ModelPayroll? modelpayroll;
 
-  GetSlipGajiLoaded({required this.statusCode, required this.model, this.idPegawai});
+  GetSlipGajiLoaded({required this.statusCode, this.model, this.modelpayroll});
 }

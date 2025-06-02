@@ -32,7 +32,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
           }
           if (state is PelatihanFailed) {
             var data = state.json;
-            return Center(child: Text("This user does not have access."));
+            return const Center(child: Text("This user does not have access."));
           }
           if (state is PelatihanLoaded == false) {
             return Container();
@@ -163,7 +163,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                   children: [
                                     const Text('SKP', style: TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 13)),
                                     const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                    Text(a.pelatihan!.jumlahSkp.toString()!, style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                    Text(a.pelatihan!.jumlahSkp.toString(), style: const TextStyle(fontFamily: 'JakartaSansMedium')),
                                   ],
                                 ),
                                 const TableRow(
@@ -216,7 +216,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                   Navigator.pushNamed(context, addPartisipasiScreen);
                                 },
                                 text: "Check In",
-                                textStyle: TextStyle(fontFamily: 'MontserratMedium', color: Colors.white),
+                                textStyle: const TextStyle(fontFamily: 'MontserratMedium', color: Colors.white),
                                 roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                             ),
@@ -226,7 +226,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                               width: MediaQuery.of(context).size.width,
                               height: 45,
                               child: CustomButton2(
-                                backgroundColor: Color(0XFF78B3CE),
+                                backgroundColor: const Color(0XFF78B3CE),
                                 onTap: () {
                                   setState(() {
                                     id_pelatihan = a.idPelatihan;
@@ -237,7 +237,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                                   Navigator.pushNamed(context, addResumePelatihanScreen);
                                 },
                                 text: "Resume",
-                                textStyle: TextStyle(fontFamily: 'MontserratMedium', color: Colors.white),
+                                textStyle: const TextStyle(fontFamily: 'MontserratMedium', color: Colors.white),
                                 roundedRectangleBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                             )
@@ -246,6 +246,7 @@ class _PelatihanScreenState extends State<PelatihanScreen> {
                       ),
                     );
                   }
+                  return null;
                 },
               ),
             ),

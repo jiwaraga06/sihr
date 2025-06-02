@@ -12,7 +12,7 @@ class _AddResumePelatihanScreenState extends State<AddResumePelatihanScreen> {
   final formkey = GlobalKey<FormState>();
 
   void submit() {
-    if (formkey!.currentState!.validate()) {
+    if (formkey.currentState!.validate()) {
       BlocProvider.of<AbsenPelatihanCubit>(context).updatePartisipasi(context, controllerResume.text);
     }
   }
@@ -30,8 +30,8 @@ void initState() {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: biru,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Resume Pelatihan", style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text("Resume Pelatihan", style: TextStyle(color: Colors.white)),
       ),
       body: BlocListener<AbsenPelatihanCubit, AbsenPelatihanState>(
         listener: (context, state) {

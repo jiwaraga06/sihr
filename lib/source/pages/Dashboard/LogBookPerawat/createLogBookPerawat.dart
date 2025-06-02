@@ -30,7 +30,7 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
   }
 
   void submit() {
-    if (formkey!.currentState!.validate()) {
+    if (formkey.currentState!.validate()) {
       BlocProvider.of<CreateLogBookPerawatCubit>(context)
           .createlogbook(context, controllerTanggal.text, controllerJumlah.text, valueMasterlogBook, controllerKeterangan.text, valuejenislogbook);
     }
@@ -123,7 +123,7 @@ class _CreateLogBookPerawatScreenState extends State<CreateLogBookPerawatScreen>
                         // selectedItem: valueMasterlogBook,
                         onChanged: (value) {
                           setState(() {
-                            data!.dataMaster!.where((e) => e.namaLog == value).forEach((a) {
+                            data.dataMaster!.where((e) => e.namaLog == value).forEach((a) {
                               valueMasterlogBook = a.id;
                             });
                           });

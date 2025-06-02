@@ -19,7 +19,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   void changePassword() {
-    if (formkey!.currentState!.validate()) {
+    if (formkey.currentState!.validate()) {
       BlocProvider.of<ChangePasswordCubit>(context).changePassword(context, controllerEmail.text, controllerPasswordBaru.text);
     }
   }

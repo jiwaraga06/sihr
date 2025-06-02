@@ -97,7 +97,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       if (data.data!.foto!.isEmpty && data.data!.jenisKelamin != "L")
-                      
                         Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
@@ -148,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 30),
                       CustomButton(
                         onTap: (){
-                          Navigator.pushNamed(context, changePasswordScreen, arguments: {"email": data!.data!.users!.email});
+                          Navigator.pushNamed(context, changePasswordScreen, arguments: {"email": data.data!.users!.email});
                         },
                         backgroundColor: hijauLight2,
                         text: "Ganti Password",

@@ -39,7 +39,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              return Center(child: Text("This user does not have access."));
+              return const Center(child: Text("This user does not have access."));
             } else {
               return Center(child: Text(data['message'].toString()));
             }
@@ -59,7 +59,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
               child: ListView.builder(
                 itemCount: data!.dataLogbook!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var a = data!.dataLogbook![index];
+                  var a = data.dataLogbook![index];
                   return Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(color: hijauDark, borderRadius: BorderRadius.circular(12)),
@@ -76,7 +76,7 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
+                              const Expanded(flex: 3, child: AutoSizeText("", style: TextStyle(fontFamily: 'MontserratSemiBold'))),
                               if (a.status == 0)
                                 Expanded(
                                   flex: 1,
@@ -190,9 +190,9 @@ class _LogBookPerawatScreenState extends State<LogBookPerawatScreen> {
                                 children: [
                                   const Text('Jenis', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
                                   const Text(':', style: TextStyle(fontFamily: 'JakartaSansSemiBold')),
-                                  if (a.jenis! == "") Text("", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.jenis!.contains("mandiri")) Text("Mandiri", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
-                                  if (a.jenis!.contains("supervisi")) Text("supervisi", style: const TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis! == "") const Text("", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis!.contains("mandiri")) const Text("Mandiri", style: TextStyle(fontFamily: 'JakartaSansMedium')),
+                                  if (a.jenis!.contains("supervisi")) const Text("supervisi", style: TextStyle(fontFamily: 'JakartaSansMedium')),
                                 ],
                               ),
                               const TableRow(

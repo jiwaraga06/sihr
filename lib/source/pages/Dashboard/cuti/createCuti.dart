@@ -21,7 +21,6 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
   // Format untuk menampilkan tanggal
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
-
   void pilihtglMulai() async {
     final DateTime today = DateTime.now();
     final DateTime initialDate = today.add(const Duration(days: 7)); // 1 minggu dari sekarang
@@ -42,15 +41,21 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
   }
 
   void pilihtglSelesai() async {
+    setState(() {});
     if (startDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Pilih tanggal awal terlebih dahulu!')),
       );
       return;
     }
-
+    print(valueCuti);
     final DateTime initialDate = startDate!; // 1 hari setelah startDate
-    final DateTime lastAllowedDate = startDate!.add(const Duration(days: 7)); // Maksimal 7 hari setelah startDate
+    DateTime? lastAllowedDate;
+    if (valueCuti != 3) {
+      lastAllowedDate = startDate!.add(const Duration(days: 7));
+    } else {
+      lastAllowedDate = DateTime(2100, 12, 31);
+    }
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -64,7 +69,6 @@ class _CreateCutiScreenState extends State<CreateCutiScreen> {
         controllerTglSelesai.text = pickedDate.toString().split(' ')[0];
       });
     }
-  
   }
 
   void submit() {

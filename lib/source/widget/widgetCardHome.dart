@@ -1,12 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sihr/source/env/env.dart';
 import 'package:sihr/source/env/formatTime.dart';
-import 'package:sihr/source/env/pickTime.dart';
 import 'package:sihr/source/service/Absensi/cubit/get_sisa_absen_cubit.dart';
-import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 import 'package:sihr/source/widget/skeleton.dart';
 

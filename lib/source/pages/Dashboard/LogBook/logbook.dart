@@ -45,7 +45,7 @@ class _LogBookScreenState extends State<LogBookScreen> {
             var data = state.json;
           var statusCode = state.statusCode;
             if (statusCode == 403) {
-              return Center(child: Text("This user does not have access."));
+              return const Center(child: Text("This user does not have access."));
             } else {
               return Center(child: Text(data['message'].toString()));
             }

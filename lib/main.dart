@@ -51,6 +51,7 @@ import 'package:sihr/source/service/Pengumuman/cubit/get_pengumuman_peserta_cubi
 import 'package:sihr/source/service/Pengumuman/cubit/update_pengumuman_peserta_cubit.dart';
 import 'package:sihr/source/service/Shift/cubit/get_shift_cubit.dart';
 import 'package:sihr/source/service/SlipGaji/cubit/get_slip_gaji_cubit.dart';
+import 'package:sihr/source/service/SlipGaji/cubit/getpayroll_cubit.dart';
 import 'package:sihr/source/service/pegawai/cubit/get_pegawai_cubit.dart';
 
 void main() async {
@@ -126,6 +127,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => UpdateLogBookPerawatCubit(repository: RepositoryLogBook())),
           // SLIP GAJI
           BlocProvider(create: (context) => GetSlipGajiCubit(repository: RepositorySlipGaji())),
+          BlocProvider(create: (context) => GetpayrollCubit(repository: RepositorySlipGaji())),
           //approval
           BlocProvider(create: (context) => ApprovalCubit(repository: RepostoryApproval())),
         ],

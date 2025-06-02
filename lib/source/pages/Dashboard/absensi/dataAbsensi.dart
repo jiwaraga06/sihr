@@ -38,7 +38,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Pilih Tanggal Absen"),
+          title: const Text("Pilih Tanggal Absen"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,13 +67,66 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("Tutup")),
+                child: const Text("Tutup")),
             TextButton(
                 onPressed: () {
                   BlocProvider.of<GetAbsensiCubit>(context).getAbsensi(context, controllerTanggalAwal.text, controllerTanggalAkhir.text);
                   Navigator.of(context).pop();
                 },
-                child: Text("Cari")),
+                child: const Text("Cari")),
+          ],
+        );
+      },
+    );
+  }
+
+  void showFoto(foto) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Foto Absensi"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                  child: SizedBox(
+                    height: 250,
+                    width: 200,
+                    child: Image.network(
+                      foto!,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child; // Image is fully loaded
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                        return const Center(
+                          child: Icon(Icons.error, color: Colors.red, size: 50),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Tutup")),
           ],
         );
       },
@@ -91,7 +144,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Data Absensi", style: TextStyle(fontFamily: 'JakartaSansMedium')),
-        actions: [IconButton(onPressed: filterTanggal, icon: Icon(FontAwesomeIcons.filter))],
+        actions: [IconButton(onPressed: filterTanggal, icon: const Icon(FontAwesomeIcons.filter))],
       ),
       body: BlocBuilder<GetAbsensiCubit, GetAbsensiState>(
         builder: (context, state) {
@@ -112,7 +165,7 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
             var data = state.json;
             var statusCode = state.statusCode;
             if (statusCode == 403) {
-              return Center(child: Text("This user does not have access."));
+              return const Center(child: Text("This user does not have access."));
             } else {
               return Center(child: Text(data['message'].toString()));
             }
@@ -258,6 +311,13 @@ class _DataAbsensiScreenState extends State<DataAbsensiScreen> {
                               ],
                             ),
 
+                            const SizedBox(height: 8),
+                            InkWell(
+                                onTap: () {
+                                  showFoto(a.fotoUrl!);
+                                },
+                                child: const Text("Lihat Foto",
+                                    style: TextStyle(fontFamily: 'JakartaSansMedium', color: Colors.blue, decoration: TextDecoration.underline))),
                             const SizedBox(height: 8),
                             // AutoSizeText(a.keterangan!, maxLines: 2, style: TextStyle(fontFamily: 'MontserratMedium', fontSize: 14)),
                             // const SizedBox(height: 12),

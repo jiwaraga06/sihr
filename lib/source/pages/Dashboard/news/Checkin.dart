@@ -13,7 +13,7 @@ class _CheckInNewsScreenState extends State<CheckInNewsScreen> {
 
   void submit() {
     if (statusAbsenNews == "Resume") {
-      if (formkey!.currentState!.validate()) {
+      if (formkey.currentState!.validate()) {
         BlocProvider.of<UpdatePengumumanPesertaCubit>(context).updateResumePengumumanPeserta(context, idNews, controllerResume.text);
       }
     } else {
@@ -44,8 +44,8 @@ void initState() {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: biru,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Check In News", style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text("Check In News", style: TextStyle(color: Colors.white)),
       ),
       body: BlocListener<UpdatePengumumanPesertaCubit, UpdatePengumumanPesertaState>(
         listener: (context, state) {
@@ -90,11 +90,11 @@ void initState() {
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           height: 450,
-                          margin: EdgeInsets.all(8),
-                          padding: EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                               color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.black.withOpacity(0.5), width: 1)),
-                          child: gambar == null ? Center(child: Icon(FontAwesomeIcons.image)) : Image.file(File(gambar!.path)),
+                          child: gambar == null ? const Center(child: Icon(FontAwesomeIcons.image)) : Image.file(File(gambar!.path)),
                         ),
                       ),
                     ],
