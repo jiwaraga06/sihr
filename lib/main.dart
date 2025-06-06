@@ -153,7 +153,7 @@ class MyApp extends StatelessWidget {
               onError: Colors.red, // Text color on top of the error color
             ),
             appBarTheme: const AppBarTheme(color: whiteCustom),
-            dialogTheme: const DialogTheme(backgroundColor: Colors.white),
+            dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
             floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: hijauLight),
             inputDecorationTheme: const InputDecorationTheme(
               focusedBorder: OutlineInputBorder(

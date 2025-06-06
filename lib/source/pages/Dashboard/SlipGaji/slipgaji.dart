@@ -49,8 +49,9 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
       return;
     }
     String base64Logo = await assetImageToBase64('assets/images/copy.png');
+    String base64LogoIcon = await assetImageToBase64('assets/images/logoapk.png');
     final generatedPdfFile = await HtmlToPdf.convertFromHtmlContent(
-      htmlContent: SlipGaji.htmlSlipGaji(data, nameMonth, year, base64Logo),
+      htmlContent: SlipGaji.htmlSlipGaji(data, nameMonth, year, base64Logo, base64LogoIcon),
       printPdfConfiguration: PrintPdfConfiguration(
         // targetDirectory: targetPath!.path,
         targetDirectory: targetPath!.path,
