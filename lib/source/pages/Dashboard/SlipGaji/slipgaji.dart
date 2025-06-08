@@ -37,7 +37,7 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
   void downloadSlipGaji(data) async {
     // Directory? targetPath = await getApplicationDocumentsDirectory();
     Directory? targetPath = Directory('/storage/emulated/0/Download');
-    var targetFileName = "SlipGaji-${data.payroll[0].pegawai.nama}-$nameMonth $year";
+    var targetFileName = "SlipGaji-${data.pegawai.nama}-$nameMonth $year";
 
     bool granted = await requestStoragePermission();
     const snackBars = SnackBar(content: Text('Loading...'));
@@ -132,9 +132,9 @@ class _SlipGajiScreenState extends State<SlipGajiScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(data!.payroll![0].pegawai!.nama!, style: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
+                                Text(data!.pegawai.nama, style: const TextStyle(fontFamily: 'JakartaSansSemiBold', fontSize: 16)),
                                 const SizedBox(height: 4),
-                                Text(data!.payroll![0].pegawai!.jabatan!.namaJabatan!, style: const TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 15)),
+                                Text(data!.pegawai!.jabatan, style: const TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 15)),
                                 // Text(data!.payroll![0].noreff!, style: const TextStyle(fontFamily: 'JakartaSansMedium', fontSize: 14)),
                               ],
                             ),

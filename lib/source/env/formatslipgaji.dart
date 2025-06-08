@@ -70,22 +70,22 @@ return """
           <tr>
             <th style="width: 100px;">NIK</th>
             <th style="width: 10px;">:</th>
-            <td>${data.payroll[0].pegawai.nip}</td>
+            <td>${data.pegawai.nik}</td>
           </tr>
           <tr>
             <th style="width: 100px;">Nama</th>
             <th style="width: 10px;">:</th>
-            <td>${data.payroll[0].pegawai.nama}</td>
+            <td>${data.pegawai.nama}</td>
           </tr>
           <tr>
             <th style="width: 100px;">Pendidikan</th>
             <th style="width: 10px;">:</th>
-            <td>${data.payroll[0].pegawai.pendidikan}</td>
+            <td>${data.pegawai.pendidikan}</td>
           </tr>
           <tr>
             <th style="width: 100px;">Jabatan</th>
             <th style="width: 10px;">:</th>
-            <td>${data.payroll[0].pegawai.jabatan.namaJabatan}</td>
+            <td>${data.pegawai.jabatan}</td>
           </tr>
         </table>
       </div>
@@ -94,17 +94,17 @@ return """
           <tr>
             <th style="width: 100px;">Gol</th>
             <th style="width: 10px;">:</th>
-            <td></td>
+            <td>${data.pegawai.golongan}</td>
           </tr>
           <tr>
             <th style="width: 100px;">Masa Jabatan</th>
             <th style="width: 10px;">:</th>
-            <td></td>
+            <td>${data.pegawai.masaJabatan}</td>
           </tr>
           <tr>
             <th style="width: 100px;">NPWP</th>
             <th style="width: 10px;">:</th>
-            <td>${data.payroll[0].pegawai.npwp}</td>
+            <td>${data.pegawai.npwp}</td>
           </tr>
           <tr>
             <th style="width: 100px;">Periode</th>
