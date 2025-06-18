@@ -3,17 +3,15 @@ class SlipGaji {
     // final pendapatanList = data.pendapatan!
     //     .map((e) => '<li class="d-flex justify-content-between"><span>${e.komponenGaji!.namaKomponen!}</span><span>Rp ${formatRupiah(e.nilai!)}</span></li>')
     //     .join();
-    final pendapatanList = data.pendapatan!
-        .map((e) => '<tr> <th style="width: 100px;">${e.komponenGaji!.namaKomponen!}</th> <td>Rp ${formatRupiah(e.nilai!)}</td></tr>')
-        .join();
+    final pendapatanList =
+        data.pendapatan!.map((e) => '<tr> <td style="width: 250px;">${e.komponenGaji!.namaKomponen!}</td> <td>Rp ${formatRupiah(e.nilai!)}</td></tr>').join();
 
     // final potonganList = data.potongan!
     //     .map((e) => '<li class="d-flex justify-content-between"><span>${e.komponenGaji!.namaKomponen!}</span><span>Rp ${formatRupiah(e.nilai!)}</span></li>')
     //     .join();
-    final potonganList = data.potongan!
-        .map((e) => '<tr> <th style="width: 100px;">${e.komponenGaji!.namaKomponen!}</th> <td>Rp ${formatRupiah(e.nilai!)}</td></tr>')
-        .join();
-return """
+    final potonganList =
+        data.potongan!.map((e) => '<tr> <td style="width: 250px;">${e.komponenGaji!.namaKomponen!}</td> <td>Rp ${formatRupiah(e.nilai!)}</td></tr>').join();
+    return """
 <!DOCTYPE html>
 <html lang="id">
 
@@ -41,7 +39,12 @@ return """
       vertical-align: middle;
       text-align: left;
     }
-
+th {
+  font-size: 11px;
+}
+td {
+  font-size: 11px;
+}
     .section-title {
       font-weight: bold;
       margin-top: 20px;
@@ -121,6 +124,10 @@ return """
         <table class="table table-bordered">
           <tbody>
           $pendapatanList
+           <tr style="width: 250px;">
+            <th >Total</th>
+            <td>RP ${formatRupiah(data.payroll![0].pendapatan!)}</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -130,11 +137,20 @@ return """
         <table class="table table-bordered">
           <tbody>
            $potonganList
+            <tr style="width: 250px;">
+            <th >Total</th>
+            <td>RP ${formatRupiah(data.payroll![0].potongan!)}</td>
+          </tr>
           </tbody>
         </table>
       </div>
     </div>
-
+         <div class="mb-4">
+           <div class="d-flex justify-content-between border-top pt-2 fw-bold">
+             <span style="font-size: 12px;">Total Gaji</span>
+             <span style="font-size: 12px;">Rp ${formatRupiah(data.payroll![0].pendapatan! - data.payroll![0].potongan!)}</span>
+           </div>
+        </div>
 
   </div>
 
@@ -163,7 +179,7 @@ return """
 //             <h5 class="mb-0">${data.payroll[0].pegawai.nama}</h5>
 //             <small class="text-muted">${data.payroll[0].pegawai.jabatan.namaJabatan}</small>
 //           </div>
-            
+
 //           <div><strong>$nameMonth $year</strong></div>
 //         </div>
 
